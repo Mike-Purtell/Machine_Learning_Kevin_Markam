@@ -1,0 +1,723 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.24.0",
+    "script_metadata_hash": "34d476a201387f5118f43886ffe66b56"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "e8d7f6ba3850ea6c4ff9f424e765ad09",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"master-machine-learning-chapter3\">Master Machine Learning - Chapter3</h1>\n<h3 id=\"encoding-categorical-features\">Encoding categorical features</h3>\n<span class=\"paragraph\">Completed on Saturday August 29, 2026</span>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>Ran all code blocks from the book, after modification from pandas to polars</li>\n<li>Output of all code blocks exactly matches what is shown in the book.</li>\n<li>There was no impact from sklearn version differences.</li>\n<li>Section 2.4 has a great comparison of linear regression that I know well to logistic regression, where my experience is very light. This comparison sets a nice tone for me to carry while studying this book</li>\n<li>Chapter 2 is a binary classification problem, but nice to see the multiclass explanation in 2.5</li>\n<li>Interesting idea to use a series for binary classification</li>\n<li>Need to remember closing point, to use KFold instead of StratifiedKFold for regression problems.</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "513387b6aaec2a819678dbd5c9c27ccc",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "b8a94591e07469d899557b554f5aafb5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&#x27;1.9.0&#x27;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "39d2f800394cc6a972d868777654b97b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "eff7d5dba32b4da32d9a67a519434d3f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='PKri-0' random-id='07467e06-3a26-8b26-cafa-fe7926091c5f'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Braund, Mr. Owen Harris&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:22.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;A/5 21171&#92;&quot;,&#92;&quot;Fare&#92;&quot;:7.25,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;Cumings, Mrs. John Bradley (Florence Briggs Thayer)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:38.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;PC 17599&#92;&quot;,&#92;&quot;Fare&#92;&quot;:71.2833,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;C85&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Heikkinen, Miss. Laina&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:26.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;STON/O2. 3101282&#92;&quot;,&#92;&quot;Fare&#92;&quot;:7.925,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;Futrelle, Mrs. Jacques Heath (Lily May Peel)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:35.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;113803&#92;&quot;,&#92;&quot;Fare&#92;&quot;:53.1,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;C123&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Allen, Mr. William Henry&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:35.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;373450&#92;&quot;,&#92;&quot;Fare&#92;&quot;:8.05,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Moran, Mr. James&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:null,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;330877&#92;&quot;,&#92;&quot;Fare&#92;&quot;:8.4583,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;McCarthy, Mr. Timothy J&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:54.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;17463&#92;&quot;,&#92;&quot;Fare&#92;&quot;:51.8625,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;E46&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Palsson, Master. Gosta Leonard&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:2.0,&#92;&quot;SibSp&#92;&quot;:3,&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;349909&#92;&quot;,&#92;&quot;Fare&#92;&quot;:21.075,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:27.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:2,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;347742&#92;&quot;,&#92;&quot;Fare&#92;&quot;:11.1333,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:2,&#92;&quot;Name&#92;&quot;:&#92;&quot;Nasser, Mrs. Nicholas (Adele Achem)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:14.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;237736&#92;&quot;,&#92;&quot;Fare&#92;&quot;:30.0708,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;}]&quot;' data-total-rows='10' data-total-columns='11' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Survived&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Pclass&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Age&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;SibSp&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Parch&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Ticket&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;Cabin&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Embarked&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "1a0d1ddf-acaa-42c5-87b8-147850adc97e",
+      "code_hash": "599d4644e445cf144d4985cabe0243f6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Scikit-learn models expect features to be numeric, so Embarked and Sex can\u2019t be\npassed to a model without numeric endoding. The process used here is one-hot\nencoding or dummy encoding</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "86f9cc7bf3938076bb6ecc924878cfb2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Xref-0' random-id='91212da8-180c-e2c7-460b-f37431111656'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.25,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:71.2833,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.925,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:53.1,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:8.05,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:8.4583,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:51.8625,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Fare&#92;&quot;:21.075,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:2,&#92;&quot;Fare&#92;&quot;:11.1333,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:30.0708,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;}]&quot;' data-total-rows='10' data-total-columns='4' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Parch&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;Embarked&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "6965b34a-0d1a-4776-8bbf-2313e7696410",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "d9cfc35f-c274-482a-8a3f-af42db48f92a",
+      "code_hash": "77333e9c4b8845035cd4deabde6b6139",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[0., 0., 1.],\n       [1., 0., 0.],\n       [0., 0., 1.],\n       [0., 0., 1.],\n       [0., 0., 1.],\n       [0., 1., 0.],\n       [0., 0., 1.],\n       [0., 0., 1.],\n       [0., 0., 1.],\n       [1., 0., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "5ee0c087-336b-4860-b9fc-c4d74d3401ea",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "c1c52c0e-d512-497b-ab2d-5265a262712f",
+      "code_hash": "5fdfa5901f78c9a49061956bd92b4ce6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain:['C' 'Q' 'S']\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "85ca6f58-e707-419d-a5a4-7335b9254862",
+      "code_hash": "6f8f57715090da2632453988d9a1501b",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "name 'm' is not defined. Did you mean: 'mo'?",
+          "traceback": null
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">&quot;C:\\Users\\mpurt\\AppData\\Local\\Temp\\marimo_10440\\__marimo__cell_85ca6f58-e707-419d-a5a4-7335b9254862_.py&quot;</span>, line <span class=\"m\">1</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"n\">m</span>\n<span class=\"gr\">NameError</span>: <span class=\"n\">name &#39;m&#39; is not defined. Did you mean: &#39;mo&#39;?</span>\n</pre></div>\n</span>",
+          "mimetype": "application/vnd.marimo+traceback"
+        }
+      ]
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "f5937ff66dc0e672dc9b441924ef341e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='SFPL-0' random-id='dbf545ef-284a-ad6d-5506-def742b9bbc9'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Survived&#92;&quot;:0},{&#92;&quot;Survived&#92;&quot;:1},{&#92;&quot;Survived&#92;&quot;:1},{&#92;&quot;Survived&#92;&quot;:1},{&#92;&quot;Survived&#92;&quot;:0},{&#92;&quot;Survived&#92;&quot;:0},{&#92;&quot;Survived&#92;&quot;:0},{&#92;&quot;Survived&#92;&quot;:0},{&#92;&quot;Survived&#92;&quot;:1},{&#92;&quot;Survived&#92;&quot;:1}]&quot;' data-total-rows='10' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Survived&quot;,[&quot;integer&quot;,&quot;i64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "027040b9-2fbc-441c-a9e7-7b770e85c68f",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "19c3215b-ecec-412c-b160-19a4b4d2bebb",
+      "code_hash": "ddc5f3f80162c0c64166104d56302135",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[0., 0., 1., 0., 1.],\n       [1., 0., 0., 1., 0.],\n       [0., 0., 1., 1., 0.],\n       [0., 0., 1., 1., 0.],\n       [0., 0., 1., 0., 1.],\n       [0., 1., 0., 0., 1.],\n       [0., 0., 1., 0., 1.],\n       [0., 0., 1., 0., 1.],\n       [0., 0., 1., 1., 0.],\n       [1., 0., 0., 1., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "d9ac8e34-762c-4e74-8391-23166afd8c00",
+      "code_hash": "8fa4115d0a5a9033b7cffdaf6af4e033",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "syntax",
+          "evalue": "line 1\n    So for example, the first sample in the output array is 00101, which means they embarked from S\n                                                            ^^\nSyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers\n",
+          "traceback": []
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "0df859f4-bd76-4a3a-802f-9d704ab736e9",
+      "code_hash": "5fdfa5901f78c9a49061956bd92b4ce6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain:['C' 'Q' 'S']\", \"text/plain:['female' 'male']\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "6f2dd371-abeb-479d-958a-10da816f6a7b",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "a186df51-1090-4c68-9ad9-4b51a3bedf02",
+      "code_hash": "06f00a3a6321c2afa530533aeb000aa0",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[1., 0., 0.],\n       [0., 1., 0.],\n       [0., 0., 1.],\n       [0., 1., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "19dd660a-1e82-4b93-8024-6dd89e7d728e",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "d10e4d66-6a6c-442e-a384-7358a7432380",
+      "code_hash": "042d98fa380f07eae0b840ae1ec93a88",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='d10e4d66-6a6c-442e-a384-7358a7432380-0' random-id='87678827-bbc5-6641-6ba2-9e81a32a2713'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;letter&#92;&quot;:&#92;&quot;A&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;C&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;A&#92;&quot;}]&quot;' data-total-rows='3' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;letter&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "7719a277-644a-458b-a4ca-23b61974f65f",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "baaa60523bef608e4baf02f9c39ccc8c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[1., 0.],\n       [0., 1.],\n       [1., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "5a43f5ec-e7a7-435a-917b-ee4dae82f186",
+      "code_hash": "caf2774612c688d7430cb4c25d3e9689",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "syntax",
+          "evalue": "line 1\n    The output array only includes two columns, because the testing data only included two categories.\n        ^^^^^^\nSyntaxError: invalid syntax\n",
+          "traceback": []
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "75337fd9-57d9-48d2-a2bf-1b903d9a3f6c",
+      "code_hash": "7e562099a8cbfda4ff17f7a9b0840282",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[1., 0., 0.],\n       [0., 1., 0.],\n       [0., 0., 1.],\n       [0., 1., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "fc625dbf-e67c-4e02-bffb-e201a1ef138d",
+      "code_hash": "468b09cb16e7c2c96ddbf8260f64d151",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[1., 0., 0.],\n       [0., 0., 1.],\n       [1., 0., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "fe992182-c621-4821-81e8-056b0638f309",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "e2becdf8-2b94-425c-966c-f3e78cbae059",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "dab0b543-179a-42e1-aaf7-05fd5e6afe3b",
+      "code_hash": "b1f1ab21a99c14b4f74beaa10e67bac5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='dab0b543-179a-42e1-aaf7-05fd5e6afe3b-0' random-id='56986dcb-bdac-7ceb-93f0-c01b7c32594e'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;letter&#92;&quot;:&#92;&quot;A&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;B&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;C&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;B&#92;&quot;}]&quot;' data-total-rows='4' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;letter&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "99e38c85-2b1a-44ca-b74e-fe26f36b934e",
+      "code_hash": "7e562099a8cbfda4ff17f7a9b0840282",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[1., 0., 0.],\n       [0., 1., 0.],\n       [0., 0., 1.],\n       [0., 1., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bcd87923-3316-43a6-8517-991d6b82192e",
+      "code_hash": "5fdfa5901f78c9a49061956bd92b4ce6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain:['A' 'B' 'C']\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "e51cb18f-5b6a-4a5e-be78-3d1c5cfc7901",
+      "code_hash": "402db4d163c3f2eabf7ce312b419575b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='e51cb18f-5b6a-4a5e-be78-3d1c5cfc7901-0' random-id='4d2f951a-6207-ed9d-ed99-51f47f9d5d56'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;letter&#92;&quot;:&#92;&quot;A&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;C&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;D&#92;&quot;}]&quot;' data-total-rows='3' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;letter&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "a0401895-c779-4b85-8ef7-52f5392daaa1",
+      "code_hash": "89b48473a5301e84e32858c0b351f359",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "792cd430-9797-4b5b-949a-ce87acdd233b",
+      "code_hash": "febacaec544c10810312e636d99fda78",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[1., 0., 0.],\n       [0., 1., 0.],\n       [0., 0., 1.],\n       [0., 1., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "c467750b-c2ac-4f9c-b498-719f240b0d9a",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "0362feb0-f28a-406a-b51d-dae1164c730c",
+      "code_hash": "b2b349d247b7155aeb2a8b44e7750820",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[1., 0., 0.],\n       [0., 0., 1.],\n       [0., 0., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "ohe_unknown_cats.categories_ =[array(['A', 'B', 'C'], dtype=object)]\ndemo_test_unknown = shape: (3, 1)\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 letter \u2502\n\u2502 ---    \u2502\n\u2502 str    \u2502\n\u255e\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2561\n\u2502 A      \u2502\n\u2502 C      \u2502\n\u2502 D      \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "d9d0341f-e07f-497d-ba0d-4efe34e12967",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "77e14789-8c51-4cda-81b4-eed6933ab1e1",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "79390ef0-bd1a-4d56-9e1e-46a46cf7f177",
+      "code_hash": "b1f1ab21a99c14b4f74beaa10e67bac5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='79390ef0-bd1a-4d56-9e1e-46a46cf7f177-0' random-id='f1a81219-8833-0088-3e9d-29449b5afe81'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;letter&#92;&quot;:&#92;&quot;A&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;B&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;C&#92;&quot;},{&#92;&quot;letter&#92;&quot;:&#92;&quot;B&#92;&quot;}]&quot;' data-total-rows='4' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;letter&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "22f5ee04-6b5a-41e4-a52c-cc15a882dd7a",
+      "code_hash": "7e562099a8cbfda4ff17f7a9b0840282",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[1., 0., 0.],\n       [0., 1., 0.],\n       [0., 0., 1.],\n       [0., 1., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "7e73b9f6-b6c9-47f6-a68a-ff847030c1c6",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "35f7793d-ebb0-4208-aadb-2e99d41979e3",
+      "code_hash": "cb8469de7fcb4f5b2ce1948cf8be80e2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[0., 0.],\n       [1., 0.],\n       [0., 1.],\n       [1., 0.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "154be698-4a2d-4645-affa-27056a5941f4",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "69be6640-b601-46d6-b41c-ea4e38fb7536",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "9ed2a860-9acd-41c4-b550-67a57dc04ec9",
+      "code_hash": "eff7d5dba32b4da32d9a67a519434d3f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='9ed2a860-9acd-41c4-b550-67a57dc04ec9-0' random-id='f99d6ca9-c07d-c065-fcb8-499205946994'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Braund, Mr. Owen Harris&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:22.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;A/5 21171&#92;&quot;,&#92;&quot;Fare&#92;&quot;:7.25,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;Cumings, Mrs. John Bradley (Florence Briggs Thayer)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:38.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;PC 17599&#92;&quot;,&#92;&quot;Fare&#92;&quot;:71.2833,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;C85&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Heikkinen, Miss. Laina&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:26.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;STON/O2. 3101282&#92;&quot;,&#92;&quot;Fare&#92;&quot;:7.925,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;Futrelle, Mrs. Jacques Heath (Lily May Peel)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:35.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;113803&#92;&quot;,&#92;&quot;Fare&#92;&quot;:53.1,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;C123&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Allen, Mr. William Henry&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:35.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;373450&#92;&quot;,&#92;&quot;Fare&#92;&quot;:8.05,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Moran, Mr. James&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:null,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;330877&#92;&quot;,&#92;&quot;Fare&#92;&quot;:8.4583,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;McCarthy, Mr. Timothy J&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:54.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;17463&#92;&quot;,&#92;&quot;Fare&#92;&quot;:51.8625,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;E46&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Palsson, Master. Gosta Leonard&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:2.0,&#92;&quot;SibSp&#92;&quot;:3,&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;349909&#92;&quot;,&#92;&quot;Fare&#92;&quot;:21.075,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:27.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:2,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;347742&#92;&quot;,&#92;&quot;Fare&#92;&quot;:11.1333,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:2,&#92;&quot;Name&#92;&quot;:&#92;&quot;Nasser, Mrs. Nicholas (Adele Achem)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:14.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;237736&#92;&quot;,&#92;&quot;Fare&#92;&quot;:30.0708,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;}]&quot;' data-total-rows='10' data-total-columns='11' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Survived&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Pclass&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Age&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;SibSp&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Parch&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Ticket&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;Cabin&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Embarked&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "b2a41941-b360-45d7-9cab-80831d9a0fcc",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "f4e9ab54-b8ce-4d2e-b8d3-308f8dcf4140",
+      "code_hash": "b0e97a57afd71c82ca2205d4e43ba460",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='f4e9ab54-b8ce-4d2e-b8d3-308f8dcf4140-0' random-id='6c0b06c6-8e81-49b6-058d-7877ce71bdc1'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Class&#92;&quot;:&#92;&quot;third&#92;&quot;,&#92;&quot;Size&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Class&#92;&quot;:&#92;&quot;first&#92;&quot;,&#92;&quot;Size&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Class&#92;&quot;:&#92;&quot;second&#92;&quot;,&#92;&quot;Size&#92;&quot;:&#92;&quot;L&#92;&quot;},{&#92;&quot;Class&#92;&quot;:&#92;&quot;third&#92;&quot;,&#92;&quot;Size&#92;&quot;:&#92;&quot;XL&#92;&quot;}]&quot;' data-total-rows='4' data-total-columns='2' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Class&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Size&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "fcf868ca-0e53-4a32-8349-ef44cadeac84",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "cb350a2c-5814-46de-b4d4-9944c63fa9c2",
+      "code_hash": "6ceee1d96a8cfe86e71759a38f2ce833",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[2., 0.],\n       [0., 0.],\n       [1., 2.],\n       [2., 3.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "6f089bc2-425c-44ea-982b-3753eadedb24",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "0313493f-1864-4cbb-9715-dd6dca20e69b",
+      "code_hash": "7b5103b8d73f9c2932f0a9ccd8e293b3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[0., 0., 1., 1., 0., 0., 0.],\n       [1., 0., 0., 1., 0., 0., 0.],\n       [0., 1., 0., 0., 0., 1., 0.],\n       [0., 0., 1., 0., 0., 0., 1.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "9739d10f-50bc-4780-8847-2b0a6cb29c62",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "119ee36a-e735-4f28-aa5b-a33e1fdcd6a9",
+      "code_hash": "f97f7c9875fc18b94920a1696ecd0416",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "a6990234-5e53-4442-8852-bf03d29f4e8e",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "4a576efa-6656-4e19-88e1-482f1356f2bf",
+      "code_hash": "5ba346e073f870b6e45aeeffb546665f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='4a576efa-6656-4e19-88e1-482f1356f2bf-0' random-id='223df3e1-342c-a080-f38e-87d42310e0f6'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Fare&#92;&quot;:7.25},{&#92;&quot;Fare&#92;&quot;:71.2833},{&#92;&quot;Fare&#92;&quot;:7.925},{&#92;&quot;Fare&#92;&quot;:53.1},{&#92;&quot;Fare&#92;&quot;:8.05},{&#92;&quot;Fare&#92;&quot;:8.4583},{&#92;&quot;Fare&#92;&quot;:51.8625},{&#92;&quot;Fare&#92;&quot;:21.075},{&#92;&quot;Fare&#92;&quot;:11.1333},{&#92;&quot;Fare&#92;&quot;:30.0708}]&quot;' data-total-rows='10' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "df8a7b6a-1935-4e7a-a63b-bb04616d2f8d",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "06952039-abfa-4e67-b85f-b094c18f4561",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bfacc690-d5d9-4bd7-9e8e-5047aba6b1d9",
+      "code_hash": "431901ea510b2e8322f164d1857bd354",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[0.],\n       [2.],\n       [0.],\n       [2.],\n       [0.],\n       [1.],\n       [2.],\n       [1.],\n       [1.],\n       [2.]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "1c6251dd-b131-4b37-bf9e-07abb772eb75",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "115403f1-4378-4acc-ae46-e3233a62ef78",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "b8370eee-a6b0-4bb2-92d1-b527e67dbeaf",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "4962cea3-de57-4ca8-a189-27f5def82eaf",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

@@ -10,7 +10,7 @@ The book is a hands-on introduction to machine learning using Python. It focuses
 
 The material in this repo follows the structure of the book and its core learning progression:
 
-- Chapter 2: Introduction to machine learning and the workflow
+- Introduction to machine learning and the workflow
 - Data preparation and exploratory analysis
 - Feature engineering and preprocessing
 - Model training and evaluation

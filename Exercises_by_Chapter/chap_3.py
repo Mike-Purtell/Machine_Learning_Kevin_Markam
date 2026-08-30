@@ -199,7 +199,6 @@ def _(mo):
 def _(ohe, pl):
     demo_train = pl.DataFrame({'letter':['A', 'B', 'C', 'B']})
     ohe.fit_transform(demo_train)
-
     return (demo_train,)
 
 
@@ -262,7 +261,6 @@ def _(demo_train, ohe):
 @app.cell
 def _(demo_test, ohe):
     ohe.transform(demo_test)
-
     return
 
 
@@ -597,14 +595,6 @@ def _(df):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
- 
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
     A strategy with numeric features is to “discretize” or “bin” them
     into categorical ranges. In scikit-learn this is done with KBinsDiscretizer.
     """)
@@ -615,15 +605,6 @@ def _(mo):
 def _(KBinsDiscretizer, df):
     kb = KBinsDiscretizer(n_bins=3, strategy='quantile', encode='ordinal')
     kb.fit_transform(df.select('Fare'))
-
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
- 
-    """)
     return
 
 
@@ -642,6 +623,27 @@ def _(mo):
     overfitting the training data. Making those decisions during a tuning process
     adds complexity and processing time. Neither of these options are attractive.
     """)
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    #### more on hot key encoding
+    This table (from AI) differentiates hot key encoding of scikit-learn vs. equivalent dataframe solutions (pandas/get_dummies(), polars/to_dummies()).
+
+    | Feature|pandas, polars| OneHotEncoder (scikit-learn)
+    |--|--|--|
+    |Stateful| No | Yes|
+    |Output type| Dataframe | Numpy/sparse matrix|
+    |Best for | EDA, quick transforms | ML pipelines, production|
+    |Ease of use| Very easy | more setup|
+    """)
+    return
+
+
+@app.cell
+def _():
     return
 
 

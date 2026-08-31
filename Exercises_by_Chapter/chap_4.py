@@ -36,8 +36,23 @@ def _(mo):
 
     **My takeaways:**
 
-    - TBD
-    - TBD
+    - column tranformer to apply different steps to different columns
+    - pipelines: apply same workflow to training data and new data
+    - what to do with columns that are not transformed
+       - drop
+       - passthrough all
+       - passthrough some (by list, slice, from numpy)
+    - column transformer (ct) get_features_names_out
+    - chaining steps with pipelines, example is column transformer, logistic regression
+    - pipeline prediction, or pipe.predict(X). On small sample of 10, all 4 females survived, all 6 males did not
+    - scale unspecified columns, it scaler = MaxAbsScaler()
+    - pipe.fit
+    - column tranformer (ct) fit_tranform method does not support polars
+    - select columns by datatype, it datetime, category, or multiple types
+    - select by pattern name
+    - When to use ColumnTransformer or make_column_transformer
+    - When to use Pipeline or make_pipeline
+    - How to examine steps of a Pipeline
     """)
     return
 
@@ -134,14 +149,6 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
- 
-    """)
-    return
-
-
 @app.cell
 def _(X, make_column_transformer, ohe):
     ct_passthrough = make_column_transformer(  #tuple
@@ -165,7 +172,6 @@ def _(mo):
 @app.cell
 def _(ct):
     list(ct.get_feature_names_out())
-
     return
 
 
@@ -211,7 +217,6 @@ def _(LogisticRegression, X, ct_revised, df, make_pipeline):
         logreg
     )
     pipe.fit(X, y)
-
     return logreg, pipe, y
 
 
@@ -219,7 +224,6 @@ def _(LogisticRegression, X, ct_revised, df, make_pipeline):
 def _(pl):
     df_new = pl.read_csv('http://bit.ly/MLnewdata', n_rows=10)
     df_new
-
     return (df_new,)
 
 
@@ -233,7 +237,6 @@ def _(df_new):
 @app.cell
 def _(X_new, pipe):
     pipe.predict(X_new)
-
     return
 
 
@@ -273,7 +276,6 @@ def _(X, make_column_transformer, ohe):
         remainder='passthrough'
     )
     ct_4p4.fit_transform(X)
-
     return
 
 
@@ -448,7 +450,6 @@ def _(make_column_selector):
 def _(make_column_selector):
     # select multiple objects
     select_multiple = make_column_selector(dtype_include=[object, 'category'])
-
     return
 
 
@@ -472,7 +473,6 @@ def _(X, make_column_selector, make_column_transformer, ohe):
         (ohe, select_ES),
         remainder='passthrough')
     _ct.fit_transform(X.to_pandas())
-
     return
 
 
@@ -562,7 +562,6 @@ def _(ColumnTransformer, Pipeline, logreg, ohe):
     _pipe         # as marimo notebook, interactive object structure is printed in a more readable way
     print(f'{_pipe.named_steps.keys() =}')  # print the named steps of the pipeline
 
-
     return
 
 
@@ -586,7 +585,6 @@ def _(ColumnTransformer, logreg, make_pipeline, ohe):
 
     print(f'{_pipe.named_steps.keys() =}')  # print the named steps of the pipeline
     _pipe
-
 
     return
 
@@ -620,7 +618,6 @@ def _(ColumnTransformer, X, logreg, make_pipeline, ohe, y):
 
     _pipe.fit(X, list(y))
     print(f'{_pipe = }')
-
     return
 
 
@@ -647,7 +644,6 @@ def _(ColumnTransformer, X, logreg, make_pipeline, ohe, y):
 
     _pipe.fit(X, list(y))
     print(f'{_pipe.named_steps["columntransformer"] = }')
-
     return
 
 

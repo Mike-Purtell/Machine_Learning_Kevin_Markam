@@ -1,0 +1,496 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.24.0",
+    "script_metadata_hash": "34d476a201387f5118f43886ffe66b56"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "8e04fa14ba3ac06416e11b1af39ddceb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "NLmD",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "c542e8cd1e96a2cab335198f7efc4f76",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-7-handling-missing-values\">Chapter 7: Handling missing values</h1>\n<span class=\"paragraph\">Completed on Saturday September 5, 2026</span>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>Learned how to impute missing value with sklearn. KNN (nearest neighbors is most interesting to me)</li>\n<li>Learned about missingness, where missing values have relationship with other data. Example is Age, where older people are more reluctant to share their age.</li>\n<li>Some of the missing value strategies are best managed at the dataframe level.</li>\n<li>Machine learning models often will not tolerate missing values</li>\n<li>Interesting way to add columns to indicate that value was imputed from missing data</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "a50ed85d8bfc47bff0065ea0006568a4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "85f1bbc6cd798d07006ea23b06d4e4ae",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"example-of-missing-data\">Example of missing data</h4>\n<span class=\"paragraph\">Look at Cabin (7 missing values out of 10) and Age (1 missing value)</span>\n<span class=\"paragraph\">Missing values vs unknown categories:</span>\n<ul>\n<li>Missing value: Value encoded as NaN or None</li>\n<li>Unknown category: Category not seen in the training data</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "eff7d5dba32b4da32d9a67a519434d3f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='PKri-0' random-id='e5ff3635-9d3a-13d9-7789-9af0d7de28f3'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Braund, Mr. Owen Harris&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:22.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;A/5 21171&#92;&quot;,&#92;&quot;Fare&#92;&quot;:7.25,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;Cumings, Mrs. John Bradley (Florence Briggs Thayer)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:38.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;PC 17599&#92;&quot;,&#92;&quot;Fare&#92;&quot;:71.2833,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;C85&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Heikkinen, Miss. Laina&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:26.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;STON/O2. 3101282&#92;&quot;,&#92;&quot;Fare&#92;&quot;:7.925,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;Futrelle, Mrs. Jacques Heath (Lily May Peel)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:35.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;113803&#92;&quot;,&#92;&quot;Fare&#92;&quot;:53.1,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;C123&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Allen, Mr. William Henry&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:35.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;373450&#92;&quot;,&#92;&quot;Fare&#92;&quot;:8.05,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Moran, Mr. James&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:null,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;330877&#92;&quot;,&#92;&quot;Fare&#92;&quot;:8.4583,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:1,&#92;&quot;Name&#92;&quot;:&#92;&quot;McCarthy, Mr. Timothy J&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:54.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;17463&#92;&quot;,&#92;&quot;Fare&#92;&quot;:51.8625,&#92;&quot;Cabin&#92;&quot;:&#92;&quot;E46&#92;&quot;,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Palsson, Master. Gosta Leonard&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Age&#92;&quot;:2.0,&#92;&quot;SibSp&#92;&quot;:3,&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;349909&#92;&quot;,&#92;&quot;Fare&#92;&quot;:21.075,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:3,&#92;&quot;Name&#92;&quot;:&#92;&quot;Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:27.0,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:2,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;347742&#92;&quot;,&#92;&quot;Fare&#92;&quot;:11.1333,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;},{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;Pclass&#92;&quot;:2,&#92;&quot;Name&#92;&quot;:&#92;&quot;Nasser, Mrs. Nicholas (Adele Achem)&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Age&#92;&quot;:14.0,&#92;&quot;SibSp&#92;&quot;:1,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:&#92;&quot;237736&#92;&quot;,&#92;&quot;Fare&#92;&quot;:30.0708,&#92;&quot;Cabin&#92;&quot;:null,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;}]&quot;' data-total-rows='10' data-total-columns='11' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Survived&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Pclass&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Age&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;SibSp&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Parch&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Ticket&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;Cabin&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Embarked&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "574383b2379cafebd42ceaffa50a2e54",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "a9935722ac170f9f3e9ebcc1e716e6b8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"72-three-ways-to-handle-missing-values\">7.2 Three ways to handle missing values</h4>\n<ol>\n<li>Drop rows with missing values\nThis dataframe approach is impractical. If there are a large number of missing values, it will discard to much of the training data.</li>\n</ol></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "a6b3ee0e8226ab3eea8ccaa5315bc5ff",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='BYtC-0' random-id='34a77452-fe61-289c-788f-88670db2cf94'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.25,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Braund, Mr. Owen Harris&#92;&quot;,&#92;&quot;Age&#92;&quot;:22.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:71.2833,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Cumings, Mrs. John Bradley (Florence Briggs Thayer)&#92;&quot;,&#92;&quot;Age&#92;&quot;:38.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.925,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Heikkinen, Miss. Laina&#92;&quot;,&#92;&quot;Age&#92;&quot;:26.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:53.1,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Futrelle, Mrs. Jacques Heath (Lily May Peel)&#92;&quot;,&#92;&quot;Age&#92;&quot;:35.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:8.05,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Allen, Mr. William Henry&#92;&quot;,&#92;&quot;Age&#92;&quot;:35.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:51.8625,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;McCarthy, Mr. Timothy J&#92;&quot;,&#92;&quot;Age&#92;&quot;:54.0},{&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Fare&#92;&quot;:21.075,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Palsson, Master. Gosta Leonard&#92;&quot;,&#92;&quot;Age&#92;&quot;:2.0},{&#92;&quot;Parch&#92;&quot;:2,&#92;&quot;Fare&#92;&quot;:11.1333,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)&#92;&quot;,&#92;&quot;Age&#92;&quot;:27.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:30.0708,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Nasser, Mrs. Nicholas (Adele Achem)&#92;&quot;,&#92;&quot;Age&#92;&quot;:14.0}]&quot;' data-total-rows='9' data-total-columns='6' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Parch&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;Embarked&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Age&quot;,[&quot;number&quot;,&quot;f64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "69c502ca356ee70340ab76420f3d793e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"2-drop-columns-with-missing-values\">2. Drop columns with missing values</h4>\n<span class=\"paragraph\">Notice the age column is gone</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "76040a3ebe673747ece0c792ec71f5f1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Kclp-0' random-id='b37a7a12-a0d1-f38a-51e8-c4cd945c2741'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.25,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Braund, Mr. Owen Harris&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:71.2833,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Cumings, Mrs. John Bradley (Florence Briggs Thayer)&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.925,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Heikkinen, Miss. Laina&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:53.1,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Futrelle, Mrs. Jacques Heath (Lily May Peel)&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:8.05,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Allen, Mr. William Henry&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:8.4583,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Moran, Mr. James&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:51.8625,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;McCarthy, Mr. Timothy J&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Fare&#92;&quot;:21.075,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Palsson, Master. Gosta Leonard&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:2,&#92;&quot;Fare&#92;&quot;:11.1333,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)&#92;&quot;},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:30.0708,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Nasser, Mrs. Nicholas (Adele Achem)&#92;&quot;}]&quot;' data-total-rows='10' data-total-columns='5' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Parch&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;Embarked&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Name&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "523a2dccca8673757f3baa1142d399a3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"3-impute-missing-values\">3. Impute missing values</h4>\n<span class=\"paragraph\">Fill in missing values based on what is known from existing data. Here are the tradeoffs</span>\n<ul>\n<li>Benefit: Keeps more samples and features</li>\n<li>Cost: Imputed values may not match the true values</li>\n</ul>\n<span class=\"paragraph\">Factors to consider before imputing:</span>\n<ul>\n<li>How important are the samples?</li>\n<li>How important are the features?</li>\n<li>What percentage of values would need to be imputed?</li>\n</ul>\n<span class=\"paragraph\">There are many strategies for handling of missing data, to be covered later in this chapter. From the dataframe world, missing values can be replaced by mean, median, fill_forward, fill_backward, interpolation, and many other ways. Best way depends on the context.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "9384e5d13332788e4e326f806ad0f0cd",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"73-missing-value-imputation\">7.3 Missing value imputation</h4>\n<span class=\"paragraph\">This lesson performs missing value imputation on the Age column, so that it can be included in the model. First method is the SimpleImputer</span>\n<span class=\"paragraph\">Simple imputation strategies:</span>\n<ul>\n<li>Mean value (I believe this the default strategy)</li>\n<li>Median value</li>\n<li>Most frequent value\n-User-defined value</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "d8c6d6181de387fd4a7cb71684b8a6de",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[22.        ],\n       [38.        ],\n       [26.        ],\n       [35.        ],\n       [35.        ],\n       [28.11111111],\n       [54.        ],\n       [ 2.        ],\n       [27.        ],\n       [14.        ]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "d36706c79fddade3ac393506e5b19d42",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([28.11111111])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "13c476cc00b8f4c16b451377dff86766",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&lt;Compressed Sparse Row sparse matrix of dtype &#x27;float64&#x27;\n\twith 88 stored elements and shape (10, 48)&gt;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "aaf15391985c92108366ca167c1ffa93",
+      "outputs": [],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "C:\\Users\\mpurt\\AppData\\Local\\uv\\cache\\archive-v0\\-KEp6jLMFzKCky2sHVBOu\\Lib\\site-packages\\sklearn\\utils\\validation.py:1365: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().\n  y = column_or_1d(y, warn=True)\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "e31bb529b1595e8d84994886cee2f94f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Before we make predictions, we\u2019re going to examine the Pipeline to confirm the imputation value for Age that was learned from X:</span>\n<ul>\n<li>First, we access the columntransformer step of the Pipeline using the named_steps attribute.</li>\n<li>Then, from that Pipeline step, we access the simpleimputer transformer using the\nnamed_transformers_ attribute.</li>\n<li>Finally, from that transformer, we access the statistics_ attribute.</li>\n</ul>\n<span class=\"paragraph\">This confirms what we saw previously, which is that the imputer learned a value of 28.11 from the Age column. This query does not show which column was imputed, but that can be found by inspected earlier code, or using interactive pipeline diagram above this cell.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "fb195c9babd2054649707d0173f7f160",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([28.11111111])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "8fec8408879c536d0e9e2b214742e52e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Vxnm-0' random-id='51e7eff9-82a8-abbe-2f1d-04aec36dd4fe'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.8292,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Kelly, Mr. James&#92;&quot;,&#92;&quot;Age&#92;&quot;:34.5},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.0,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Wilkes, Mrs. James (Ellen Needs)&#92;&quot;,&#92;&quot;Age&#92;&quot;:47.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:9.6875,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Myles, Mr. Thomas Francis&#92;&quot;,&#92;&quot;Age&#92;&quot;:62.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:8.6625,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Wirz, Mr. Albert&#92;&quot;,&#92;&quot;Age&#92;&quot;:27.0},{&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Fare&#92;&quot;:12.2875,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Hirvonen, Mrs. Alexander (Helga E Lindqvist)&#92;&quot;,&#92;&quot;Age&#92;&quot;:22.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:9.225,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Svensson, Mr. Johan Cervin&#92;&quot;,&#92;&quot;Age&#92;&quot;:14.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.6292,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Connolly, Miss. Kate&#92;&quot;,&#92;&quot;Age&#92;&quot;:30.0},{&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Fare&#92;&quot;:29.0,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Caldwell, Mr. Albert Francis&#92;&quot;,&#92;&quot;Age&#92;&quot;:26.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.2292,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Abrahim, Mrs. Joseph (Sophie Halaut Easu)&#92;&quot;,&#92;&quot;Age&#92;&quot;:18.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:24.15,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Davies, Mr. John Samuel&#92;&quot;,&#92;&quot;Age&#92;&quot;:21.0}]&quot;' data-total-rows='10' data-total-columns='6' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Parch&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;Embarked&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Age&quot;,[&quot;number&quot;,&quot;f64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "2174279d779de2d3a87e5059e608e29b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([0, 0, 0, 0, 1, 0, 1, 0, 1, 0])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "6516fe9aa9f5e6378830f3ec6b08c240",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Note that X_new had no missing values in the Age column, so nothing was imputed during prediction. If X_new had missing values in Age, the imputed value would have been the mean of Age in X, which is 28.11, not the mean of Age in X_new. This is very important because a transformer is only allowed to learn from the training data, and then apply what it learned to both the training and new data.</span>\n<span class=\"paragraph\">What do transformers learn from the training data?</span>\n<ul>\n<li>OneHotEncoder: Learns categories</li>\n<li>CountVectorizer: Learns vocabulary</li>\n<li>SimpleImputer: Learns imputation value</li>\n</ul>\n<h4 id=\"74-using-missingness-as-a-feature\">7.4 Using \u201cmissingness\u201d as a feature</h4></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "b9a1393a78d6401f109d36ce69a0eac5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[22.        ,  0.        ],\n       [38.        ,  0.        ],\n       [26.        ,  0.        ],\n       [35.        ,  0.        ],\n       [35.        ,  0.        ],\n       [28.11111111,  1.        ],\n       [54.        ,  0.        ],\n       [ 2.        ,  0.        ],\n       [27.        ,  0.        ],\n       [14.        ,  0.        ]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "39a84dbbffefa58bbf5736975a6ec775",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Why add a missing indicator?</span>\n<ul>\n<li>Useful when the data is not missing at random</li>\n<li>Can encode the relationship between \u201cmissingness\u201d and the target value</li>\n</ul>\n<span class=\"paragraph\">For example, if missing Age was more common with older passengers reluctant to share their ages, and older passengers were more likely to have survived, then there is a relationship between occurances of missing Age and the likelihood of survival. The missingness itself can be a useful feature, that can be included as a model feature using a missing indicator.</span>\n<h4 id=\"75-how-do-i-perform-a-multivariate-imputation\">7.5 How do I perform a multivariate imputation?</h4>\n<span class=\"paragraph\">SimpleImputer does univariate imputation, which only looks at the feature being imputed when deciding what values to impute. Thus when imputing missing values for Age, SimpleImputer only considers the values in the Age column.</span>\n<span class=\"paragraph\">Multivariate imputation takes other features into account when deciding what\nvalues to impute.</span>\n<span class=\"paragraph\">For example, if high Parch and a low Fare is common for kids and Age is missing for a this kind of row, you should impute a low Age rather than the mean of Age, which is what SimpleImputer would do.</span>\n<span class=\"paragraph\">Multivariate imputation is available in scikit-learn via the IterativeImputer and KNNImputer classes, and in this lesson I\u2019ll explain how both of them work.</span>\n<span class=\"paragraph\">Notice in the example below that the imputed age reduced from 28.111 to 24.237.</span>\n<span class=\"paragraph\">Notes about IterativeImputer:</span>\n<ul>\n<li>Only works with numerical features</li>\n<li>You have to decide which features to include</li>\n<li>You can include multiple features with missing values</li>\n<li>You can choose the regression model</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "ce52996916900c31c4b77ceabf2faffd",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[ 0.        ,  7.25      , 22.        ],\n       [ 0.        , 71.2833    , 38.        ],\n       [ 0.        ,  7.925     , 26.        ],\n       [ 0.        , 53.1       , 35.        ],\n       [ 0.        ,  8.05      , 35.        ],\n       [ 0.        ,  8.4583    , 24.23702669],\n       [ 0.        , 51.8625    , 54.        ],\n       [ 1.        , 21.075     ,  2.        ],\n       [ 2.        , 11.1333    , 27.        ],\n       [ 0.        , 30.0708    , 14.        ]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": "e78d58a8d6977755f8a6075e1c96b820",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": "879195b70ac7762365e898eb43178642",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"knnimputer\">KNNImputer</h4>\n<span class=\"paragraph\">Example below has n_neighbors set to 2. So KNN find the 2 rows with closest match to Parch and Fare, and calculates the mean value of them. In this case, the 2 rows with closest match on Parch and Fare are the 3rd row where age of 26 and the 5th row where age of 35. The mean value for Age in these 2 nearest rows is 30.5 as shown below.</span>\n<span class=\"paragraph\">How KNNImputer works:</span>\n<ol>\n<li>Find the row in which Age is missing</li>\n<li>Find the n_neighbors nearest rows in which Age is not missing</li>\n<li>Calculate the mean of Age from the nearest rows</li>\n</ol></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": "0cd736b9e1c9c7445169e0c7f594280f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[ 0.    ,  7.25  , 22.    ],\n       [ 0.    , 71.2833, 38.    ],\n       [ 0.    ,  7.925 , 26.    ],\n       [ 0.    , 53.1   , 35.    ],\n       [ 0.    ,  8.05  , 35.    ],\n       [ 0.    ,  8.4583, 30.5   ],\n       [ 0.    , 51.8625, 54.    ],\n       [ 1.    , 21.075 ,  2.    ],\n       [ 2.    , 11.1333, 27.    ],\n       [ 0.    , 30.0708, 14.    ]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "AjVT",
+      "code_hash": "5a34c3e8d7251649534805c7188f4eda",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"76-best-practices-for-missing-value-imputation\">7.6 Best practices for missing value imputation</h4>\n<span class=\"paragraph\">Missing value imputation may be dubious from a statistics point of view, but has been shown experimentally to improve prediction under certain conditions:</span>\n<span class=\"paragraph\">Missing Completely At Random (MCAR):</span>\n<ul>\n<li>No relationship between missingness and underlying data</li>\n<li>Example: Booking agent forgot to gather Age</li>\n<li>For small datasets, IterativeImputer is more effective than mean imputation.</li>\n<li>For large datasets, IterativeImputer and mean imputation work equally\nwell, though IterativeImputer has a much higher computational cost.</li>\n<li>Missing indicator offers little value since the missingness is random.</li>\n</ul>\n<span class=\"paragraph\">Missing Not At Random (MNAR):</span>\n<ul>\n<li>Relationship between missingness and underlying data</li>\n<li>Example: Older passengers declined to give their Age</li>\n<li>Mean imputation is more effective than IterativeImputer</li>\n<li>Add a missing indicator</li>\n<li>Use a powerful, non-linear model for prediction</li>\n</ul>\n<span class=\"paragraph\">Missing due to a structural deficiency:</span>\n<ul>\n<li>Data omitted for a specific purpose</li>\n<li>Example: Staff members did not pay a Fare</li>\n<li>Impute a logical and reasonable user-defined value (for example use 0 for comps)</li>\n<li>Add a missing indicator</li>\n</ul>\n<span class=\"paragraph\">Best practices differ depending upon the type of missing data. But if you\u2019re going to impute missing values, it\u2019s important to thoroughly understand your data before choosing an imputation strategy.</span>\n<span class=\"paragraph\">Histogram-based gradient boosting trees in scikit-learn have built-in support for missing values. These are handled them internally at a lower computation cost than complex imputation strategies like IterativeImputer, and perform just as well or better than imputation across a variety of missing value scenarios.</span>\n<span class=\"paragraph\">For large datasets with many of missing values, it\u2019s worth using a histogram based\ngradient boosting tree as the prediction model and excluding the imputation step. It is also worthwhile to compare its performance with models that do require an imputation step.</span>\n<h4 id=\"77-difference-between-columntranformer-and-feature-union\">7.7 Difference between ColumnTranformer and Feature Union</h4></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "pHFh",
+      "code_hash": "7caf4bd2232ade55f87c29f5cab3d9f4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[22.        ,  0.        ],\n       [38.        ,  0.        ],\n       [26.        ,  0.        ],\n       [35.        ,  0.        ],\n       [35.        ,  0.        ],\n       [28.11111111,  1.        ],\n       [54.        ,  0.        ],\n       [ 2.        ,  0.        ],\n       [27.        ,  0.        ],\n       [14.        ,  0.        ]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "NCOB",
+      "code_hash": "ffb32a43e2645c43603fb97b2a50b2ec",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[22.        ],\n       [38.        ],\n       [26.        ],\n       [35.        ],\n       [35.        ],\n       [28.11111111],\n       [54.        ],\n       [ 2.        ],\n       [27.        ],\n       [14.        ]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aqbW",
+      "code_hash": "aba594d96bada7455fb0fd50799c0c7b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[False],\n       [False],\n       [False],\n       [False],\n       [False],\n       [ True],\n       [False],\n       [False],\n       [False],\n       [False]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TRpd",
+      "code_hash": "2d02ff1e8eac0bc67bec215d1e3ece2d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Example below shows how to use a union of a simple imputer and a missing indicator to handle missing values in the 'Age' column. The value of '1' next to 28.11 indicates the value was missing and imputed.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TXez",
+      "code_hash": "7d06454ccc4845ff1de4002956520f90",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[22.        ,  0.        ],\n       [38.        ,  0.        ],\n       [26.        ,  0.        ],\n       [35.        ,  0.        ],\n       [35.        ,  0.        ],\n       [28.11111111,  1.        ],\n       [54.        ,  0.        ],\n       [ 2.        ,  0.        ],\n       [27.        ,  0.        ],\n       [14.        ,  0.        ]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "dNNg",
+      "code_hash": "71bed95646872a099248b47804742c67",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Same results as above could have been achieved usinga a ColumnTransformer, by passing age to 2 separate tranformations.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "yCnT",
+      "code_hash": "51e02543b89d362b5c3651bb5f31b5ab",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[22.        ,  0.        ],\n       [38.        ,  0.        ],\n       [26.        ,  0.        ],\n       [35.        ,  0.        ],\n       [35.        ,  0.        ],\n       [28.11111111,  1.        ],\n       [54.        ,  0.        ],\n       [ 2.        ,  0.        ],\n       [27.        ,  0.        ],\n       [14.        ,  0.        ]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "wlCL",
+      "code_hash": "8bfecad6093a96c631764cd94c45b239",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">FeatureUnion vs ColumnTransformer:</span>\n<ul>\n<li>FeatureUnion:<ul>\n<li>Single input column</li>\n<li>Applies multiple different transformations to that column in parallel</li>\n</ul>\n</li>\n<li>ColumnTransformer:<ul>\n<li>Multiple input columns</li>\n<li>Applies a different transformation to each column in parallel</li>\n</ul>\n</li>\n</ul>\n<span class=\"paragraph\">ColumnTransformer is far more flexible than FeatureUnion and is recommended for vast majority of transformations. When multiple transformations in parallel are requred on the same column, use a FeatureUnion or a ColumnTransformer.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

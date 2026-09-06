@@ -1,0 +1,113 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.24.0",
+    "script_metadata_hash": "34d476a201387f5118f43886ffe66b56"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "eb252e652d82a95a891180e00eb027d5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "4e9f24caa7854147aa4a39802934b6cd",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-9-workflow-review-2\">Chapter 9:  Workflow review #2</h1>\n<span class=\"paragraph\">Completed on Sunday September 6, 2026</span>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>TBD</li>\n<li>TBD</li>\n<li>TBD</li>\n<li>TBD</li>\n</ul>\n<h4 id=\"91-workflow-recap\">9.1 Workflow recap</h4>\n<span class=\"paragraph\">In this chapter, we\u2019re going to review the workflow that we\u2019ve built so far and also discuss the concept of data leakage.</span>\n<span class=\"paragraph\">To start, we\u2019re going to walk through all of the code that\u2019s necessary to recreate our workflow up to this point. The import block above has imported the three transformer classes we\u2019re using, one modeling class, and two composition functions, and the polars datafame library.</span>\n<span class=\"paragraph\">Next, define the columns we will select from the data, and read the training data to define X and y.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "13567a2d45c7c4bd770945999dc96eb7",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='bkHC-0' random-id='5bb78e82-94d6-e1dd-ba54-cd7c2f6a7e34'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.8292,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Kelly, Mr. James&#92;&quot;,&#92;&quot;Age&#92;&quot;:34.5},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.0,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Wilkes, Mrs. James (Ellen Needs)&#92;&quot;,&#92;&quot;Age&#92;&quot;:47.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:9.6875,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Myles, Mr. Thomas Francis&#92;&quot;,&#92;&quot;Age&#92;&quot;:62.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:8.6625,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Wirz, Mr. Albert&#92;&quot;,&#92;&quot;Age&#92;&quot;:27.0},{&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Fare&#92;&quot;:12.2875,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Hirvonen, Mrs. Alexander (Helga E Lindqvist)&#92;&quot;,&#92;&quot;Age&#92;&quot;:22.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:9.225,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Svensson, Mr. Johan Cervin&#92;&quot;,&#92;&quot;Age&#92;&quot;:14.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.6292,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;Q&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Connolly, Miss. Kate&#92;&quot;,&#92;&quot;Age&#92;&quot;:30.0},{&#92;&quot;Parch&#92;&quot;:1,&#92;&quot;Fare&#92;&quot;:29.0,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Caldwell, Mr. Albert Francis&#92;&quot;,&#92;&quot;Age&#92;&quot;:26.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:7.2292,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;female&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Abrahim, Mrs. Joseph (Sophie Halaut Easu)&#92;&quot;,&#92;&quot;Age&#92;&quot;:18.0},{&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:24.15,&#92;&quot;Embarked&#92;&quot;:&#92;&quot;S&#92;&quot;,&#92;&quot;Sex&#92;&quot;:&#92;&quot;male&#92;&quot;,&#92;&quot;Name&#92;&quot;:&#92;&quot;Davies, Mr. John Samuel&#92;&quot;,&#92;&quot;Age&#92;&quot;:21.0}]&quot;' data-total-rows='418' data-total-columns='6' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;Parch&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;Fare&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;Embarked&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Age&quot;,[&quot;number&quot;,&quot;f64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "2f5c28e9-10de-4368-a691-50dbce1fd43f",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "e3a4f72d-07d6-465d-882e-9553e70c90b0",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "09b1abe3-31ba-434b-bc4c-2e330c4a6087",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "10654926-01ab-41b7-a8fb-21a102a9dbeb",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

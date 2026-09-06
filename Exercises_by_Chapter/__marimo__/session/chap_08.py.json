@@ -1,0 +1,301 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.24.0",
+    "script_metadata_hash": "34d476a201387f5118f43886ffe66b56"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "8e04fa14ba3ac06416e11b1af39ddceb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "d1fa5e0c6506e52022a65d1f7936b3f9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-8-fixing-common-workflow-problems\">Chapter 8:  Fixing Common workflow problems</h1>\n<span class=\"paragraph\">Completed on Sunday September 6, 2026</span>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>OneHotEncoder treats missing values as a new category starting with scikit-learn 0.24, which I am using. Book uses earlier version that throws errors when column passed to OneHotEncoder has any missing values.</li>\n<li>TBD</li>\n<li>TBD</li>\n<li>TBD</li>\n<li>TBD</li>\n</ul>\n<h4 id=\"81-two-new-problems\">8.1 Two new problems</h4>\n<span class=\"paragraph\">So far this book has only used the first 10 rows of the Titanic dataset, to simpify examination of the input and output of each workflow step.</span>\n<span class=\"paragraph\">The rest of the book will use the full Titanic dataset. This will expose common problems with real datasets, which we will figure out how to handle appriopriately. Will begin by reading the training data into df and reading the new data into df_new. df_new willl have one fewer column than df because it doesn\u2019t contain the target column of Survived.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "8789b60ffee84904883350e241160092",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "83545c8a210d5eedfe798f4de6935c5e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "df.shape = (891, 11)\ndf_new.shape = (418, 10)\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "PKri",
+      "code_hash": "9658bae02fe040572135cbd28cd24b0e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"count-the-number-of-missing-values-by-column-for-in-each-dataframe\">count the number of missing values by column for in each dataframe</h4></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "e49dc7dcec242429d5a479d4a4b78e2b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Xref-0' random-id='94a2bfbb-463f-68f1-10ca-63a776c05e38'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;Pclass&#92;&quot;:0,&#92;&quot;Name&#92;&quot;:0,&#92;&quot;Sex&#92;&quot;:0,&#92;&quot;Age&#92;&quot;:177,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:0,&#92;&quot;Cabin&#92;&quot;:687,&#92;&quot;Embarked&#92;&quot;:2}]&quot;' data-total-rows='1' data-total-columns='11' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Survived&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Pclass&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Name&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Sex&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Age&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;SibSp&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Parch&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Ticket&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Fare&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Cabin&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Embarked&quot;,[&quot;integer&quot;,&quot;u32&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "314a6751fd4f7b4a07248e3d08886e09",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='SFPL-0' random-id='6567cfa0-cefc-cb46-d620-8e1b3a69b1e2'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Pclass&#92;&quot;:0,&#92;&quot;Name&#92;&quot;:0,&#92;&quot;Sex&#92;&quot;:0,&#92;&quot;Age&#92;&quot;:86,&#92;&quot;SibSp&#92;&quot;:0,&#92;&quot;Parch&#92;&quot;:0,&#92;&quot;Ticket&#92;&quot;:0,&#92;&quot;Fare&#92;&quot;:1,&#92;&quot;Cabin&#92;&quot;:327,&#92;&quot;Embarked&#92;&quot;:0}]&quot;' data-total-rows='1' data-total-columns='10' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Pclass&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Name&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Sex&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Age&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;SibSp&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Parch&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Ticket&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Fare&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Cabin&quot;,[&quot;integer&quot;,&quot;u32&quot;]],[&quot;Embarked&quot;,[&quot;integer&quot;,&quot;u32&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "aabaedc391329100b4299c5450e1c56f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Features with missing values:</span>\n<ul>\n<li>Problematic:<ul>\n<li>Embarked: Missing values in df</li>\n<li>Fare: Missing value in df_new</li>\n</ul>\n</li>\n<li>\n<span class=\"paragraph\">Not problematic:</span>\n<ul>\n<li>Cabin: Not currently using</li>\n<li>Age: Already being imputed</li>\n</ul>\n<h4 id=\"82-problem-1-missing-values-in-a-categorical-feature\">8.2 Problem 1: Missing values in a categorical feature</h4>\n</li>\n</ul>\n<span class=\"paragraph\">Six feature columns we use are:</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "6e942ae8bbebf30940f5e96f7bc4d76d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "4f99d60f418efa6b989b41aaa09cbda4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">I don't see errors that book mentioned due to missing values values in Embarked. This was explained as an attribute of OneHotEncoder, where prior to scikit-learn 0.24 errors were raised if input contained missing values. For 0.24 onward that I am using, OneHotEncoder treats missing values as a new category, and runs without error.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "8f65286369fbad987497a0a74ca202fa",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "26e5e44aa20b100298bf812b4491d241",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Even though my version of scikit-learn can handle missing values passed to OneHotEncoder, I will follow along with the steps to fix this with SimpleImputer. My thinking is that imputing a few missing values is better than making them an unknown category.</span>\n<span class=\"paragraph\">First step is to create a new instance of SimpleImputer, and use a strategy of 'constant' to replace missing values. Note the missing_values parameter set to None, for polars dataframe. The book did not  use the missing_values paramter, so default is NaN, which is what pandas uses for misssing values.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "1e33c1de32d1e7df4e009745e433ca2b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "1f67c5caee2b8031a8c41f1a3ce78ca1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Imputation strategies for categorical features:</span>\n<ul>\n<li>Most frequent value</li>\n<li>User-defined value\nCreate a two-step pipeline that only contains transformers. First step is imputation using our new imputer, and second step in one-hot encoding. Call this pipelinge imp_ohe to show of the two steps it contains.</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "8c3cacbf1dae25ca459ca90ce443258d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>&lt;Compressed Sparse Row sparse matrix of dtype &#x27;float64&#x27;\n\twith 891 stored elements and shape (891, 4)&gt;</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "f897521a1c2ae0b42fea44f06112dc73",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[\"text/plain:['C' 'Q' 'S' 'missing']\"]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "b6af79d3e9be21a5d124e31121f3baa5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "9a6df861ba0d6c13cf4eb7be98eeb0ad",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">There are two things about the imp_ohe Pipeline:</span>\n<ul>\n<li>Only transformer objects may be included in a ColumnTransformer. <ul>\n<li>imp_ohe is eligible because all of its steps are transformers.</li>\n</ul>\n</li>\n<li>It's OK to apply imp_ohe to the Sex column, as it has no missing values, and makeimputation step is a NOP. It will simply get passed to the one-hot encoding step.</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

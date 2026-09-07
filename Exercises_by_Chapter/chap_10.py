@@ -139,18 +139,22 @@ def _(
     )
 
     # create an instance of LogisticRegression
-    logreg = LogisticRegression(solver='liblinear', random_state=1)
+    logreg = LogisticRegression(
+        solver='liblinear',
+        l1_ratio=0.0,
+        random_state=1,
+    )
 
     # create a 2-step pipeline, fit it to X and y, and make predictions on X_new
     pipe = make_pipeline(ct, logreg)
-    pipe.fit(X, y)
+    pipe.fit(X, y.to_series())
     pipe.predict(X_new)
     return X, pipe, y
 
 
 @app.cell
 def _(X, cross_val_score, pipe, y):
-    print(cross_val_score(pipe, X, y, scoring ='accuracy').mean())
+    print(cross_val_score(pipe, X, y.to_series(), scoring ='accuracy').mean())
     return
 
 
@@ -205,9 +209,9 @@ def _(mo):
     #### 10.3 Tuning the model
 
     LogisticRegression tuning parameters:
-    - penalty: Type of regularization
-      - 'l1'
-      -  'l2' (default)
+    - l1_ratio: Type of regularization
+      - 1 (L1)
+      - 0 (L2, default)
     - C: Amount of regularization
       - 0.1
       - 1 (default)
@@ -241,9 +245,10 @@ def _(mo):
 
 @app.cell
 def _():
-    params = {}
-    params['logisticregression__penalty'] = ['l1', 'l2']
-    params['logisticregression__C'] = [0.1, 1, 10]
+    params = {
+        'logisticregression__l1_ratio': [0.0, 1.0],
+        'logisticregression__C': [0.1, 1, 10],
+    }
     params
     return (params,)
 
@@ -251,7 +256,7 @@ def _():
 @app.cell
 def _(GridSearchCV, X, params, pipe, y):
     grid = GridSearchCV(pipe, param_grid=params, cv=5, scoring='accuracy', verbose=0)
-    grid.fit(X, y)
+    grid.fit(X, y.to_series())
     return (grid,)
 
 
@@ -303,7 +308,6 @@ def _(mo):
 
 @app.cell
 def _():
- 
     return
 
 

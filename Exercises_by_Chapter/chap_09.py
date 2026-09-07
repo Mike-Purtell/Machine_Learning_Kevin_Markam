@@ -62,10 +62,9 @@ def _(mo):
 
     **My takeaways:**
 
-    - TBD
-    - TBD
-    - TBD
-    - TBD
+    - studied comparison of ColumnTransformers and Pipelines
+    - reviewed reasons for processing data with scikit-learn instead of using similar tools at dataframe level
+    - learned about data leakage and how to avoid it
     #### 9.1 Workflow recap
 
     In this chapter, we’re going to review the workflow that we’ve built so far and also discuss the concept of data leakage.
@@ -278,36 +277,6 @@ def _(mo):
     - 3. cross_val_score splits the data prior to performing data transformations, which I’ll
     explain in detail in the next chapter.
     """)
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
     return
 
 

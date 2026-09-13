@@ -352,7 +352,8 @@ def _(params):
 @app.cell
 def _(params):
     # tune add_indicator parameter of SimpleImputer
-    params['columntransformer__pipeline__simpleimputer__add_indicator'] = [True, False]
+    # params['columntransformer__pipeline__simpleimputer__add_indicator'] = [True, False]
+    params['columntransformer__simpleimputer__add_indicator'] = [True, False]
 
     return
 
@@ -372,8 +373,17 @@ def _(GridSearchCV, X, params, pipe, y):
 
 
 @app.cell
-def _(GridSearchCV, X, params, pipe, pl, y):
-    _grid = GridSearchCV(pipe, params, cv=5, scoring='accuracy')
+def _(GridSearchCV, X, pipe, pl, y):
+    # AI generated solution to match book (which uses olderr sklearn version)
+    params_5 = {
+        'logisticregression__l1_ratio': [0.0, 1.0],  # 0.0 is L2 (Ridge), 1.0 is L1 (Lasso)
+        'logisticregression__C': [0.1, 1, 10],
+        'columntransformer__pipeline__onehotencoder__drop': [None, 'first'],
+        'columntransformer__countvectorizer__ngram_range': [(1, 1), (1, 2)],
+        'columntransformer__simpleimputer__add_indicator': [True, False],
+    }
+
+    _grid = GridSearchCV(pipe, params_5, cv=5, scoring='accuracy')
     _grid.fit(X, y.to_series())
     _result_cols = pl.DataFrame(_grid.cv_results_, strict=False).columns
 
@@ -386,20 +396,20 @@ def _(GridSearchCV, X, params, pipe, pl, y):
         .rename({col: col.split("__")[-1] for col in _result_cols})
         .sort("rank_test_score")
     )
-    print(_df_results)
+    _df_results
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    My result don't match the book, but they are close.
+    Results now match the book:
     Pipeline accuracy scores:
-    - Grid Search (5 parameters): 0.828
-    - Grid Search (2 paramters): 0.818
-    - Baseline (no tuning): 0.811
+    - Grid Search (5 parameters): 0.828253 (Rank 1: ngram_range=(1, 2), drop=None, add_indicator=True, C=10, l1_ratio=1.0)
+    - Grid Search (2 parameters): 0.818166 (C=10, l1_ratio=1.0)
+    - Baseline (no tuning): 0.811462
 
-    # Break at Page 150, where 10.5 begins
+    #### 10.5 Using the best pipline ot make predictions
     """)
     return
 

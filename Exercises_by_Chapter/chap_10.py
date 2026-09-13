@@ -56,6 +56,7 @@ def _(mo):
     # Chapter 10:  Evaluating and tuning a pipeline
     - Started Sunday September 6, 2026  - first page is 137
     - Break on Sunday September 6, at page 143
+    - Break on Saturday September 12, at page 150
     - Completed xxxday September y, 2026 - last page is 169 (very big chapter)
 
     Item | Book uses|I use|
@@ -68,6 +69,9 @@ def _(mo):
 
     **My takeaways:**
 
+    - This is first chapter to use full dataset instead of only 10 rows.
+    - Will use 5 folds for cross validation, previously just used 3.
+    - Several compatibility issues between the book's version of sklearn and the version I use that is more up to date. Issues found on "C" and "penalty", which are tuning parameters of logistic regression.
     - TBD
     - TBD
     - TBD
@@ -246,6 +250,7 @@ def _(mo):
 @app.cell
 def _():
     params = {
+        # book uses logisticregression__penalty, but that is deprecated
         'logisticregression__l1_ratio': [0.0, 1.0],
         'logisticregression__C': [0.1, 1, 10],
     }
@@ -299,25 +304,111 @@ def _(mo):
 def _(mo):
     mo.md(r"""
     #### 10.4 Tuning the transformers
-
-    #BREAK AT PAGE 143
-    pick up again at 10.4, Tuning the transformers
     """)
     return
 
 
 @app.cell
-def _():
+def _(pipe):
+    print(pipe.named_steps['columntransformer'].named_transformers_)
+    pipe.named_steps['columntransformer'].named_transformers_
     return
 
 
 @app.cell
-def _():
+def _(mo):
+    mo.md(r"""
+    #### tune OneHotEncoder drop method, check for None and first
+    """)
     return
 
 
 @app.cell
-def _():
+def _(params):
+    params['columntransformer__pipeline__onehotencoder__drop'] = [None, 'first']
+    params
+    return
+
+
+@app.cell
+def _(pipe):
+    list(pipe.get_params().keys())
+    return
+
+
+@app.cell
+def _(params):
+    # Tune ngram_range parameter for the CountVectorizer
+    params['columntransformer__countvectorizer__ngram_range'] = [(1, 1), (1, 2)]
+    return
+
+
+@app.cell
+def _(params):
+    params
+    return
+
+
+@app.cell
+def _(params):
+    # tune add_indicator parameter of SimpleImputer
+    params['columntransformer__pipeline__simpleimputer__add_indicator'] = [True, False]
+
+    return
+
+
+@app.cell
+def _(params):
+    print(params)
+
+    return
+
+
+@app.cell
+def _(GridSearchCV, X, params, pipe, y):
+    _grid = GridSearchCV(pipe, params, cv=5, scoring='accuracy')
+    _grid.fit(X, y.to_series())
+    return
+
+
+@app.cell
+def _(GridSearchCV, X, params, pipe, pl, y):
+    _grid = GridSearchCV(pipe, params, cv=5, scoring='accuracy')
+    _grid.fit(X, y.to_series())
+    _result_cols = pl.DataFrame(_grid.cv_results_, strict=False).columns
+
+    _df_results = (
+        pl.DataFrame(_grid.cv_results_, strict=False)
+        .select([
+            col for col in _result_cols
+            if col.startswith("param_") or "mean_test" in col or "rank" in col
+        ])
+        .rename({col: col.split("__")[-1] for col in _result_cols})
+        .sort("rank_test_score")
+    )
+    print(_df_results)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    My result don't match the book, but they are close.
+    Pipeline accuracy scores:
+    - Grid Search (5 parameters): 0.828
+    - Grid Search (2 paramters): 0.818
+    - Baseline (no tuning): 0.811
+
+    # Break at Page 150, where 10.5 begins
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+ 
+    """)
     return
 
 

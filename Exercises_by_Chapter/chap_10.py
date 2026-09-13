@@ -30,9 +30,11 @@ def _():
     from sklearn.pipeline import make_pipeline
     from sklearn.model_selection import cross_val_score
     from sklearn.model_selection import GridSearchCV
+    from sklearn.model_selection import RandomizedSearchCV
 
     import polars as pl
     import polars.selectors as cs
+    import numpy as np
 
     # pickle and joblib are used for saving and reloading models.
     # these are demostrated as doing the same thing which is saving 
@@ -47,11 +49,14 @@ def _():
         GridSearchCV,
         LogisticRegression,
         OneHotEncoder,
+        RandomizedSearchCV,
         SimpleImputer,
         cross_val_score,
+        cs,
         joblib,
         make_column_transformer,
         make_pipeline,
+        np,
         os,
         pickle,
         pl,
@@ -65,6 +70,7 @@ def _(mo):
     - Started Sunday September 6, 2026  - first page is 137
     - Break on Sunday September 6, at page 143
     - Break on Saturday September 12, at page 150
+    - Break on Sunday September 13, at page 160
     - Completed xxxday September y, 2026 - last page is 169 (very big chapter)
 
     Item | Book uses|I use|
@@ -82,7 +88,10 @@ def _(mo):
     - Several compatibility issues between the book's version of sklearn and the version I use that is more up to date. Issues found on "C" and "penalty", which are tuning parameters of logistic regression.
     - Models with best hypertuned parameters can be saved with pickle or joblib and recalled later for predictions. Caution: these files may be version specific and can be poisoned with malicious code
     - When running gridsearch, also use n_jobs = -1 for parallel processing/throughput improvement.
-    - TBD
+    - Use RandomSearch for further speedup. Risk of not using best model?
+    -
+    -
+    -
     #### 10.1 Evaluating a pipeline with cross-validation
     This long chapter is a deep dive into efficient Pipelint tuning for maximum accuracy.
     With full data set in use, will run cross_validation_score on the entire pipeline instead of just running it on the model. Will pass it X and y, specify number of cross-validation folds. Will choose 5 cross-validation folds (only 3 were used when the data size was limited to 10) in order to minimize amount of computation.Finally will specify evaluation metric for classification accuracy.
@@ -362,14 +371,12 @@ def _(params):
     # tune add_indicator parameter of SimpleImputer
     # params['columntransformer__pipeline__simpleimputer__add_indicator'] = [True, False]
     params['columntransformer__simpleimputer__add_indicator'] = [True, False]
-
     return
 
 
 @app.cell
 def _(params):
     print(params)
-
     return
 
 
@@ -426,7 +433,6 @@ def _(mo):
 @app.cell
 def _(grid):
     type(grid.best_estimator_)
-
     return
 
 
@@ -524,7 +530,7 @@ def _(GridSearchCV, X, params, pipe, y):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Now add n_jobs and set it to 1, and re-run the grid search.  This instructs sklearn to use parallel processing with all CPUs, and will generally be faster (on my system speed improved from 14.0 seconds to 4.1 seconds, about 79% faster). Book recommendation is to set n_jobs to -1 whenever you run a grid search, and this is what is used for the remainder of the book
+    Now add n_jobs and set it to 1, and re-run the grid search.  This instructs sklearn to use parallel processing with all CPUs, and will generally be faster. On my system speed improvement varied between first run of this notebook and subsequent runs, but generally was 40% to 70% faster. Book recommendation is to set n_jobs to -1 whenever you run a grid search, and this is what is used for the remainder of the book
     """)
     return
 
@@ -544,12 +550,98 @@ def _(GridSearchCV, X, params, pipe, y):
 
 
 @app.cell
-def _():
+def _(mo):
+    mo.md(r"""
+    #### 10.8 Pipeline tune with randomized search
+    Let's increase number of C values from 3 in the existing model to 6. This would lead to increasing the number of cross validation runs from 48 to 96 (need to check this math). Alternate approach it to used randomized search with the RandomizedSearchCV class. This as a very similar API as GridSearchCV.
+    """)
     return
 
 
 @app.cell
-def _():
+def _(params):
+    print(params)
+    more_params = params.copy()
+    more_params['logisticregression__C'] = [0.01, 0.1, 1, 10, 100, 1000]
+    print(more_params)
+    return (more_params,)
+
+
+@app.cell
+def _(RandomizedSearchCV, X, more_params, pipe, y):
+    rand = RandomizedSearchCV(
+        pipe,
+        more_params,
+        cv=5,
+        scoring='accuracy',
+        n_iter=10,
+        random_state=1,
+        n_jobs=-1,
+    )
+    rand.fit(X, y.to_series())
+    return (rand,)
+
+
+@app.cell
+def _(cs, pl, rand):
+    _results = (
+        pl.DataFrame(rand.cv_results_, strict=False)
+        .select(
+            cs.starts_with("param_"),
+            cs.starts_with("mean_test"),
+            cs.starts_with("rank"),
+        )
+        .rename(lambda c: c.split("__")[-1])
+        #.sort("mean_test_score")
+    )
+    _results
+    return
+
+
+@app.cell
+def _(rand):
+    # Results in the table above differ slightly from the book. This is because 
+    # RandomizedSearchCV samples parameter combinations are generated differently 
+    # across our different versions of scikit-learn.
+    rand.best_score_
+    return
+
+
+@app.cell
+def _(rand):
+    rand.best_params_
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Why use RandomizedSearchCV instead of GridSearchCV?
+    - Similar results in far less time
+    - Easier to control the computational budget
+    - Freedom to tune many more parameters
+    - Can use a much finer grid
+
+    A useful function creating a fine grid of numbers for a randomized search is numpy's linspace. For example, this code specifies that I want 101 equally spaced values, starting with 0 and ending with 1.
+
+    Another similar function is numpy's logspace. Example shown specifies 6 values, from 10 to the power of -2, through 10 to the power of 3.  SciPy library can also specify continuous paramaters for a randomized search using SciPy distributions. SciPy is powerful, Numpy is easier.
+    """)
+    return
+
+
+@app.cell
+def _(np):
+    print(np.linspace(0, 1, 101))
+    print(np.logspace(-2, 3, 6))
+
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    # FINISHED TO END OF 10.8, page 160
+    """)
     return
 
 

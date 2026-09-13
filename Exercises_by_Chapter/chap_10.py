@@ -34,6 +34,12 @@ def _():
     import polars as pl
     import polars.selectors as cs
 
+    # pickle and joblib are used for saving and reloading models.
+    # these are demostrated as doing the same thing which is saving 
+    # the best selected model to a file and recalling later for prediction
+    import pickle
+    import joblib
+
     import os
 
     return (
@@ -43,9 +49,11 @@ def _():
         OneHotEncoder,
         SimpleImputer,
         cross_val_score,
+        joblib,
         make_column_transformer,
         make_pipeline,
         os,
+        pickle,
         pl,
     )
 
@@ -72,7 +80,7 @@ def _(mo):
     - This is first chapter to use full dataset instead of only 10 rows.
     - Will use 5 folds for cross validation, previously just used 3.
     - Several compatibility issues between the book's version of sklearn and the version I use that is more up to date. Issues found on "C" and "penalty", which are tuning parameters of logistic regression.
-    - TBD
+    - Models with best hypertuned parameters can be saved with pickle or joblib and recalled later for predictions. Caution: these files may be version specific and can be poisoned with malicious code
     - TBD
     - TBD
     #### 10.1 Evaluating a pipeline with cross-validation
@@ -434,23 +442,58 @@ def _(X_new, grid):
     return
 
 
-@app.cell
-def _():
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 10.6 Saving best pipeline for future use
+    The Pipeline with the best set of parameters is stored as an attribute of the GridSearchCV object called best_estimator_, so this is the object that we want to save.
+    """)
     return
 
 
 @app.cell
-def _():
+def _(grid):
+    type(grid.best_estimator_)
     return
 
 
 @app.cell
-def _():
+def _(X_new, grid, pickle):
+    # You can save a Pipeline to a file using pickle
+    # pickle is part of the Python standard library.
+    with open('ch_10_pipe.pickle', 'wb') as _f_out:
+         pickle.dump(grid.best_estimator_, _f_out)
+
+    # here we load the Pipeline from the file and use it to make predictions
+    with open('ch_10_pipe.pickle', 'rb') as _f_in:
+        pipe_from_pickle = pickle.load(_f_in)
+
+    # Now use it to make predictions   
+    pipe_from_pickle.predict(X_new)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+ 
+    """)
     return
 
 
 @app.cell
-def _():
+def _(X_new, grid, joblib):
+    # You can also save a Pipeline to a file using joblib
+    # joblib is part of the Python standard library.
+    with open('ch_10_pipe.joblib', 'wb') as _f_out:
+         joblib.dump(grid.best_estimator_, _f_out)
+
+    # here we load the Pipeline from the file and use it to make predictions
+    with open('ch_10_pipe.joblib', 'rb') as _f_in:
+        pipe_from_joblib = joblib.load(_f_in)
+
+    # Now use it to make predictions   
+    pipe_from_joblib.predict(X_new)
     return
 
 

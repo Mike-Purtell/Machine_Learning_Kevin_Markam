@@ -153,7 +153,7 @@ def _(
     pipe = make_pipeline(ct, logreg)
     pipe.fit(X, y.to_series())
     pipe.predict(X_new)
-    return X, pipe, y
+    return X, X_new, pipe, y
 
 
 @app.cell
@@ -409,8 +409,78 @@ def _(mo):
     - Grid Search (2 parameters): 0.818166 (C=10, l1_ratio=1.0)
     - Baseline (no tuning): 0.811462
 
-    #### 10.5 Using the best pipline ot make predictions
+    #### 10.5 Using the best pipline to make predictions
+    GridSearchCV actually makes this very easy. After locating the best set of parameters, it automatically refits the Pipeline on X and y using the best set of parameters, and it stores that fitted Pipeline as an attribute called best_estimator_. As you can see, that attribute is indeed a Pipeline object.
     """)
+    return
+
+
+@app.cell
+def _(grid):
+    type(grid.best_estimator_)
+
+    return
+
+
+@app.cell
+def _(grid):
+    grid.best_estimator_
+    return
+
+
+@app.cell
+def _(X_new, grid):
+    grid.predict(X_new)
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
     return
 
 

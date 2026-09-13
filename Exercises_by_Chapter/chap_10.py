@@ -81,7 +81,7 @@ def _(mo):
     - Will use 5 folds for cross validation, previously just used 3.
     - Several compatibility issues between the book's version of sklearn and the version I use that is more up to date. Issues found on "C" and "penalty", which are tuning parameters of logistic regression.
     - Models with best hypertuned parameters can be saved with pickle or joblib and recalled later for predictions. Caution: these files may be version specific and can be poisoned with malicious code
-    - TBD
+    - When running gridsearch, also use n_jobs = -1 for parallel processing/throughput improvement.
     - TBD
     #### 10.1 Evaluating a pipeline with cross-validation
     This long chapter is a deep dive into efficient Pipelint tuning for maximum accuracy.
@@ -497,23 +497,49 @@ def _(X_new, grid, joblib):
     return
 
 
-@app.cell
-def _():
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 10.7 How to speed up a Gridsearch
+    Recreate the GridSearchCV object, and add the verbose parameter and set it to 1. This will result in two changes to the output:
+    - It will calculate the number of parameter combinations which is now 48. As a  5-fold cross-validation, the Pipeline will be fit 240 times.
+    - It will report back how long the search took, with progress updates along the way.
+    """)
     return
 
 
 @app.cell
-def _():
+def _(GridSearchCV, X, params, pipe, y):
+    _grid = GridSearchCV(
+        pipe, 
+        params, 
+        cv=5, 
+        scoring='accuracy', 
+        verbose=1
+    )
+    _grid.fit(X, y.to_series())
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Now add n_jobs and set it to 1, and re-run the grid search.  This instructs sklearn to use parallel processing with all CPUs, and will generally be faster (on my system speed improved from 14.0 seconds to 4.1 seconds, about 79% faster). Book recommendation is to set n_jobs to -1 whenever you run a grid search, and this is what is used for the remainder of the book
+    """)
     return
 
 
 @app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
+def _(GridSearchCV, X, params, pipe, y):
+    _grid = GridSearchCV(
+        pipe, 
+        params, 
+        cv=5, 
+        scoring='accuracy', 
+        verbose=1, 
+        n_jobs=-1     # Use all available CPU cores for parallel processing
+    )
+    _grid.fit(X, y.to_series())
     return
 
 

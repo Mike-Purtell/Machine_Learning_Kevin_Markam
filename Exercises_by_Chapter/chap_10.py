@@ -31,6 +31,7 @@ def _():
     from sklearn.model_selection import cross_val_score
     from sklearn.model_selection import GridSearchCV
     from sklearn.model_selection import RandomizedSearchCV
+    from sklearn.model_selection import train_test_split
 
     import polars as pl
     import polars.selectors as cs
@@ -60,6 +61,7 @@ def _():
         os,
         pickle,
         pl,
+        train_test_split,
     )
 
 
@@ -71,7 +73,7 @@ def _(mo):
     - Break on Sunday September 6, at page 143
     - Break on Saturday September 12, at page 150
     - Break on Sunday September 13, at page 160
-    - Completed xxxday September y, 2026 - last page is 169 (very big chapter)
+    - Completed Monday September 14, 2026
 
     Item | Book uses|I use|
     |--|--|--|
@@ -89,7 +91,7 @@ def _(mo):
     - Models with best hypertuned parameters can be saved with pickle or joblib and recalled later for predictions. Caution: these files may be version specific and can be poisoned with malicious code
     - When running gridsearch, also use n_jobs = -1 for parallel processing/throughput improvement.
     - Use RandomSearch for further speedup. Risk of not using best model?
-    -
+    - Name column contains more predictive signal than noise
     -
     -
     #### 10.1 Evaluating a pipeline with cross-validation
@@ -170,7 +172,7 @@ def _(
     pipe = make_pipeline(ct, logreg)
     pipe.fit(X, y.to_series())
     pipe.predict(X_new)
-    return X, X_new, pipe, y
+    return X, X_new, imp, imp_ohe, logreg, pipe, y
 
 
 @app.cell
@@ -633,14 +635,218 @@ def _(mo):
 def _(np):
     print(np.linspace(0, 1, 101))
     print(np.logspace(-2, 3, 6))
-
     return
 
 
 @app.cell
 def _(mo):
     mo.md(r"""
-    # FINISHED TO END OF 10.8, page 160
+    #### 10.10 Can a model include thousands of features?
+    The pipe object is our Pipeline that hasn’t been tuned by grid search. Recall that you can examine an individual Pipeline step by using the named_steps attribute. In this case, we’ll select the first step, which is our ColumnTransformer.
+    """)
+    return
+
+
+@app.cell
+def _(pipe):
+    pipe.named_steps['columntransformer']
+    return
+
+
+@app.cell
+def _(X, pipe):
+    pipe.named_steps['columntransformer'].fit_transform(X)
+    return
+
+
+@app.cell
+def _(X, cross_val_score, pipe, y):
+    cross_val_score(pipe, X, y.to_series(), cv=5, scoring='accuracy').mean()
+    return
+
+
+@app.cell
+def _(grid):
+    grid.best_estimator_.named_steps['columntransformer']
+    return
+
+
+@app.cell
+def _(X, grid):
+    grid.best_estimator_.named_steps['columntransformer'].fit_transform(X)
+    return
+
+
+@app.cell
+def _(grid):
+    grid.best_score_
+    return
+
+
+@app.cell
+def _(imp, imp_ohe, make_column_transformer):
+    no_name_ct = make_column_transformer(
+        (imp_ohe, ['Embarked', 'Sex']),
+        (imp, ['Age', 'Fare']),
+        ('passthrough', ['Parch'])
+    )
+    return (no_name_ct,)
+
+
+@app.cell
+def _(X, no_name_ct):
+    no_name_ct.fit_transform(X).shape
+    return
+
+
+@app.cell
+def _(X, cross_val_score, logreg, make_pipeline, no_name_ct, y):
+    no_name_pipe = make_pipeline(
+        no_name_ct, logreg
+    )
+    cross_val_score(no_name_pipe, 
+        X, 
+        y.to_series(),
+        cv=5,
+        scoring='accuracy'
+    ).mean()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 10.11 How to examine coefficients of a Pipeline
+    """)
+    return
+
+
+@app.cell
+def _(grid):
+    grid.best_estimator_.named_steps['logisticregression'].coef_
+    return
+
+
+@app.cell
+def _(grid):
+    # this command does not work using books version of sklearn, but it works
+    # on my newer version
+    (
+        grid
+        .best_estimator_
+        .named_steps['columntransformer']
+        .get_feature_names_out()
+    )
+    return
+
+
+@app.cell
+def _(grid):
+    print(
+        grid
+        .best_estimator_
+        .named_steps['columntransformer']
+        .transformers_
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 10.12 Should dataset be split before tuning the Pipeline?
+    Grid search finds the parameters that maximize the cross-validation score on a dataset. The same data is used to accomplish two separate goals:
+    - to choose the best parameters for the Pipeline, which are stored in the best_params_ attribute.
+    - to estimate the future performance of the Pipeline on new data when using these parameters, which is stored in the best_score_ attribute.
+    """)
+    return
+
+
+@app.cell
+def _(grid):
+    grid.best_params_
+    return
+
+
+@app.cell
+def _(grid):
+    grid.best_score_
+    return
+
+
+@app.cell
+def _(X, train_test_split, y):
+    X_train, X_test, y_train, y_test = train_test_split(
+        X,
+        y.to_series(),
+        test_size = 0.25,
+        random_state = 1,
+        stratify= y
+    )
+    return X_test, X_train, y_test, y_train
+
+
+@app.cell
+def _(GridSearchCV, X_train, params, pipe, y_train):
+    training_grid = GridSearchCV(
+        pipe, 
+        params, 
+        cv=5, 
+        scoring='accuracy',
+        n_jobs=-1
+    )
+    training_grid.fit(X_train, y_train)
+    return (training_grid,)
+
+
+@app.cell
+def _(training_grid):
+    training_grid.best_params_
+    return
+
+
+@app.cell
+def _(X_test, training_grid, y_test):
+    training_grid.score(X_test, y_test)
+    return
+
+
+@app.cell
+def _(X, training_grid, y):
+    best_pipe = training_grid.best_estimator_
+    best_pipe.fit(X, y.to_series())
+    return (best_pipe,)
+
+
+@app.cell
+def _(X_new, best_pipe):
+    best_pipe.predict(X_new)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Guidelines for using this process:
+    - Only use the testing set once:
+      - If used multiple times, performance estimates will become less reliable
+    - You must have enough data:
+      - If training set is too small, grid search won’t find the optimal parameters
+      - If testing set is too small, it won’t provide a reliable performance estimate
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 10.13 What is regularization?
+    Regularization constrains the size of a model’s coefficients to avoid overfitting. Overfitting fits your model to patterns in the training data, causing your model perform poorly on predictions with new data.
+
+    Regularization:
+    - Constrains the size of model coefficients to minimize overfitting
+    - Reduces the variance of complex models to help the model generalize
+    - Decreases model flexibility to follows the true patterns in the data
     """)
     return
 

@@ -1,0 +1,87 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.24.0",
+    "script_metadata_hash": "34d476a201387f5118f43886ffe66b56"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "51269947055a5075b76a6dc8fdfd509f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "99ee8e1b1ae3943ea34de44591f8219f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-11-comparining-linear-and-non-linear-models\">Chapter 11:  Comparining linear and non-linear models</h1>\n<ul>\n<li>Started Tuesday September 15, 2026  - first page is 170</li>\n<li>Completed XXX September YYY, 2026</li>\n</ul>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>This is first chapter to use full dataset instead of only 10 rows.</li>\n<li>Will use 5 folds for cross validation, previously just used 3.</li>\n<li>Several compatibility issues between the book's version of sklearn and the version I use that is more up to date. Issues found on \"C\" and \"penalty\", which are tuning parameters of logistic regression.</li>\n<li>Models with best hypertuned parameters can be saved with pickle or joblib and recalled later for predictions. Caution: these files may be version specific and can be poisoned with malicious code</li>\n<li>When running gridsearch, also use n_jobs = -1 for parallel processing/throughput improvement.</li>\n<li>Use RandomSearch for further speedup. Risk of not using best model?</li>\n</ul>\n<h2 id=\"-name-column-contains-more-predictive-signal-than-noise\">- Name column contains more predictive signal than noise</h2>\n<span class=\"paragraph\">-</span>\n<h4 id=\"101-evaluating-a-pipeline-with-cross-validation\">10.1 Evaluating a pipeline with cross-validation</h4>\n<span class=\"paragraph\">This long chapter is a deep dive into efficient Pipelint tuning for maximum accuracy.\nWith full data set in use, will run cross_validation_score on the entire pipeline instead of just running it on the model. Will pass it X and y, specify number of cross-validation folds. Will choose 5 cross-validation folds (only 3 were used when the data size was limited to 10) in order to minimize amount of computation.Finally will specify evaluation metric for classification accuracy.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "255c4254b44653b326f3fa42f783c6c9",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "The system cannot find the path specified. (os error 3): ./assets/MLtrain.csv",
+          "traceback": null
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Downloading training dataset...\n",
+          "mimetype": "text/plain"
+        },
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">&quot;C:\\Users\\mpurt\\AppData\\Local\\Temp\\marimo_11256\\__marimo__cell_bkHC_.py&quot;</span>, line <span class=\"m\">9</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"n\">df</span><span class=\"o\">.</span><span class=\"n\">write_csv</span><span class=\"p\">(</span><span class=\"n\">training_data_path</span><span class=\"p\">)</span>\n<span class=\"w\">    </span><span class=\"pm\">~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;C:\\Users\\mpurt\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\polars\\dataframe\\frame.py&quot;</span>, line <span class=\"m\">3240</span>, in <span class=\"n\">write_csv</span>\n<span class=\"w\">    </span><span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">lazy</span><span class=\"p\">()</span><span class=\"o\">.</span><span class=\"n\">sink_csv</span><span class=\"p\">(</span>\n<span class=\"w\">    </span><span class=\"pm\">~~~~~~~~~~~~~~~~~~~~^</span>\n<span class=\"w\">    </span>    <span class=\"n\">target</span><span class=\"p\">,</span>\n<span class=\"w\">        </span><span class=\"pm\">^^^^^^^</span>\n<span class=\"w\">    </span><span class=\"o\">...&lt;</span><span class=\"mi\">21</span> <span class=\"n\">lines</span><span class=\"o\">&gt;...</span>\n<span class=\"w\">    </span>    <span class=\"n\">engine</span><span class=\"o\">=</span><span class=\"n\">engine</span><span class=\"p\">,</span>\n<span class=\"w\">        </span><span class=\"pm\">^^^^^^^^^^^^^^</span>\n<span class=\"w\">    </span><span class=\"p\">)</span>\n<span class=\"w\">    </span><span class=\"pm\">^</span>\n  File <span class=\"nb\">&quot;C:\\Users\\mpurt\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\polars\\lazyframe\\frame.py&quot;</span>, line <span class=\"m\">4113</span>, in <span class=\"n\">sink_csv</span>\n<span class=\"w\">    </span><span class=\"n\">ldf</span><span class=\"o\">.</span><span class=\"n\">collect</span><span class=\"p\">(</span><span class=\"n\">engine</span><span class=\"o\">=</span><span class=\"n\">engine</span><span class=\"p\">)</span>\n<span class=\"w\">    </span><span class=\"pm\">~~~~~~~~~~~^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;C:\\Users\\mpurt\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\polars\\_utils\\deprecation.py&quot;</span>, line <span class=\"m\">97</span>, in <span class=\"n\">wrapper</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">function</span><span class=\"p\">(</span><span class=\"o\">*</span><span class=\"n\">args</span><span class=\"p\">,</span> <span class=\"o\">**</span><span class=\"n\">kwargs</span><span class=\"p\">)</span>\n  File <span class=\"nb\">&quot;C:\\Users\\mpurt\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\polars\\lazyframe\\opt_flags.py&quot;</span>, line <span class=\"m\">344</span>, in <span class=\"n\">wrapper</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">function</span><span class=\"p\">(</span><span class=\"o\">*</span><span class=\"n\">args</span><span class=\"p\">,</span> <span class=\"o\">**</span><span class=\"n\">kwargs</span><span class=\"p\">)</span>\n  File <span class=\"nb\">&quot;C:\\Users\\mpurt\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\polars\\lazyframe\\frame.py&quot;</span>, line <span class=\"m\">2630</span>, in <span class=\"n\">collect</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">wrap_df</span><span class=\"p\">(</span><span class=\"n\">ldf</span><span class=\"o\">.</span><span class=\"n\">collect</span><span class=\"p\">(</span><span class=\"n\">engine</span><span class=\"p\">,</span> <span class=\"n\">callback</span><span class=\"p\">))</span>\n<span class=\"w\">                   </span><span class=\"pm\">~~~~~~~~~~~^^^^^^^^^^^^^^^^^^</span>\n<span class=\"gr\">FileNotFoundError</span>: <span class=\"n\">The system cannot find the path specified. (os error 3): ./assets/MLtrain.csv</span>\n</pre></div>\n</span>",
+          "mimetype": "application/vnd.marimo+traceback"
+        }
+      ]
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "8a1abe33c27a409a37fabcff8c5505b2",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "An ancestor raised an exception (FileNotFoundError): ",
+          "traceback": null
+        }
+      ],
+      "console": []
+    }
+  ]
+}

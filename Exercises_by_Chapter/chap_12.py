@@ -67,8 +67,8 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Chapter 11:  Comparing linear and non-linear models
-    - Completed Tuesday September 15, 2026
+    # Chapter 12:  Ensembling multiple models
+    - Started Tuesday September 15, 2026
 
     Item | Book uses|I use|
     |--|--|--|

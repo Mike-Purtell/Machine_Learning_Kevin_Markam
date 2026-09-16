@@ -37,7 +37,7 @@ def _():
     from sklearn.linear_model import LogisticRegression
     from sklearn.model_selection import cross_val_score
     # from sklearn.model_selection import RandomizedSearchCV
-    # from sklearn.model_selection import GridSearchCV
+    from sklearn.model_selection import GridSearchCV
     # from sklearn.pipeline import Pipeline
     from sklearn.ensemble import VotingClassifier
 
@@ -49,6 +49,7 @@ def _():
     )
     return (
         CountVectorizer,
+        GridSearchCV,
         LogisticRegression,
         OneHotEncoder,
         RandomForestClassifier,
@@ -192,7 +193,7 @@ def _(mo):
 
 @app.cell
 def _(VotingClassifier, logreg, rf):
-    vc = VotingClassifier(
+    vc_1 = VotingClassifier(
         [
             ('clf1', logreg),
             ('clf2', rf)
@@ -200,7 +201,7 @@ def _(VotingClassifier, logreg, rf):
         voting='soft',
         n_jobs=-1
     )
-    return (vc,)
+    return (vc_1,)
 
 
 @app.cell(hide_code=True)
@@ -212,10 +213,10 @@ def _(mo):
 
 
 @app.cell
-def _(ct, make_pipeline, vc):
-    vc_pipe = make_pipeline(ct, vc)
-    vc_pipe
-    return (vc_pipe,)
+def _(ct, make_pipeline, vc_1):
+    vc_pipe_1 = make_pipeline(ct, vc_1)
+    vc_pipe_1
+    return (vc_pipe_1,)
 
 
 @app.cell(hide_code=True)
@@ -250,15 +251,15 @@ def _(mo):
 
 
 @app.cell
-def _(X, X_new, vc_pipe, y):
-    vc_pipe.fit(X, y.to_series())
-    vc_pipe.predict_proba(X_new)[:3]
+def _(X, X_new, vc_pipe_1, y):
+    vc_pipe_1.fit(X, y.to_series())
+    vc_pipe_1.predict_proba(X_new)[:3]
     return
 
 
 @app.cell
-def _(X_new, vc_pipe):
-    vc_pipe.predict(X_new[:3])
+def _(X_new, vc_pipe_1):
+    vc_pipe_1.predict(X_new[:3])
     return
 
 
@@ -291,8 +292,8 @@ def _(mo):
 
 
 @app.cell
-def _(X_new, vc_pipe):
-    vc_pipe.predict_proba(X_new)[80]
+def _(X_new, vc_pipe_1):
+    vc_pipe_1.predict_proba(X_new)[80]
     return
 
 
@@ -305,24 +306,211 @@ def _(mo):
 
 
 @app.cell
-def _(X, cross_val_score, vc_pipe, y):
-    cross_val_score(vc_pipe, X, y.to_series(), cv=5, scoring='accuracy').mean()
+def _(X, cross_val_score, vc_pipe_1, y):
+    cross_val_score(vc_pipe_1, X, y.to_series(), cv=5, scoring='accuracy').mean()
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    #BREAK AT START OF 12.4, page 187
+    #### 12.4 Combining class predictions
+    Modify the VotingClassifier to use hard voting, which ignores predicted probabilities and takes a majority vote based on class predictions.
     """)
+    return
+
+
+@app.cell
+def _(VotingClassifier, X, cross_val_score, ct, logreg, make_pipeline, rf, y):
+    vc_2 = (
+        VotingClassifier([
+            ("clf1", logreg),
+            ("clf2", rf)
+        ],
+        voting='hard',
+        n_jobs=-1
+        )
+    )
+    vc_pipe_2 = make_pipeline(ct, vc_2)
+    cross_val_score(
+        vc_pipe_2, 
+        X, 
+        y.to_series(), 
+        cv=5, 
+        scoring='accuracy'
+    ).mean()
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
- 
+    Why is this result misleading?
+    - In the case of a tie, hard voting always chooses class 0
+    - Thus hard voting is performing better than soft voting by chance
+
+    #### 12.5 Choosing a voting strategy
+    Soft voting:
+    - Preferred if you have an even number of models (especially two)
+    - Preferred if all models are well-calibrated
+    - Only works if all models have the predict_proba method
+
+    Hard voting:
+    - Preferred if some models are not well-calibrated
+    - Does not require the predict_proba method
     """)
+    return
+
+
+@app.cell
+def _(VotingClassifier, ct, logreg, make_pipeline, rf):
+    vc_3 = VotingClassifier([
+        ('clf1', logreg), 
+        ('clf2', rf)
+        ], 
+        voting='soft',
+        n_jobs=-1
+    )
+
+    vc_pipe_3 = make_pipeline(ct, vc_3)
+
+    return (vc_pipe_3,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 12.6 Tuning and ensemble with grid search
+    VotingClassifier’s hyperparameters can be tuned using a grid search to improve its accuracy. The best parameters for the VotingClassifier Pipeline might be different than the parameters for either model tuned separately. Create a vc_params dictionary with only the ColumnTransformer parameters.
+    """)
+    return
+
+
+@app.cell
+def _():
+    vc_params = {
+        'columntransformer__pipeline__onehotencoder__drop': [None, 'first'],
+        'columntransformer__countvectorizer__ngram_range': [(1, 1), (1, 2)],
+        'columntransformer__simpleimputer__add_indicator': [False, True]
+    }
+
+
+
+    vc_params 
+    return (vc_params,)
+
+
+@app.cell
+def _(vc_pipe_3):
+    vc_pipe_3.named_steps.keys()
+    return
+
+
+@app.cell
+def _(vc_pipe_3):
+    print(vc_pipe_3.named_steps['votingclassifier'].named_estimators)
+    return
+
+
+@app.cell
+def _(vc_params):
+    vc_params['votingclassifier__clf1__penalty'] = ['l1', 'l2']
+    vc_params['votingclassifier__clf1__C'] = [1, 10]
+    vc_params['votingclassifier__clf2__n_estimators'] = [100, 300]
+    vc_params['votingclassifier__clf2__min_samples_leaf'] = [2, 3]
+    vc_params
+    return
+
+
+@app.cell
+def _(GridSearchCV, X, vc_params, vc_pipe_3, y):
+    vc_grid = GridSearchCV(
+        vc_pipe_3, 
+        vc_params, 
+        cv=5, 
+        scoring='accuracy',
+        n_jobs=-1
+    )
+    vc_grid.fit(X, y.to_series())
+    return (vc_grid,)
+
+
+@app.cell
+def _(vc_grid):
+    print(vc_grid.best_score_)
+    return
+
+
+@app.cell
+def _(vc_grid):
+    print(vc_grid.best_params_)
+    return
+
+
+@app.cell
+def _(X_new, vc_grid):
+    vc_grid.predict(X_new)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 12.7 When should I use ensembling?
+    Ensembling generally improves model performance. It is useful when performance is the highest priority. Ensembling increases process complexity and is less interpretable than a single model.
+
+    Recommendation for ensembling is to include at least 3 models in the ensemble, and that these models performing reasonably well on their own. Ideally the selected models generate their predictions using different processes.
+
+    #### 12.8 How to apply different weights to models in an ensemble
+    By default, each model within an ensemble has an equal weight. You can weight certain models more than others to give them more “voting power” for determining the predicted class labels or predicted probabilities. For example, logistic regression model could be given double the voting power of the random forest model by setting the weights parameter of the VotingClassifier.
+    """)
+    return
+
+
+@app.cell
+def _(VotingClassifier, X, ct, logreg, make_pipeline, rf, y):
+    vc_4 = VotingClassifier([
+        ('clf1', logreg),
+        ('clf2', rf),
+        ],
+        voting='soft',
+        weights=[2, 1],
+        n_jobs=-1
+    )
+    vc_pipe_4 = make_pipeline(ct, vc_4)
+    vc_pipe_4.fit(X, y.to_series())
+    return (vc_pipe_4,)
+
+
+@app.cell
+def _(X_new, vc_pipe_4):
+    vc_pipe_4.predict_proba(X_new)[:3]
+    return
+
+
+@app.cell
+def _(X, cross_val_score, vc_pipe_4, y):
+    cross_val_score(
+        vc_pipe_4, 
+        X, 
+        y.to_series(), 
+        cv=5,
+        scoring='accuracy'
+        ).mean()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    You can search for optimal weights using a grid search. Here’s how to add that to the vc_params dictionary.
+    """)
+    return
+
+
+@app.cell
+def _(vc_params):
+    vc_params['votingclassifier__weights'] = [(1, 1), (2, 1), (1, 2)]
     return
 
 

@@ -38,6 +38,8 @@ def _():
     from sklearn.linear_model import LogisticRegression
     from sklearn.model_selection import cross_val_score
     from sklearn.model_selection import GridSearchCV
+    from sklearn.feature_selection import SelectFromModel
+    from sklearn.ensemble import ExtraTreesClassifier
 
     import warnings
 
@@ -47,15 +49,18 @@ def _():
     )
     return (
         CountVectorizer,
+        ExtraTreesClassifier,
         GridSearchCV,
         LogisticRegression,
         OneHotEncoder,
+        SelectFromModel,
         SelectPercentile,
         SimpleImputer,
         chi2,
         cross_val_score,
         make_column_transformer,
         make_pipeline,
+        np,
         os,
         pl,
     )
@@ -185,7 +190,6 @@ def _():
         'logisticregression__l1_ratio': [0.0, 1.0],  # 0.0 is L2 (Ridge), 1.0 is L1 (Lasso)
         'logisticregression__C': [0.1, 1, 10] 
     }
-
     return (params,)
 
 
@@ -327,9 +331,9 @@ def _(mo):
 @app.cell
 def _(SelectPercentile, chi2, ct, logreg, make_pipeline):
     selection = SelectPercentile(chi2, percentile=50)
-    fs_pipe = make_pipeline(ct, selection, logreg)
-    fs_pipe
-    return (fs_pipe,)
+    fs_pipe_1 = make_pipeline(ct, selection, logreg)
+    fs_pipe_1
+    return (fs_pipe_1,)
 
 
 @app.cell(hide_code=True)
@@ -341,15 +345,14 @@ def _(mo):
 
 
 @app.cell
-def _(X, cross_val_score, fs_pipe, y):
+def _(X, cross_val_score, fs_pipe_1, y):
     cross_val_score(
-        fs_pipe,
+        fs_pipe_1,
         X,
         y.to_series(),
         cv=5,
         scoring='accuracy',
     ).mean()
-
     return
 
 
@@ -361,17 +364,193 @@ def _(mo):
     SelectPercentile vs SelectKBest:
     - SelectPercentile: Specify percentage of features to keep
     - SelectKBest: Specify number of features to keep
+
+    #### 13.4 Filter methods: Model-based scoring
+    The other filter method we’ll use is called SelectFromModel. Whereas SelectPercentile scores features using a statistical test, SelectFromModel uses a model to score features:
+    - specify a model to use only for feature selection. That model is fit on all of the
+    features, and the coef_ or feature_importances_ attribute of the model is used as the scores.
+    - this will pass on to your prediction model all of the features that score above a certain
+    threshold (that you specify).
+
+    Thus for a model to be used by SelectFromModel, it has to calculate either coefficients or feature importances. Models that can be used by SelectFromModel include logistic regression, linear SVC, and tree-based models.
+
+    To be clear, SelectFromModel is a filter method (not an intrinsic method) because it’s filtering which features are passed to your separate prediction model. Let’s see how all of this fits together. We’re going to start by using logistic regression for feature selection. We’ll create a new instance of logistic regression called logreg_selection that’s only going to be used for feature selection. It’s completely separate from the logistic regression model we’re using to make predictions.
     """)
+    return
+
+
+@app.cell
+def _(LogisticRegression):
+    logreg_selection = LogisticRegression(
+        solver='liblinear',
+        penalty='l1',
+        random_state=1
+    )
+    return (logreg_selection,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Then, we’ll import SelectFromModel from the feature_selection module and create an instance called selection.
+
+    First, we pass it the model we’re using for selection. Second, we pass it a threshold. This can be the mean or median of the scores, though you can optionally include a scaling factor (such as 1.5 × mean). All features above this threshold will be passed to the prediction model, thus setting a higher threshold means fewer features will be kept.
+    """)
+    return
+
+
+@app.cell
+def _(SelectFromModel, logreg_selection):
+    selection_2 = SelectFromModel(logreg_selection, threshold='mean')
+    return (selection_2,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Now update fs_pipe to use the new feature selection object. Notice that logistic regression appears twice: one instance is being used only for feature selection, and the other instance is being used only for prediction.
+    """)
+    return
+
+
+@app.cell
+def _(ct, logreg, make_pipeline, selection_2):
+    fs_pipe_2 = make_pipeline(ct, selection_2, logreg)
+    fs_pipe_2
+    return (fs_pipe_2,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    When we cross-validate the updated Pipeline, the score has improved again, to 0.826.
+    """)
+    return
+
+
+@app.cell
+def _(X, cross_val_score, fs_pipe_2, y):
+    cross_val_score(
+        fs_pipe_2,
+        X,
+        y.to_series(),
+        cv=5,
+        scoring='accuracy',
+    ).mean()
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    #### 13.4 Filter methods: Model-based scoring
-
-    # BREAK ON PAGE 200, section 13.4
+    Now let’s try using a tree-based model with SelectFromModel. We’ll use ExtraTreesClassifier, which is an ensemble of decision trees similar to random forests. After importing it from the ensemble module, we’ll create an instance to use for feature selection called et_selection.
     """)
+    return
+
+
+@app.cell
+def _(ExtraTreesClassifier):
+    et_selection = ExtraTreesClassifier(
+        n_estimators=100,
+        random_state=1
+    )
+    return (et_selection,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Then, we’ll update both the feature selection object and the Pipeline. Notice that ExtraTreesClassifier has replaced logistic regression as the second step in the Pipeline.
+    """)
+    return
+
+
+@app.cell
+def _(SelectFromModel, ct, et_selection, logreg, make_pipeline):
+    selection_3 = SelectFromModel(
+        et_selection,
+        threshold='mean'
+    )
+    fs_pipe_3 = make_pipeline(ct, selection_3, logreg)
+    fs_pipe_3
+    return (fs_pipe_3,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    When we cross-validate the updated Pipeline, the resulting score is 0.815, which is not quite as
+    good.
+    """)
+    return
+
+
+@app.cell
+def _(X, cross_val_score, fs_pipe_3, y):
+    cross_val_score(
+        fs_pipe_3,
+        X,
+        y.to_series(),
+        cv=5,
+        scoring='accuracy',
+    ).mean()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    As mentioned earlier, it’s important to tune the feature selection parameters, the transformer parameters, and the model parameters all at the same time. We’ll do this using a grid search.
+
+    To start, we’ll make a copy of our params dictionary called fs_params. We want to add a new entry in order to tune the threshold parameter of SelectFromModel. For the dictionary key, we specify the step name, which is selectfrommodel, followed by two underscores, followed by the parameter name. For the values, we’ll pass a list of mean, 1.5 × mean, and negative infinity, which means don’t remove any features.
+    """)
+    return
+
+
+@app.cell
+def _(np):
+    fs_params = {
+        'columntransformer__countvectorizer__ngram_range': [(1, 1), (1, 2)],
+        'columntransformer__pipeline__onehotencoder__drop': [None, 'first'],
+        'columntransformer__simpleimputer__add_indicator': [True, False],
+        'logisticregression__l1_ratio': [0.0, 1.0],  # 0.0 is L2 (Ridge), 1.0 is L1 (Lasso)
+        'logisticregression__C': [0.1, 1, 10] 
+    }
+    fs_params['selectfrommodel__threshold'] = ['mean', '1.5*mean', -np.inf]
+    print(fs_params)
+    return (fs_params,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    We’ll create a new instance of GridSearchCV called fs_grid, and make sure to pass it the fs_pipe_3 and fs_params objects. Then we’ll run the grid search.
+    """)
+    return
+
+
+@app.cell
+def _(GridSearchCV, X, fs_params, fs_pipe_3, y):
+    fs_grid = GridSearchCV(
+        fs_pipe_3, 
+        fs_params, 
+        cv=5, 
+        scoring='accuracy',
+        n_jobs=-1
+    )
+    fs_grid.fit(X, y.to_series())
+    return (fs_grid,)
+
+
+@app.cell
+def _(fs_grid):
+    fs_grid.best_params_
+
+    return
+
+
+@app.cell
+def _():
     return
 
 

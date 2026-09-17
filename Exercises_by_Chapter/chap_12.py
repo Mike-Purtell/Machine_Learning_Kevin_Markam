@@ -36,9 +36,7 @@ def _():
     from sklearn.compose import make_column_transformer
     from sklearn.linear_model import LogisticRegression
     from sklearn.model_selection import cross_val_score
-    # from sklearn.model_selection import RandomizedSearchCV
     from sklearn.model_selection import GridSearchCV
-    # from sklearn.pipeline import Pipeline
     from sklearn.ensemble import VotingClassifier
 
     import warnings

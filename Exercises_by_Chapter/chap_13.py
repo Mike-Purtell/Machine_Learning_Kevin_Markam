@@ -72,7 +72,7 @@ def _():
 def _(mo):
     mo.md(r"""
     # Chapter 13:  Feature Selection
-    - Finished Wednesday September 16, 2026
+    - Finished Friday September 18, 2026
 
     Item | Book uses|I use|
     |--|--|--|
@@ -84,7 +84,11 @@ def _(mo):
 
     **My takeaways:**
 
-    - TBD
+    - Benefits and trade-offs of feature selection
+    - Intrinsic methods: feature selection happens automatically as part of the model building process.
+    - Filter methods: features are selected based on statistical measures.
+    - Wrapper methods: features are selected based on model performance.
+    - Recursive feature elimination (RFE): a wrapper method that recursively removes features and builds models to identify which features contribute the most to the model's performance.
 
     #### 13.1 Introduction to feature selection
     Feature selection is the process of removing uninformative features from your model. These are features that are not helping your model to make better predictions. In other words, uninformative features are adding “noise” to your model, rather than “signal”.

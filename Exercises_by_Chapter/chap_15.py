@@ -25,6 +25,7 @@ def _():
     import polars as pl
     import polars.selectors as cs
     import numpy as np
+    import pickle
 
     import os
 
@@ -42,6 +43,7 @@ def _():
     from sklearn.preprocessing import MaxAbsScaler
     from sklearn.preprocessing import FunctionTransformer
     from sklearn.model_selection import GridSearchCV
+    from sklearn.preprocessing import PolynomialFeatures
 
 
     return (
@@ -49,6 +51,7 @@ def _():
         FunctionTransformer,
         LogisticRegression,
         OneHotEncoder,
+        PolynomialFeatures,
         SimpleImputer,
         cross_val_score,
         cs,
@@ -56,6 +59,7 @@ def _():
         make_pipeline,
         np,
         os,
+        pickle,
         pl,
     )
 
@@ -76,7 +80,8 @@ def _(mo):
 
     **My takeaways:**
 
-    - TBD
+    - Stateless tranformations do not learn any information during the fit step. These include functions like ceiling, clip, letter(gets first letter of a string, and total (horizontal sum of columns))
+    - FunctionTransformer can only be used with Stateless transformations
 
     #### 15.1 Why not use dataframe tools for feature engineering?
     Let’s say that you need custom features for your model. You
@@ -660,18 +665,250 @@ def _(FunctionTransformer, demo, make_integer):
 @app.cell
 def _(mo):
     mo.md(r"""
-    # Break on page 236, at the end of 15.8, start of 15.9
+    #### 15.9: How do I create features from datetime data?
+    Demonstrate how to create date-based features. Read a tiny dataset of reported UFO sightings into a DataFrame.
     """)
     return
 
 
 @app.cell
-def _():
+def _(pl):
+    ufo = (
+        pl.read_csv(
+            'http://bit.ly/ufosample',
+        )
+        .with_columns(
+            Date = pl.col('Date').str.to_date(format='%m/%d/%Y')
+        )
+    )
+    ufo
+    return (ufo,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    We can access properties of the Date column using the dt
+    accessor. For example, we can easily access the day of the month using the day attribute.
+    """)
     return
 
 
 @app.cell
-def _():
+def _(pl, ufo):
+    ufo.select(pl.col('Date').dt.day())
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    If you want to use the day of the month as a feature, the first step is to create
+    a custom function called day_of_month.
+    """)
+    return
+
+
+@app.cell
+def _(pl, ufo):
+    def day_of_month(df):
+        return df.select(pl.col('Date').dt.day())
+
+    day_of_month(ufo)
+    return (day_of_month,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Now convert the day_of_month function into a transformer called day, and check that it
+    works as well.
+    """)
+    return
+
+
+@app.cell
+def _(FunctionTransformer, day_of_month, ufo):
+    day = FunctionTransformer(day_of_month)
+    day.fit_transform(ufo)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 15.8: How do I create feature interaction?
+    When there is an interaction between two or more features, one common technique is to
+    create “interaction terms” or “feature interactions” that your model can learn from. This is generally done by multiplying the values of each pair of features and then using those as new features.
+
+    Creating interaction features is useful when the combined impact of a pair of features is different
+    from the impact of the features when considered independently. For example, let’s pretend that
+    features A and B each have a small positive impact on the target, but when combined, they have a
+    much larger positive impact on the target than you would expect. In that case, it would be useful to
+    create the interaction feature of A × B.
+
+    Let’s see how we can create feature interactions in sklearn. We’ll assume that we’ve decided to
+    create interactions between Fare, SibSp, and Parch. Here are the first three and last three rows of
+    each of those features.
+    """)
+    return
+
+
+@app.cell
+def _(X, pl):
+    X.select(pl.col('Fare', 'SibSp', 'Parch'))
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Our first step is to import the PolynomialFeatures class from the preprocessing module, and then
+    create an instance called poly. We’ll set the include_bias parameter to False to avoid creating
+    a column of ones in the output, and we’ll set the interaction_only parameter to True to avoid
+    creating the square of each feature.
+    """)
+    return
+
+
+@app.cell
+def _(PolynomialFeatures):
+    poly = PolynomialFeatures(include_bias=False, interaction_only=True)
+    return (poly,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    When we run the fit_transform method and pass it those three columns, it outputs six columns:
+    - First three columns of the output are the original three columns: Fare, SibSp, and Parch.
+    - Next three columns are our interaction terms: Fare × SibSp, Fare × Parch, and SibSp ×
+    Parch.
+    """)
+    return
+
+
+@app.cell
+def _(X, pl, poly):
+    poly.fit_transform(X.select(pl.col('Fare', 'SibSp', 'Parch')))
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    If we wanted to include these feature interactions in our model, we would simply include poly as
+    one of the transformers in our ColumnTransformer.
+    One obvious question is: How should you choose which feature interactions to create?
+    - Ideally, you would use expert knowledge to guide your decision of which interactions to create.
+    - Otherwise explore the data to decide which interactions to create.
+    - For small number of features, create all possible interactions, then use feature selection to remove less ones.
+
+    For a large number of features, it’s impractical to create all possible
+    interactions. This would increase the risk of false positive feature interactions that appear to have a relationship with the target but could be occurring due to random chance (hallucinations?).
+
+    Tree-based models can learn feature interactions on their own through recursive splitting. When using a tree-based prediction model, then you don’t need to manually create feature interactions.
+
+    Keep in mind that while linear models can’t explicitly learn feature interactions, they can sometimes replace the information supplied by the interaction terms, in which case the
+    interactions are unnecessary.
+
+    **You should always evaluate the model with interactions
+    against the model without interactions, and only include them if they’re improving the model’s
+    performance.**
+
+    #### 15.11 How do I save a Pipeline with custom transformers?
+    If you save a Pipeline using pickle or joblib, and the Pipeline includes custom transformers, then
+    the saved Pipeline can only be loaded into a new environment if the functions it depends on are
+    defined in the new environment.
+    For example, let’s import pickle and use it to save our current Pipeline.
+    """)
+    return
+
+
+@app.cell
+def _(pickle, pipe_5):
+    with open('pipe.pickle', 'wb') as f:
+        pickle.dump(pipe_5, f)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Let’s pretend that we’re in a brand new environment and want to make predictions for X_new using our saved Pipeline. Because the Pipeline includes custom transformers which use the
+    first_letter and sum_cols functions, those two functions need to be defined in the new environment.
+
+    Those functions depend on polars, so polars would also need to be imported into the new environment. With these conditions satisfied, we can load our saved Pipeline into the pipe_from_pickle object.
+    """)
+    return
+
+
+@app.cell
+def _(pickle):
+    with open('pipe.pickle', 'rb') as f_read:
+        pipe_from_pickle_read = pickle.load(f_read)
+    return (pipe_from_pickle_read,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    We also need to create the X_new object in our environment.
+    """)
+    return
+
+
+@app.cell
+def _(pl):
+    read_cols = ['Parch', 'Fare', 'Embarked', 'Sex', 'Name', 'Age', 'Cabin',
+    'SibSp']
+    df_new_read = pl.read_csv('http://bit.ly/MLnewdata')
+    X_new_read = df_new_read.select(pl.col(read_cols))
+    return (X_new_read,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Now we can make predictions using the saved Pipeline
+    """)
+    return
+
+
+@app.cell
+def _(X_new_read, pipe_from_pickle_read):
+    pipe_from_pickle_read.predict(X_new_read)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    If this seems too cumbersome, one alternative is to use a Python library called cloudpickle, which extends the functionality of pickle to allow you to save user-defined functions.
+
+    Install and import cloudpickle, then save the Pipeline using cloudpickle instead of pickle. Notice that the cloudpickle code is exactly the same as the pickle code, except you use the dump function from cloudpickle instead of from pickle.
+
+    **skipped the cloudpickle examples**
+
+    #### 15.12: Can FunctionTransformer be used with any transformation?
+    FunctionTransformer should only be used with stateless transformations, where the transformation doesn’t learn any information during the fit step.
+
+    All custom transformations in this chapter were stateless: rounding up to the next integer, limiting values to a range,
+    extracting the first letter, and adding two columns. They didn’t learn anything about the training data that
+    later needed to be applied to testing data. They
+    work exactly the same on the testing data regardless of what the
+    training data looked like.
+
+    This is in contrast to stateful transformations, which do learn information from the fit step that need to be applied to both training and testing data. We’ve seen many stateful transformations in this
+    book:
+    - OneHotEncoder learns the categories from the training data, and those same categories need to be applied to the testing data.
+    - CountVectorizer learns the vocabulary from the training data, and that vocabulary needs to be used when building the document-term matrix for the testing data.
+    - SimpleImputer learns the values to impute from the training data, and those values are applied to the testing data.
+    - MaxAbsScaler learns the scale of each feature from the training data, and that scaling is applied to the testing data.
+
+    FunctionTransformer should never be used to implement stateful transformations. Depending on the situation, you would either run into an error or you would silently cause data leakage. In that
+    case, you would need to write your own class in order to create a proper transformer.
+    """)
     return
 
 

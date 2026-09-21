@@ -20,7 +20,7 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "d94af791e121112d4f3bab792fb7fe56",
+      "code_hash": "7db3e7dbba5b124d25f8ed152445b048",
       "outputs": [
         {
           "type": "data",
@@ -45,13 +45,13 @@
       "console": []
     },
     {
-      "id": "1694242e-d0f7-417f-a4fd-29cc8a247aee",
-      "code_hash": "b675f38a052fb3b708afb3352673857d",
+      "id": "bkHC",
+      "code_hash": "835cb0e24832b7417ebf44f1039a645e",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='1694242e-d0f7-417f-a4fd-29cc8a247aee-0' random-id='c7ac1407-8335-ce46-28cf-e2ccdc582604'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;age&#92;&quot;:25,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 226802&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; 11th&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 7&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Machine-op-inspct&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Own-child&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Black&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:38,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 89814&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Farming-fishing&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 50&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:28,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Local-gov&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 336951&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Assoc-acdm&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 12&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Protective-serv&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:44,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 160323&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Machine-op-inspct&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Black&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 7688&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:18,&#92;&quot;workclass&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 103497&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Own-child&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 30&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:34,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 198693&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; 10th&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 6&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Other-service&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Not-in-family&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 30&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:29,&#92;&quot;workclass&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 227026&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Unmarried&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Black&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:63,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Self-emp-not-inc&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 104626&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Prof-school&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 15&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Prof-specialty&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 3103&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 32&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:24,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 369667&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Other-service&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Unmarried&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:55,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 104996&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; 7th-8th&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 4&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Craft-repair&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;}]&quot;' data-total-rows='48842' data-total-columns='15' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;age&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;workclass&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;fnlwgt&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;education&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;education-num&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;marital-status&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;occupation&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;relationship&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;race&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;capital-gain&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;capital-loss&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;hours-per-week&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;native-country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;class&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/html": "<marimo-ui-element object-id='bkHC-0' random-id='e3fd5289-3b95-8426-ed0a-431e54f106fc'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;age&#92;&quot;:25,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 226802&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; 11th&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 7&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Machine-op-inspct&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Own-child&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Black&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:38,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 89814&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Farming-fishing&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 50&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:28,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Local-gov&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 336951&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Assoc-acdm&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 12&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Protective-serv&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:44,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 160323&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Machine-op-inspct&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Black&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 7688&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:18,&#92;&quot;workclass&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 103497&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Own-child&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 30&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:34,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 198693&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; 10th&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 6&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Other-service&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Not-in-family&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 30&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:29,&#92;&quot;workclass&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 227026&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Unmarried&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Black&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:63,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Self-emp-not-inc&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 104626&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Prof-school&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 15&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Prof-specialty&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 3103&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 32&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:24,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 369667&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Other-service&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Unmarried&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;age&#92;&quot;:55,&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 104996&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; 7th-8th&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 4&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Craft-repair&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;}]&quot;' data-total-rows='48842' data-total-columns='15' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;age&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;workclass&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;fnlwgt&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;education&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;education-num&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;marital-status&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;occupation&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;relationship&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;race&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;capital-gain&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;capital-loss&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;hours-per-week&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;native-country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;class&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
           }
         }
       ],
@@ -65,79 +65,86 @@
       ]
     },
     {
-      "id": "182059de-b78a-44e7-a041-81d11f68f5c9",
+      "id": "lEQa",
       "code_hash": "dd19451bb26d0e873763679842d4ca1e",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='182059de-b78a-44e7-a041-81d11f68f5c9-0' random-id='cbe1291d-7ce8-1ab4-f673-58c79299e85a'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Local-gov&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 177695&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Other-service&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Amer-Indian-Eskimo&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 55899&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Bachelors&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 13&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Divorced&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Adm-clerical&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Unmarried&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Self-emp-not-inc&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 280005&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Craft-repair&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 50&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 219086&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Sales&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 55&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 133833&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Adm-clerical&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Own-child&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 158993&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Divorced&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Other-service&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Other-relative&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Black&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 38&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 202516&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Own-child&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 35&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Federal-gov&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 189944&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Adm-clerical&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Not-in-family&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Black&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 72&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 191335&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Craft-repair&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 56&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 463072&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Bachelors&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 13&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Prof-specialty&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 60&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;}]&quot;' data-total-rows='48695' data-total-columns='14' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;workclass&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;fnlwgt&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;education&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;education-num&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;marital-status&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;occupation&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;relationship&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;race&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;capital-gain&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;capital-loss&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;hours-per-week&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;native-country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;class&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/html": "<marimo-ui-element object-id='lEQa-0' random-id='8a7c1421-ac81-f034-3f1d-945f08983259'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Local-gov&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 210926&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; 9th&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 5&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Divorced&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Farming-fishing&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Unmarried&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; Mexico&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Self-emp-inc&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 125000&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Bachelors&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 13&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Exec-managerial&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; England&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 153484&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Masters&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 14&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Exec-managerial&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 1977&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 50&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; State-gov&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 298871&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Adm-clerical&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; Asian-Pac-Islander&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; Vietnam&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Local-gov&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 29144&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Assoc-voc&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 11&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Craft-repair&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 152652&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Married-civ-spouse&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Transport-moving&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Husband&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 65&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 142977&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Divorced&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Craft-repair&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Not-in-family&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 65&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 334105&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Some-college&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Other-service&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Own-child&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 10&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Private&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 126568&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; HS-grad&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 9&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Craft-repair&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Not-in-family&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Male&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;workclass&#92;&quot;:&#92;&quot; Federal-gov&#92;&quot;,&#92;&quot;fnlwgt&#92;&quot;:&#92;&quot; 48099&#92;&quot;,&#92;&quot;education&#92;&quot;:&#92;&quot; Bachelors&#92;&quot;,&#92;&quot;education-num&#92;&quot;:&#92;&quot; 13&#92;&quot;,&#92;&quot;marital-status&#92;&quot;:&#92;&quot; Never-married&#92;&quot;,&#92;&quot;occupation&#92;&quot;:&#92;&quot; Exec-managerial&#92;&quot;,&#92;&quot;relationship&#92;&quot;:&#92;&quot; Not-in-family&#92;&quot;,&#92;&quot;race&#92;&quot;:&#92;&quot; White&#92;&quot;,&#92;&quot;sex&#92;&quot;:&#92;&quot; Female&#92;&quot;,&#92;&quot;capital-gain&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;capital-loss&#92;&quot;:&#92;&quot; 0&#92;&quot;,&#92;&quot;hours-per-week&#92;&quot;:&#92;&quot; 40&#92;&quot;,&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;}]&quot;' data-total-rows='48695' data-total-columns='14' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;workclass&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;fnlwgt&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;education&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;education-num&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;marital-status&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;occupation&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;relationship&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;race&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;sex&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;capital-gain&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;capital-loss&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;hours-per-week&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;native-country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;class&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "27c68927-6bdb-4d25-a632-21a9ede56e1b",
-      "code_hash": null,
+      "id": "PKri",
+      "code_hash": "c537b6176398853cb3de7722278229a9",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">You can see from the previous cell that education, occupation, and native-country all have more than 10 unique values. There\u2019s no hard rule to define a high-cardinality feature, but all 3 of these could be considered high-cardinality because they each have many unique values.</span>\n<span class=\"paragraph\">You can\u2019t tell from this display, but the 8 features are all nominal features, with the exception of\neducation since it does have a logical ordering. However, we\u2019re going to be treating education as\nnominal for this experiment.</span>\n<span class=\"paragraph\">The column labeled \u201cclass\u201d is actually our target. This column indicates whether the person has an income of more or less than $50,000 a year.\nWe can view the class proportions by normalizing the output of value_counts.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "1890be65-9d97-4504-9f0b-75ebb6ef0bff",
+      "id": "Xref",
       "code_hash": "5d1626b7dedf6d7aae1d2ac59f73a52d",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='1890be65-9d97-4504-9f0b-75ebb6ef0bff-0' random-id='abd108ea-d120-cbaa-3301-875cbf3ca22e'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;,&#92;&quot;count&#92;&quot;:11687}},{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;,&#92;&quot;count&#92;&quot;:37155}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/html": "<marimo-ui-element object-id='Xref-0' random-id='e6f555d8-436d-37ec-4d16-2bbe90f34fbf'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;,&#92;&quot;count&#92;&quot;:11687}},{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;,&#92;&quot;count&#92;&quot;:37155}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "1201ceab-31ac-4e3b-95b4-729fbc0f5378",
-      "code_hash": null,
-      "outputs": [],
+      "id": "SFPL",
+      "code_hash": "69833d821f289fa3e50df29f574d076d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">We can view the class proportions by normalizing the output of value_counts.</span></span>"
+          }
+        }
+      ],
       "console": []
     },
     {
-      "id": "65f57d56-1672-4b0a-9cff-635c9aa0df8a",
+      "id": "BYtC",
       "code_hash": "149e35ffccfa21d2eb3d4bba0d02d238",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='65f57d56-1672-4b0a-9cff-635c9aa0df8a-0' random-id='7ea2b043-2003-7c92-9213-fd57108d6c05'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.23928176569346055}},{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.7607182343065395}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/html": "<marimo-ui-element object-id='BYtC-0' random-id='4fe18ee8-1822-156a-8be7-b037bb9486b2'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.23928176569346055}},{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.7607182343065395}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "9425e739-c1a3-4ecf-9e82-5d0534eb865b",
-      "code_hash": "e3201c8381ebf8c1573a94a75ef37050",
+      "id": "RGSE",
+      "code_hash": "a4f0cfa67e3fdfb0f46149a918fb065a",
       "outputs": [
         {
-          "type": "error",
-          "ename": "syntax",
-          "evalue": "line 1\n    When defining our X DataFrame, which I\u2019m calling census_X, we\u2019re only going to use the 8 categorical\n                                          ^\nSyntaxError: invalid character '\u2019' (U+2019)\n",
-          "traceback": []
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">When defining our X DataFrame, which I\u2019m calling census_X, we\u2019re only going to use the 8 categorical\ncolumns, which I\u2019ve listed out manually. And we\u2019ll use class as our y Series, which I\u2019m calling\ncensus_y.</span></span>"
+          }
         }
       ],
       "console": []
     },
     {
-      "id": "3a64fd22-a7de-4050-b4a1-03a8c9700d66",
-      "code_hash": "015d16af9a3df6fc490f780af1c386e6",
+      "id": "Kclp",
+      "code_hash": "afe9776ca8eed5bf9e6f046b873cd655",
       "outputs": [
         {
           "type": "data",
@@ -149,34 +156,21 @@
       "console": []
     },
     {
-      "id": "d94bc7a7-d240-4154-8132-2be1bad73a4b",
-      "code_hash": "0c94f095d81f462dd8e07e75b31924a0",
+      "id": "emfo",
+      "code_hash": "fc277d58576b66735baefd00be641718",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='d94bc7a7-d240-4154-8132-2be1bad73a4b-0' random-id='66dd9249-e85a-7a12-ef96-9383ac5adbf3'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;},{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;},{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"173-setting-up-the-encoders\">17.3 Setting up the encoders</h4>\n<span class=\"paragraph\">We will test the effectiveness of OneHotEncoder and OrdinalEncoder with these 8 features. For this experiment, we would normally just create instances using the default arguments.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "b05ae24d-a72a-4dae-9867-eabc4607bda2",
-      "code_hash": "9b2e5c13da13ffa680e95d0a3835d938",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "e85c36e5-65c2-45ae-9db2-34b3cd6052fa",
-      "code_hash": null,
+      "id": "Hstk",
+      "code_hash": "9d4841c80f482d8cd6799bed9e8007f6",
       "outputs": [
         {
           "type": "data",
@@ -188,7 +182,20 @@
       "console": []
     },
     {
-      "id": "0cc28a7e-80c0-4b78-9677-23f9b67fec9d",
+      "id": "nWHF",
+      "code_hash": "c245879cde9c2b15735d37d3cd549fa6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Notice that we created an instance of OrdinalEncoder without defining the category ordering. This is because we\u2019re treating all of the features as nominal, and nominal features have no logical ordering.\nAs a result, OrdinalEncoder would simply learn the categories for each feature in alphabetical order,\nwhich we can confirm by fitting the OrdinalEncoder and checking the categories_ attribute.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iLit",
       "code_hash": "4f66e2e85a9bcd2d2af43c41a4b6d0ff",
       "outputs": [
         {
@@ -201,7 +208,163 @@
       "console": []
     },
     {
-      "id": "374d0d50-9c11-4bb3-baf7-84d8dbf11753",
+      "id": "ZHCJ",
+      "code_hash": "6afd6251c40981f1a0030c29cd0b6e12",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">That being said, we will have a problem with encoding due to our highest\ncardinality feature, native-country. Let\u2019s see why.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "79d59f3d2b8f5030334fc12cbac2e404",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='ROlb-0' random-id='ab2ad303-8035-bd82-dc5d-36ffc34680b9'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;count&#92;&quot;:43832},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Mexico&#92;&quot;,&#92;&quot;count&#92;&quot;:951},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;count&#92;&quot;:857},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Philippines&#92;&quot;,&#92;&quot;count&#92;&quot;:295},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Germany&#92;&quot;,&#92;&quot;count&#92;&quot;:206},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Puerto-Rico&#92;&quot;,&#92;&quot;count&#92;&quot;:184},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Canada&#92;&quot;,&#92;&quot;count&#92;&quot;:182},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; El-Salvador&#92;&quot;,&#92;&quot;count&#92;&quot;:155},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; India&#92;&quot;,&#92;&quot;count&#92;&quot;:151},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Cuba&#92;&quot;,&#92;&quot;count&#92;&quot;:138}]&quot;' data-total-rows='42' data-total-columns='2' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;native-country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;count&quot;,[&quot;integer&quot;,&quot;u32&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "502b2c682d8b1982f0d5eb0971f159ad",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">One of the categories (Holand-Netherlands) appears only once in the dataset. Rare category values can cause problems with cross-validation, and will definitely create a problem because that sample is guaranteed to appear in the test fold but not in a training fold during one of the runs of cross-validation. That will cause an error\nfor both OneHotEncoder and OrdinalEncoder.\nIn the case of OneHotEncoder, the solution is simply to set the handle_unknown parameter to 'ignore'.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "1d0d08c9caaf2e6c60ee797df1d16c67",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "990f0231ddda87f76dd2ae141d67c8f3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Starting in sklearn 0.24, OrdinalEncoder also has a handle_unknown parameter that could be used for this situation. Older versions (including the book examples) define the categories in advance for each feature using a list comprehension that iterates through the feature columns and extracts the unique values from each column. This is shown in the book examples with an older version sklearn, but thankfully not needed here. That solution is messy.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "be8d64a6131edc42a6fb932d98a569a3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"174-encoding-nominal-features-for-a-linear-model\">17.4: Encoding nominal features for a linear model</h4>\n<span class=\"paragraph\">Now that we\u2019ve set up our OneHotEncoder, called ohe_ignore, and our OrdinalEncoder, called oe_cats, let\u2019s see what happens when we pass census_X to fit_transform and then check the shape.</span>\n<span class=\"paragraph\">As expected, the OneHotEncoder creates a lot of columns due to the high-cardinality features, whereas the OrdinalEncoder creates only one column for each of the eight features.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "3f4037aec2ecfcb143302ea9b24ea44c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[48842, 102]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "3ee92a7a-864a-4842-92d2-02e3c27113a7",
+      "code_hash": "89daef9b3e7a9399980c1e392345207f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/json": "[48842, 8]"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "45151131-164f-4652-a288-40fc574a604a",
+      "code_hash": "c971f9fcfaf64cde70a14830a124e0ea",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Now let\u2019s actually test the advice that I\u2019ve given, which is that OneHotEncoder should be used for nominal features, to see if this advice still holds for high-cardinality features.</span>\n<span class=\"paragraph\">The simplest method for doing this is to create two Pipelines. One of them uses OneHotEncoder\nand the other uses OrdinalEncoder, and both end in a logistic regression model.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "29335f27-fb4e-4808-a845-1fb54231f482",
+      "code_hash": "6384219ba3e79d5e10bcece3fb9d85b9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "deaa7a3f-e4fb-4fb2-93a1-ea18736e2057",
+      "code_hash": "d54722c0c6590b3a728919d1ba70327b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>np.float64(0.8328487299031877)</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "aab66acc-a3ba-469c-8df8-1f8438a77d57",
+      "code_hash": "1bcf518ac32cc2237be5f5aeaf5c6097",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>np.float64(0.7554768489536634)</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "f0797f53-8370-4df9-b209-d694f39e032c",
       "code_hash": null,
       "outputs": [
         {
@@ -214,21 +377,8 @@
       "console": []
     },
     {
-      "id": "de50209f-e19f-437e-8dad-1dd44084dcdf",
-      "code_hash": "d5bd4e91c2ef6c59a5a15f43411dd41c",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/html": "<marimo-ui-element object-id='de50209f-e19f-437e-8dad-1dd44084dcdf-0' random-id='de3f96a1-b148-47e0-0538-5c5495d40381'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;native-country&#92;&quot;:&#92;&quot; United-States&#92;&quot;,&#92;&quot;count&#92;&quot;:43832},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Mexico&#92;&quot;,&#92;&quot;count&#92;&quot;:951},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; ?&#92;&quot;,&#92;&quot;count&#92;&quot;:857},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Philippines&#92;&quot;,&#92;&quot;count&#92;&quot;:295},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Germany&#92;&quot;,&#92;&quot;count&#92;&quot;:206},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Puerto-Rico&#92;&quot;,&#92;&quot;count&#92;&quot;:184},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Canada&#92;&quot;,&#92;&quot;count&#92;&quot;:182},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; El-Salvador&#92;&quot;,&#92;&quot;count&#92;&quot;:155},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; India&#92;&quot;,&#92;&quot;count&#92;&quot;:151},{&#92;&quot;native-country&#92;&quot;:&#92;&quot; Cuba&#92;&quot;,&#92;&quot;count&#92;&quot;:138}]&quot;' data-total-rows='42' data-total-columns='2' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;native-country&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;count&quot;,[&quot;integer&quot;,&quot;u32&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "cf081dec-e7c1-4f57-8a26-1850a5c872b2",
-      "code_hash": null,
+      "id": "81c792ef-c4ba-46b9-8a79-c6a02dd9a467",
+      "code_hash": "acf7bda9a9da1e9dbbc51a6beb0e8325",
       "outputs": [
         {
           "type": "data",
@@ -240,72 +390,7 @@
       "console": []
     },
     {
-      "id": "8da7b67f-8069-481f-a5d8-961c9adbdd22",
-      "code_hash": "cc374ee66c0b22514302e40fe8b3d1bc",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "35274472-190d-4a69-a0aa-aefef4ad43d0",
-      "code_hash": null,
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "a8ed5811-5cf7-4d6d-a39e-e4abe688e1f7",
-      "code_hash": "8ce808bad5e9e2e07360456e356795f8",
-      "outputs": [
-        {
-          "type": "error",
-          "ename": "syntax",
-          "evalue": "line 1\n    Starting in scikit-learn version 0.24, OrdinalEncoder has a similar handle_unknown parameter that could be used for this situation.\n                             ^^^^^^^\nSyntaxError: invalid syntax\n",
-          "traceback": []
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "20466ef9-3ea0-476a-a347-fe97fd07f15e",
-      "code_hash": null,
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "3f615d03-91f1-4144-9d24-0a8bdc345c53",
-      "code_hash": null,
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "0680bd6a-c6a4-42dc-b505-b71aebb70929",
+      "id": "Pvdt",
       "code_hash": "8789b60ffee84904883350e241160092",
       "outputs": [
         {

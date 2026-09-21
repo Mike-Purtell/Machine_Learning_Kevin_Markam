@@ -30,12 +30,21 @@ def _():
     # from sklearn.impute import SimpleImputer
     # from sklearn.preprocessing import OneHotEncoder, FunctionTransformer
     # from sklearn.feature_extraction.text import CountVectorizer
-    # from sklearn.linear_model import LogisticRegression
+    from sklearn.linear_model import LogisticRegression
     # from sklearn.compose import make_column_transformer
-    # from sklearn.pipeline import make_pipeline
+    from sklearn.pipeline import make_pipeline
+    from sklearn.model_selection import cross_val_score
 
 
-    return OneHotEncoder, OrdinalEncoder, os, pl
+    return (
+        LogisticRegression,
+        OneHotEncoder,
+        OrdinalEncoder,
+        cross_val_score,
+        make_pipeline,
+        os,
+        pl,
+    )
 
 
 @app.cell(hide_code=True)
@@ -156,7 +165,7 @@ def _(census, pl):
     'relationship', 'race', 'sex', 'native-country']
     census_X = census.select(pl.col(census_cols))
     census_y = census.select(pl.col('class'))
-    return (census_X,)
+    return census_X, census_y
 
 
 @app.cell(hide_code=True)
@@ -228,15 +237,14 @@ def _(mo):
 @app.cell
 def _(OneHotEncoder, OrdinalEncoder):
     ohe_ignore = OneHotEncoder(handle_unknown='ignore')
-    oe_ignore = OrdinalEncoder(handle_unknown='ignore')
-
-    return
+    oe_ignore = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)
+    return oe_ignore, ohe_ignore
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
- 
+    Starting in sklearn 0.24, OrdinalEncoder also has a handle_unknown parameter that could be used for this situation. Older versions (including the book examples) define the categories in advance for each feature using a list comprehension that iterates through the feature columns and extracts the unique values from each column. This is shown in the book examples with an older version sklearn, but thankfully not needed here. That solution is messy.
     """)
     return
 
@@ -244,21 +252,87 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Starting in sklearn 0.24, OrdinalEncoder also has a handle_unknown parameter that could be used for this situation. Older versions (including the book examples) define the categories in advance for each feature using a list comprehension that iterates through the feature columns and extracts the unique values from each column. This is shown in the book examples run on older sklearn, but thankfully not needed here.
+    #### 17.4: Encoding nominal features for a linear model
+    Now that we’ve set up our OneHotEncoder, called ohe_ignore, and our OrdinalEncoder, called oe_cats, let’s see what happens when we pass census_X to fit_transform and then check the shape.
+
+    As expected, the OneHotEncoder creates a lot of columns due to the high-cardinality features, whereas the OrdinalEncoder creates only one column for each of the eight features.
     """)
+    return
+
+
+@app.cell
+def _(census_X, ohe_ignore):
+    ohe_ignore.fit_transform(census_X).shape
+    return
+
+
+@app.cell
+def _(OrdinalEncoder, census_X):
+    # book uses OrdinalEncoder(categories=cat) with older sklearn
+    oe_cats = OrdinalEncoder()   
+    oe_cats.fit_transform(census_X).shape
+
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # BREAK on page 254, where 17.3 is done and 17.4 starts
+    Now let’s actually test the advice that I’ve given, which is that OneHotEncoder should be used for nominal features, to see if this advice still holds for high-cardinality features.
+
+    The simplest method for doing this is to create two Pipelines. One of them uses OneHotEncoder
+    and the other uses OrdinalEncoder, and both end in a logistic regression model.
+    """)
+    return
+
+
+@app.cell
+def _(LogisticRegression, make_pipeline, oe_ignore, ohe_ignore):
+    logreg = LogisticRegression(max_iter=1000)
+    ohe_logreg = make_pipeline(ohe_ignore, logreg)
+    oe_logreg = make_pipeline(oe_ignore, logreg)
+    return oe_logreg, ohe_logreg
+
+
+@app.cell
+def _(census_X, census_y, cross_val_score, ohe_logreg):
+    cross_val_score(
+        ohe_logreg,
+        census_X,
+        census_y.to_series(),
+        cv=5,
+        scoring='accuracy'
+    ).mean()
+    return
+
+
+@app.cell
+def _(census_X, census_y, cross_val_score, oe_logreg):
+    cross_val_score(
+        oe_logreg,
+        census_X,
+        census_y.to_series(),
+        cv=5,
+        scoring='accuracy'
+    ).mean()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    The two Pipelines take around the same amount of time to run, but the accuracy of the
+    OneHotEncoder Pipeline is 0.833, which is significantly better than the 0.755 accuracy of the
+    OrdinalEncoder Pipeline. This would suggest that at least for a linear model like logistic
+    regression, OneHotEncoder should be used for nominal features, even when the features have high
+    cardinality.
     """)
     return
 
 
 @app.cell
 def _():
+    # BREAK on Page 255, end of 17.4, start of 17.5
     return
 
 

@@ -24,23 +24,21 @@ def _():
 def _():
     import polars as pl
     import os
-    # import numpy as np
     from sklearn.preprocessing import OneHotEncoder
     from sklearn.preprocessing import OrdinalEncoder
-    # from sklearn.impute import SimpleImputer
-    # from sklearn.preprocessing import OneHotEncoder, FunctionTransformer
-    # from sklearn.feature_extraction.text import CountVectorizer
     from sklearn.linear_model import LogisticRegression
-    # from sklearn.compose import make_column_transformer
+    from sklearn.compose import make_column_transformer
     from sklearn.pipeline import make_pipeline
     from sklearn.model_selection import cross_val_score
-
+    from sklearn.ensemble import RandomForestClassifier
 
     return (
         LogisticRegression,
         OneHotEncoder,
         OrdinalEncoder,
+        RandomForestClassifier,
         cross_val_score,
+        make_column_transformer,
         make_pipeline,
         os,
         pl,
@@ -51,7 +49,7 @@ def _():
 def _(mo):
     mo.md(r"""
     # Chapter 17:  High-Cardinality categorical features
-    - Finished Sunday September 20, 2026
+    - Finished Monday September 21, 2026
 
     Item | Book uses|I use|
     |--|--|--|
@@ -63,7 +61,10 @@ def _(mo):
 
     **My takeaways:**
 
-    - TBD
+    - With nominal features and a linear model, OneHotEncoder is the best choice regardless of cardinality.
+    - With nominal features and a non-linear model, try OneHotEncoder, and OrdinalEncoder and see which option performs better.
+    - With ordinal features with linear or non-linear model, try OneHotEncoder, and try using OrdinalEncoder and see which option performs better.
+    - In all cases, if the features have high cardinality, OrdinalEncoder is likely to run significantly faster than OneHotEncoder.
 
 
     #### 17.1 Recap of nominal and ordinal features
@@ -271,8 +272,7 @@ def _(OrdinalEncoder, census_X):
     # book uses OrdinalEncoder(categories=cat) with older sklearn
     oe_cats = OrdinalEncoder()   
     oe_cats.fit_transform(census_X).shape
-
-    return
+    return (oe_cats,)
 
 
 @app.cell(hide_code=True)
@@ -291,7 +291,7 @@ def _(LogisticRegression, make_pipeline, oe_ignore, ohe_ignore):
     logreg = LogisticRegression(max_iter=1000)
     ohe_logreg = make_pipeline(ohe_ignore, logreg)
     oe_logreg = make_pipeline(oe_ignore, logreg)
-    return oe_logreg, ohe_logreg
+    return logreg, oe_logreg, ohe_logreg
 
 
 @app.cell
@@ -326,20 +326,184 @@ def _(mo):
     OrdinalEncoder Pipeline. This would suggest that at least for a linear model like logistic
     regression, OneHotEncoder should be used for nominal features, even when the features have high
     cardinality.
+
+    #### 17.5: Encoding nominal features for a non-linear model
+    Let’s now do the same comparison as the previous lesson, except this time using random forests, which is a tree-based non-linear model.
+
+    First, we’ll create two more Pipelines. One uses OneHotEncoder and the other uses OrdinalEncoder, and both end in a random forest model.
     """)
     return
 
 
 @app.cell
-def _():
-    # BREAK on Page 255, end of 17.4, start of 17.5
+def _(RandomForestClassifier, make_pipeline, oe_ignore, ohe_ignore):
+    rf = RandomForestClassifier()
+    ohe_rf = make_pipeline(ohe_ignore, rf)
+    oe_rf = make_pipeline(oe_ignore, rf)
+    return oe_rf, ohe_rf, rf
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Then, we’ll cross-validate each Pipeline using all features.
+    """)
+    return
+
+
+@app.cell
+def _(census_X, census_y, cross_val_score, ohe_rf):
+    cross_val_score(
+        ohe_rf,
+        census_X,
+        census_y.to_series(),
+        cv=5,
+        scoring='accuracy',
+    ).mean()
+    return
+
+
+@app.cell
+def _(census_X, census_y, cross_val_score, oe_rf):
+    cross_val_score(
+        oe_rf,
+        census_X,
+        census_y.to_series(),
+        cv=5,
+        scoring='accuracy',
+    ).mean()
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
- 
+    We can see that the accuracies are about the same for the OneHotEncoder Pipeline (0.826) and the OrdinalEncoder Pipeline (0.825), even though we were using the OrdinalEncoder on nominal features, which would normally be considered improper.
+
+    How can this be? Well, because of how decision trees recursively split features, the random forest model can approximately learn the relationships present in categorical features even when they’re
+    encoded as single columns with OrdinalEncoder.
+
+    It’s also worth noting that the OrdinalEncoder Pipeline is significantly faster than the OneHotEncoder Pipeline due to the much smaller feature set created by the OrdinalEncoder.
+
+    #### 17.6 Combining the encodings
+    One final variation that we can try is to use the OneHotEncoder for all features except for education. And since education is actually an ordinal feature, we can use the OrdinalEncoder with it and define the category ordering.
+    Here are the education categories.
+    """)
+    return
+
+
+@app.cell
+def _(OrdinalEncoder, census_X, pl):
+    cats = sorted(
+        census_X
+        .select(pl.col('education')
+        .unique())
+        .to_series()
+        .to_list()
+    )
+    cats
+    oe_cats_1 = OrdinalEncoder(categories=[cats])
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Then we’ll create a ColumnTransformer that applies the OrdinalEncoder to education, and applies the OneHotEncoder to all other features.
+    """)
+    return
+
+
+@app.cell
+def _(make_column_transformer, oe_cats, ohe_ignore):
+    ct_1 = make_column_transformer(
+        (oe_cats, ['education']),
+        remainder=ohe_ignore
+    )
+    return (ct_1,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    When we pass census_X to the fit_transform, it creates 87 feature columns, compared to the 102 columns that were created when we only used the OneHotEncoder.
+    """)
+    return
+
+
+@app.cell
+def _(census_X, ct_1):
+    ct_1.fit_transform(census_X).shape
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Finally, we’ll create two Pipelines. Both of them start with the same ColumnTransformer, but one ends with logistic regression while the other ends with random forests.
+    """)
+    return
+
+
+@app.cell
+def _(ct_1, logreg, make_pipeline, rf):
+    oe_ohe_logreg_1 = make_pipeline(ct_1, logreg)
+    oe_ohe_rf_1 = make_pipeline(ct_1, rf)
+    return oe_ohe_logreg_1, oe_ohe_rf_1
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    When we cross-validate the first Pipeline, the accuracy is 0.832, which is nearly the same as the 0.833 achieved by the logistic regression Pipeline that used OneHotEncoder for all features.
+    """)
+    return
+
+
+@app.cell
+def _(census_X, census_y, cross_val_score, oe_ohe_logreg_1):
+    cross_val_score(
+        oe_ohe_logreg_1,
+        census_X,
+        census_y.to_series(),
+        cv=5,
+        scoring='accuracy'
+    ).mean()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    When we cross-validate the second Pipeline, the accuracy is 0.825, which is nearly the same as the 0.826 achieved by the random forest Pipeline that used OneHotEncoder for all features.
+    """)
+    return
+
+
+@app.cell
+def _(census_X, census_y, cross_val_score, oe_ohe_rf_1):
+    cross_val_score(
+        oe_ohe_rf_1,
+        census_X,
+        census_y.to_series(),
+        cv=5,
+        scoring='accuracy'
+    ).mean()
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    In summary, encoding the education feature with OrdinalEncoder and the 7 other features with OneHotEncoder performed basically the same as encoding all 8 features with OneHotEncoder. However,
+    it’s certainly possible that the OrdinalEncoder could provide a benefit under other circumstances.
+
+    #### 17.7: Best practices for encoding
+    Let’s summarize what we’ve learned in this chapter:
+    - If you have nominal features and are using a linear model, you should definitely use OneHotEncoder, regardless of whether the features have high cardinality.
+    - If you have nominal features and are using a non-linear model, you can try using OneHotEncoder, and you can try using OrdinalEncoder without defining the category ordering, and see which option performs better.
+    - If you have ordinal features and are using either type of model, you can try using OneHotEncoder, and you can try using OrdinalEncoder and then see which option performs better.
+    In all cases, keep in mind that if the features have high cardinality, OrdinalEncoder is likely to run significantly faster than OneHotEncoder, which may or may not matter in your particular case
     """)
     return
 

@@ -20,7 +20,7 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "f264e0d2a3fed5721ea2bf757eee1a36",
+      "code_hash": "3f1e5d2bfc19a057338b77ae1b837140",
       "outputs": [
         {
           "type": "data",
@@ -33,19 +33,19 @@
     },
     {
       "id": "vblA",
-      "code_hash": "366237135ada120e01f27e0f0c860f3d",
+      "code_hash": "e14ba082608f28a6dec079c80354b091",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-18-class-imbalance\">Chapter 18:  Class imbalance</h1>\n<ul>\n<li>Finished XXX September YY, 2026</li>\n</ul>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>TBD</li>\n<li>TBD</li>\n</ul>\n<h4 id=\"181-workflow-recap\">18.1 Workflow recap</h4>\n<span class=\"paragraph\">A common issue when working on a classification problem is known as\nclass imbalance, where classes are not equally represented in the\ndataset.</span>\n<span class=\"paragraph\">Class imbalance is inherent to many domains. For example, fraudulent transactions in a credit card dataset would have a natural class imbalance since only a tiny fraction of transactions are likely to be fraudulent.</span>\n<span class=\"paragraph\">Class imbalance can occur in binary classification problems where there are only two classes and in multiclass problems with more than two classes. In binary classification, the class that\nhas more samples is called the \u201cmajority class\u201d, and the class that has fewer samples is called the \u201cminority class\u201d.</span>\n<span class=\"paragraph\">So why does class imbalance even matter? In brief, Machine Learning models often have a harder time predicting the minority class because there are fewer examples of this class to learn from. In\nother words, your model won\u2019t be able to learn as much about the patterns in the minority class, and thus it may have a hard time differentiating between the classes.\nKeep in mind that some class imbalance is present in most datasets. In the Titanic dataset, for example, the majority class represents 62% of the samples and the minority class represents 38%. There\u2019s even more imbalance in the census dataset, with a split of 76% to 24%.</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-18-class-imbalance\">Chapter 18:  Class imbalance</h1>\n<ul>\n<li>Finished XXX September YY, 2026</li>\n</ul>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>A small amount of imbalance (like in the Titanic dataset) tends not to matter.</li>\n<li>As the amount of class imbalance increases, more specialized techniques need to be applied</li>\n</ul>\n<h4 id=\"181-workflow-recap\">18.1 Workflow recap</h4>\n<span class=\"paragraph\">A common issue when working on a classification problem is known as\nclass imbalance, where classes are not equally represented in the\ndataset.</span>\n<span class=\"paragraph\">Class imbalance is inherent to many domains. For example, fraudulent transactions in a credit card dataset would have a natural class imbalance since only a tiny fraction of transactions are likely to be fraudulent.</span>\n<span class=\"paragraph\">Class imbalance can occur in binary classification problems where there are only two classes and in multiclass problems with more than two classes. In binary classification, the class that\nhas more samples is called the \u201cmajority class\u201d, and the class that has fewer samples is called the \u201cminority class\u201d.</span>\n<span class=\"paragraph\">So why does class imbalance even matter? In brief, Machine Learning models often have a harder time predicting the minority class because there are fewer examples of this class to learn from. In\nother words, your model won\u2019t be able to learn as much about the patterns in the minority class, and thus it may have a hard time differentiating between the classes.\nKeep in mind that some class imbalance is present in most datasets. In the Titanic dataset, for example, the majority class represents 62% of the samples and the minority class represents 38%. There\u2019s even more imbalance in the census dataset, with a split of 76% to 24%.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "lEQa",
+      "id": "bkHC",
       "code_hash": "754ef6d629cddcf324a43e41b675a7ef",
       "outputs": [
         {
@@ -58,7 +58,7 @@
       "console": []
     },
     {
-      "id": "PKri",
+      "id": "lEQa",
       "code_hash": "398d6c6e6ac859626a4869b080b675f9",
       "outputs": [
         {
@@ -78,34 +78,34 @@
       ]
     },
     {
-      "id": "67279f5b-65a1-47b9-abda-0c80391b9135",
+      "id": "PKri",
       "code_hash": "34e38579f4fb454e99f465ac3f57cc45",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='67279f5b-65a1-47b9-abda-0c80391b9135-0' random-id='57aa8988-b389-b42e-0cd0-012ad23c3880'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Survived&#92;&quot;:{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;proportion&#92;&quot;:0.6161616161616161}},{&#92;&quot;Survived&#92;&quot;:{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;proportion&#92;&quot;:0.3838383838383838}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Survived&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/html": "<marimo-ui-element object-id='PKri-0' random-id='c4783cdb-ee79-84a6-8413-71084c1ad4cf'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Survived&#92;&quot;:{&#92;&quot;Survived&#92;&quot;:0,&#92;&quot;proportion&#92;&quot;:0.6161616161616161}},{&#92;&quot;Survived&#92;&quot;:{&#92;&quot;Survived&#92;&quot;:1,&#92;&quot;proportion&#92;&quot;:0.3838383838383838}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Survived&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "4105f9a2-273a-4d11-89cb-23aa3f27ba3f",
-      "code_hash": null,
+      "id": "Xref",
+      "code_hash": "ac479c8afa582f951d573bb22c0b45ba",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">now load the census data</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "a12dd132-37ef-4d32-ae1f-9bf07c335092",
-      "code_hash": "25bc586d666dbfdd9c04ddc79c7d9254",
+      "id": "SFPL",
+      "code_hash": "18c27f83768386bf7b29bb37729a9614",
       "outputs": [
         {
           "type": "data",
@@ -124,39 +124,39 @@
       ]
     },
     {
-      "id": "52ccd5c7-d64f-4055-a989-1ffab81bb038",
+      "id": "BYtC",
       "code_hash": "cdbd441a81f2cc7f1c0a5a3face90ea2",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='52ccd5c7-d64f-4055-a989-1ffab81bb038-0' random-id='b72a9f78-51e6-3a0d-5a34-8ea9afe79544'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.7607182343065395}},{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.23928176569346055}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/html": "<marimo-ui-element object-id='BYtC-0' random-id='d4738ef2-348c-e9c5-a410-71a3d7fe129e'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003e50K&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.23928176569346055}},{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot; &#92;u003c=50K&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.7607182343065395}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "12c926f5-51ca-412d-87b8-ec94cae8e1a6",
-      "code_hash": null,
+      "id": "RGSE",
+      "code_hash": "ad18164c58f4c5b04990876b0d9e36be",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">A small amount of class imbalance (like in the Titanic dataset) tends not to matter, and you should\njust use all of the usual techniques that you\u2019ve learned in this book. But as the amount of class\nimbalance increases, more specialized techniques need to be applied to the problem, and those\ntechniques are the focus of this chapter.</span>\n<h4 id=\"182-preparing-the-mammography-dataset\">18.2 Preparing the mammography dataset</h4>\n<span class=\"paragraph\">This chapter will use a dataset of mammography scans designed to detect the presence of cancer.</span>\n<span class=\"paragraph\">The dataset has 6 features as well as a target\ncolumn called \u201cclass\u201d. Each sample is an object of interest that was extracted from a scan, and each object was translated into these features using a computer vision algorithm.</span>\n<span class=\"paragraph\">The class column has two possible values, -1 and 1. -1 means the object did not indicate the presence of cancer, and 1 means the object did indicate the presence of cancer. These labels were assigned by\na human expert and thus represent the \u201cground truth\u201d labels for the dataset.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "5f4154a0-e5a7-4a49-9b10-2e13b619276c",
-      "code_hash": "904ad98b968f2fcbfc6688e53e6f8acd",
+      "id": "Kclp",
+      "code_hash": "38c936edbde29654be415ffbac860bee",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='5f4154a0-e5a7-4a49-9b10-2e13b619276c-0' random-id='d96a2f30-b325-b975-c4c3-142d61d6d57f'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;attr1&#92;&quot;:0.23001961,&#92;&quot;attr2&#92;&quot;:5.0725783,&#92;&quot;attr3&#92;&quot;:-0.27606055,&#92;&quot;attr4&#92;&quot;:0.83244412,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:0.4803223,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;},{&#92;&quot;attr1&#92;&quot;:0.15549112,&#92;&quot;attr2&#92;&quot;:-0.16939038,&#92;&quot;attr3&#92;&quot;:0.67065219,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.44365372,&#92;&quot;attr3&#92;&quot;:5.6747053,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;},{&#92;&quot;attr1&#92;&quot;:0.54608818,&#92;&quot;attr2&#92;&quot;:0.13141457,&#92;&quot;attr3&#92;&quot;:-0.45638679,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;},{&#92;&quot;attr1&#92;&quot;:-0.10298725,&#92;&quot;attr2&#92;&quot;:-0.3949941,&#92;&quot;attr3&#92;&quot;:-0.14081588,&#92;&quot;attr4&#92;&quot;:0.97970269,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:1.0135658,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='7' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;attr1&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr2&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr3&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr4&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr5&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr6&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;class&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/html": "<marimo-ui-element object-id='Kclp-0' random-id='ca73376b-0827-d473-fae8-348ab0fa0b65'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;attr1&#92;&quot;:0.23001961,&#92;&quot;attr2&#92;&quot;:5.0725783,&#92;&quot;attr3&#92;&quot;:-0.27606055,&#92;&quot;attr4&#92;&quot;:0.83244412,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:0.4803223,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;},{&#92;&quot;attr1&#92;&quot;:0.15549112,&#92;&quot;attr2&#92;&quot;:-0.16939038,&#92;&quot;attr3&#92;&quot;:0.67065219,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.44365372,&#92;&quot;attr3&#92;&quot;:5.6747053,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;},{&#92;&quot;attr1&#92;&quot;:0.54608818,&#92;&quot;attr2&#92;&quot;:0.13141457,&#92;&quot;attr3&#92;&quot;:-0.45638679,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;},{&#92;&quot;attr1&#92;&quot;:-0.10298725,&#92;&quot;attr2&#92;&quot;:-0.3949941,&#92;&quot;attr3&#92;&quot;:-0.14081588,&#92;&quot;attr4&#92;&quot;:0.97970269,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:1.0135658,&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='7' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;attr1&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr2&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr3&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr4&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr5&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr6&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;class&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
           }
         }
       ],
@@ -170,53 +170,347 @@
       ]
     },
     {
-      "id": "2a2ac89c-2ca1-4c51-b270-223f0d15cdb4",
-      "code_hash": null,
+      "id": "emfo",
+      "code_hash": "4096c5fe843badc06ee38884f5eb39f5",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">-1 (meaning \u201cnon-cancerous\u201d) is the majority class, and 1 (meaning\u201ccancerous\u201d) is the minority class. This is severe class imbalance because the minority class makes up only 2% of the dataset.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "bf9184bc-11af-4952-ab63-e41f5a6154c5",
+      "id": "Hstk",
       "code_hash": "6edbdabd67e67e6ed253cd8251fdb4d6",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/html": "<marimo-ui-element object-id='bf9184bc-11af-4952-ab63-e41f5a6154c5-0' random-id='b390083f-09e6-f3eb-d3cd-dba12e44ca56'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;1&#x27;&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.023249575248144506}},{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.9767504247518555}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+            "text/html": "<marimo-ui-element object-id='Hstk-0' random-id='2a5fd807-8430-cd33-fcd3-851e08ce56e6'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;-1&#x27;&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.9767504247518555}},{&#92;&quot;class&#92;&quot;:{&#92;&quot;class&#92;&quot;:&#92;&quot;&#x27;1&#x27;&#92;&quot;,&#92;&quot;proportion&#92;&quot;:0.023249575248144506}}]&quot;' data-total-rows='2' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;class&quot;,[&quot;unknown&quot;,&quot;struct[2]&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "7fa9b0a7-fcfc-4ca1-b8e3-1b92678ec186",
+      "id": "nWHF",
+      "code_hash": "f66adfbd5649dde7b3ffe1b454d907a9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Although sklearn doesn\u2019t require it, we\u2019re going to map the strings in the class column to the integers 0 and 1, in which 0 means \u201cnon-cancerous\u201d and 1 means \u201ccancerous\u201d.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "1942c7c28dfbc12fca032a26d1f96a5c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='iLit-0' random-id='41320f0b-e080-9115-5988-0b60baea180d'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;attr1&#92;&quot;:0.23001961,&#92;&quot;attr2&#92;&quot;:5.0725783,&#92;&quot;attr3&#92;&quot;:-0.27606055,&#92;&quot;attr4&#92;&quot;:0.83244412,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:0.4803223,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:0.15549112,&#92;&quot;attr2&#92;&quot;:-0.16939038,&#92;&quot;attr3&#92;&quot;:0.67065219,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.44365372,&#92;&quot;attr3&#92;&quot;:5.6747053,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:0.54608818,&#92;&quot;attr2&#92;&quot;:0.13141457,&#92;&quot;attr3&#92;&quot;:-0.45638679,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.10298725,&#92;&quot;attr2&#92;&quot;:-0.3949941,&#92;&quot;attr3&#92;&quot;:-0.14081588,&#92;&quot;attr4&#92;&quot;:0.97970269,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:1.0135658,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.18039525,&#92;&quot;attr2&#92;&quot;:-0.38172329,&#92;&quot;attr3&#92;&quot;:0.26491816,&#92;&quot;attr4&#92;&quot;:0.77294998,&#92;&quot;attr5&#92;&quot;:1.4689815,&#92;&quot;attr6&#92;&quot;:0.85206922,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.068602514,&#92;&quot;attr2&#92;&quot;:-0.34633447,&#92;&quot;attr3&#92;&quot;:-0.18589744,&#92;&quot;attr4&#92;&quot;:0.89911132,&#92;&quot;attr5&#92;&quot;:1.7433811,&#92;&quot;attr6&#92;&quot;:1.0623195,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.082491915,&#92;&quot;attr2&#92;&quot;:-0.44807732,&#92;&quot;attr3&#92;&quot;:0.89605999,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.15160016,&#92;&quot;attr2&#92;&quot;:-0.36845248,&#92;&quot;attr3&#92;&quot;:0.62557063,&#92;&quot;attr4&#92;&quot;:1.1974259,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:1.0105187,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1}]&quot;' data-total-rows='11183' data-total-columns='7' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;attr1&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr2&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr3&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr4&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr5&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr6&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;class&quot;,[&quot;integer&quot;,&quot;i8&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "57c4885819b12d72dc82da5706abcef5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Now that the dataset is ready, define two objects, scan_X and scan_y, to represent\nthe feature matrix and the target.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "db439bd70a2af27272f7cd72a4e8a277",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "106e25661197a0ab0ac8f02a93aa2795",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h4 id=\"183-evaluating-a-model-with-a-traintest-split\">18.3 Evaluating a model with a train/test split</h4>\n<span class=\"paragraph\">We have been using cross-validation as the model evaluation procedure, but in this chapter, we will use train/test split.\nHere is a quick overview of how we use train/test split for model evaluation:</span>\n<ul>\n<li>Split the dataset into training and testing sets.</li>\n<li>Fit the model on the training set.</li>\n<li>Use the fitted model to make predictions on the testing set and evaluate those predictions.</li>\n</ul>\n<span class=\"paragraph\">K-fold cross-validation is really just a train/test split run \u201cK\u201d times in a\nsystematic way and then averaging the results. Cross-validation is superior because it outputs a lower\nvariance estimate of model performance. Will look at use-cases where test/train split is a better choice.</span>\n<span class=\"paragraph\">Let\u2019s start by splitting the dataset into training and testing sets. We\u2019ll use a split of 75%\nfor training and 25% for testing. Will set a random_state for reproducibility</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "fd3371ad9c9bfcb396844e7e860d94ed",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "c79f2f144b2f0a2287a1157a5eb71a5e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">With stratified sampling the class proportions will be approximately equal in the training\nand testing sets. This is important when there is severe class imbalance, otherwise you\nmight have insufficient examples of the minority class in either the training or testing set.</span>\n<span class=\"paragraph\">Now we\u2019ll fit our logistic regression model on the training set, and use the fitted model to make\npredictions on the testing set. The predict method outputs class predictions of 0 or 1, which we\u2019ll\nstore as y_pred.\nAs an aside, we\u2019re not using a Pipeline here because the features are entirely numeric and don\u2019t\nneed any preprocessing.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "8c244c62-d4aa-418e-88ec-560e61814894",
+      "code_hash": "215411686bf2583652ef09288a839466",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([-1, -1, -1, ..., -1, -1, -1], shape=(2796,), dtype=int8)</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "93912ebe-6aca-4f6c-ae76-3e3824b6ccdb",
+      "code_hash": "0147260abb709ead21f22947523e4640",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Finally, let\u2019s evaluate the model\u2019s predictions. We\u2019ve used accuracy as our evaluation metric throughout\nthe book, so we\u2019ll try that here. We have to import the accuracy_score function from the metrics\nmodule, and then we pass it the true values followed by the predicted values.\nIt outputs an accuracy of 98%, which sounds great. But as you might recall, about 98% of the target\nvalues are 0, so an uninformed model could achieve 98% accuracy by always predicting class 0.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "864742ab-c449-4fba-bb85-8590898c971e",
+      "code_hash": "1943e8c0020522b61a7f2bd4ccbc70d5",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>0.9828326180257511</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "de15010f-bf4b-4406-a5c1-e233edc9bbc3",
+      "code_hash": "f2912d502ae35b7a55b100f3e92c224c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Because the accuracy value isn\u2019t telling us much about how the model is actually performing, it\u2019s\nnot a particularly useful evaluation metric in this case, or in any case in which there\u2019s severe class\nimbalance.</span>\n<h4 id=\"184-exploring-the-results-with-a-confusion-matrix\">18.4: Exploring the results with a confusion matrix</h4>\n<span class=\"paragraph\">Before we choose an evaluation metric other than accuracy, let\u2019s first use a confusion matrix to get a\nbetter understanding of our results.\nWe\u2019ll import it from the metrics module, and then pass it the true values followed by the predicted\nvalues. (Note that the order is important, because your confusion matrix will be incorrect if you pass\nthe predicted values first instead of second.)</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "2d1eab4d-f045-43ae-8ed3-516a54a2802f",
+      "code_hash": "1ffe659cf8dd817855768ec97b19b281",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[2721,   10],\n       [  38,   27]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "67b31870-0b6d-476c-ab74-dc97b78d9894",
+      "code_hash": "856b907883a4f892e65d6337f591ef68",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">It can be hard to remember what each of the four boxes represents, so a nice alternative is to use the\nplot_confusion_matrix function.\nWe pass it a fitted model, X_test, and y_test. It makes predictions for X_test,\nand outputs a confusion matrix by comparing the results to y_test. Thus it duplicates some of the\nwork we\u2019ve already done, though it ends up with the same result.\nThe confusion matrix is now labeled, with the true labels as the rows and the predicted labels as the\ncolumns. You can see that:</span>\n<ul>\n<li>In 2721 cases, the model predicted 0 and that was correct. These are called True Negatives.</li>\n<li>In 28 cases, it predicted 1 and that was correct. These are True Positives.</li>\n<li>In 37 cases, it predicted 0 and that was incorrect. These are False Negatives.</li>\n<li>In 10 cases, it predicted 1 and that was incorrect. These are False Positives.</li>\n</ul>\n<span class=\"paragraph\">'liblinear' was the old default for small datasets in 0.23.2, while modern sklearn defaults to 'lbfgs'. So the book example has 37 false negatives while I have 38, and the book has 28 true postive and I get 27.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "4189ba0c-c961-469f-a642-da9e27485bc6",
+      "code_hash": "2faef03d39fbc9d301446a0cd960c991",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "application/vnd.marimo+mimebundle": "{\"image/png\": \"data:image/png;base64,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5fm/+MUvQufOnat83ptvvlnYjw0fqxL7HsQxX3311fDWW29VOJ5/LJ4Tz61K2deobJxGF0iIEZQ999wz6UaZX+KxMjHAEJeGjF0x47qf22yzTX1NEQAAYJmWxWaLffr0Wez51V1D1oeyDRA/+eSTZHvhhReSpoZXXXVVOPbYYyt93ocffljIJFh55ZWrfY2uXbsmgYQZM2aEb7/9NjRv3jx5fM6cOUkAI01ApU2bNslrzZo1K0yePDk06h4JH330URJEiLUh8S9AXNrx3nvvDe+//37ypsQt7scAQlxbM54TAw7xOfG5AAAAUN/WXHPN8Otf/zr84x//SBoexu3uu+8O+++/fxIMideyxx13XLj55psrfX5crTCKyzUuTgwA5H399dcVxljSccqO0SgzEuK6mDGIEMsWbrvttnDooYdWGn2J27777hvuvPPOpElEDCZcfPHFhS6XAAAALFvixflqq60WsiaW3McGieUzOHr37p2sPBgz6OP1a1wd4Ze//GXYa6+9QseOHRc5NwYaombNmi329fIZCFFc5rH8GEs6TtkxGmVGwqOPPpq8+UcffXSlQYTyfvazn4VjjjkmyUx45JFH6mOKAAAARSFeFzf0VlYMIsSU/eq2hrDSSitVWwayxx57hHPPPTfZj00Sb7311grnLL/88snt3LlzF/t6sZwhr0WLFhXGWNJxyo7RaEsbopj+kVb+XKUNAAAAZNExxxxTCDY89dRTFY6vsMIKqcsMYl+DykoY8mMs6ThpyiAyHUiIDR/yEZ208ufmnwsAAABZ0qFDh9C2bdvCKoXl5bMp4sX9559/Xu1Y+eaI7du3X6TMIWYk5F8j37yxKp999lkhkBBbBzTqQEJcEzN67bXXUj8nf27+uQAAANTOqg1Z2JYVuWp+ll69ehX233777WpXL5wwYUKyv95661U5zvjx45Nzq1L2NSobp1EFEk4++eSk38Gll16a1I4sTjznkksuST6Qk046qT6mCAAAAEtkxowZhaUZO3XqVOH4NttsU9ivrPQhb8yYMYVMgq233rrKceI5L774YpXjlH2NysZpVIGEnXfeOfzud78Lb731Vth+++3Dyy+/XOW5r7zySthhhx3CO++8kzxnl112qY8pAgAAwBK5+eabky/No759+1Y4Hq9/82X7Q4cOLZxb3pAhQxZZLaK8AQMGFPbjSoiV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6bRp06qc65/+9KfSkpKSSp/bqlWr0kceeaS0b9++yf14WxNlP+vK3tPbbrttsT97kyZNSq+//voqX6Ps5zJ69OjSDh06VDnWr371q2rn+5///Ke0bdu21c6nf//+pV999VWlz89/JmX//gIAS0aPBIAiFpsv5nXq1KnSc84888zw6quvhr322iv5xj8uHfnxxx+HL7/8snBO/Bb/z3/+c7K/3XbbJeetueaaybfNr7zySrjqqqvCG2+8EY499tjkG+04Vlnxm/k99tgjvPXWW8n9fv36Jd90d+3aNVlhIo79+OOPh08//XSpft7hw4eH3XbbLXm9Jk2ahMMOOyxpNLn66qsn2QPxm/XHHnssPPzww4XnHH/88eGnP/1p8o18XOkivk9xLtWJfSf69u2bfHMev7k/4YQTkuyP+PN88skn4aGHHgo33XRTodHlM888E5ZbbrlFxrj//vuTb+2jlVZaKfkcYkZA9L///S9ceumlSZ+L+I18XYrvVSyDifOMn+3aa6+dZIt89NFHSQbKNddcE2bOnBlOPPHEsO666yZZHlX55ptvkuyK+L785je/Cf379w/NmzcPL7zwQpJhMHXq1PCnP/0p+TxOOeWUCs+PmSLx8/vuu++SzJj49y5mr8TPJM7n73//e/jb3/4WHn300TBw4MDwj3/8o07fGwAoWksYeABgGclI+O6770q32GKLwnm33357pc+P2znnnFPlaz3xxBOF8wYPHlzpObNnzy7dcccdC99Kx9cu67rrriuMccwxx1Q6xs9//vNF5rSkGQlxDp06dUqOt2zZstLn533wwQdLNHZ5W221VXLupptuWjpjxoxKz4mZHvlsg5tvvnmRY99++21hriuttFLpm2++WeH5r732WumKK65YeD/qKiPhww8/LJ01a1aVz//8889LN9poo+T522yzTaXn5N+7uC233HKlTz31VIVzpkyZUtqlS5dCtsX06dMXOT537tzSNdZYo5A9U9Wc4nuZf634d7M8GQkAsPT0SAAoMrNmzQpPPfVU2GWXXZLa9yhmGRxwwAGVnh/r2GOfgKpcfPHFye1+++0XjjzyyErPibX9sVdAvsdAzAwoK5/NEL9lvvLKKysd4+qrr16qb99vv/325FvrKPZhyH+7X5mYOVBTMbvg2WefTfZjX4V27dpVet5PfvKTJNMhv2xlWTHzIT/X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\", \"__metadata__\": {\"image/png\": {\"width\": 521, \"height\": 432}}}"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "23e278da-ec11-46db-9e27-f0b6165a300a",
+      "code_hash": "b62060273a25ee74f8773db7251a7800",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">This should illustrate how the confusion matrix helps us to understand the performance of our\nclassifier much better than the accuracy score.\nIn particular, it highlights a troubling issue, which we can see by examining the bottom row. There\nwere 65 samples in which cancer was present in the testing set, and it was detected in only 28 of\nthose cases. Given the context, in which the model is attempting to detect the presence of cancer,\nyou could imagine that it would be highly problematic to miss 37 out of 65 cases. This is an issue\nthat we will address by the end of this chapter.</span>\n<span class=\"paragraph\">18.5 Calculating rates from a confusion matrix</span>\n<span class=\"paragraph\">Before discussing a solution to the problem from the previous lesson, let\u2019s first calculate a few rates\nfrom the confusion matrix to help us quantify what we want to improve and what tradeoffs we\u2019ll be\nmaking. Here\u2019s another look at the confusion matrix.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "2b45dc6d-fc02-442a-977a-e26ff48e71c4",
+      "code_hash": "1ffe659cf8dd817855768ec97b19b281",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[2721,   10],\n       [  38,   27]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "896dea2d-94d4-4d4f-9548-ecbf748d657e",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "270d1073-bbf9-41b4-9fa9-8eef15b20b50",
+      "code_hash": "9f1b4ac583fca43674d1b71bdae12179",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "41.538 %\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "23c91773-f051-46ce-a409-d27c7c995243",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "a000853b-51cd-4e23-b5c9-049aafd46a07",
+      "code_hash": "4a8459703d5a92422697a8adfb1b38b6",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "99.634 %\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "1e74a4e5-f857-4b2d-a8e7-1e30f5058493",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "2f67a883-d741-4583-add9-6c11bc395cf6",
+      "code_hash": "0a88c9bab60047e5d98d152d3fb6bf44",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "0.366 %\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "30098652-e776-4b8d-aba4-4ea81c9c4e03",
       "code_hash": null,
       "outputs": [],
       "console": []
     },
     {
-      "id": "b6b44fd3-2352-40ea-8f1a-2fb343260dbe",
-      "code_hash": "c1eae44b0695084cbe30ae748510aa72",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/html": "<marimo-ui-element object-id='b6b44fd3-2352-40ea-8f1a-2fb343260dbe-0' random-id='8cff3ead-c90e-62e2-6d66-f117dad70355'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;attr1&#92;&quot;:0.23001961,&#92;&quot;attr2&#92;&quot;:5.0725783,&#92;&quot;attr3&#92;&quot;:-0.27606055,&#92;&quot;attr4&#92;&quot;:0.83244412,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:0.4803223,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:0.15549112,&#92;&quot;attr2&#92;&quot;:-0.16939038,&#92;&quot;attr3&#92;&quot;:0.67065219,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.44365372,&#92;&quot;attr3&#92;&quot;:5.6747053,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:0.54608818,&#92;&quot;attr2&#92;&quot;:0.13141457,&#92;&quot;attr3&#92;&quot;:-0.45638679,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.10298725,&#92;&quot;attr2&#92;&quot;:-0.3949941,&#92;&quot;attr3&#92;&quot;:-0.14081588,&#92;&quot;attr4&#92;&quot;:0.97970269,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:1.0135658,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.18039525,&#92;&quot;attr2&#92;&quot;:-0.38172329,&#92;&quot;attr3&#92;&quot;:0.26491816,&#92;&quot;attr4&#92;&quot;:0.77294998,&#92;&quot;attr5&#92;&quot;:1.4689815,&#92;&quot;attr6&#92;&quot;:0.85206922,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.068602514,&#92;&quot;attr2&#92;&quot;:-0.34633447,&#92;&quot;attr3&#92;&quot;:-0.18589744,&#92;&quot;attr4&#92;&quot;:0.89911132,&#92;&quot;attr5&#92;&quot;:1.7433811,&#92;&quot;attr6&#92;&quot;:1.0623195,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.082491915,&#92;&quot;attr2&#92;&quot;:-0.44807732,&#92;&quot;attr3&#92;&quot;:0.89605999,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.15160016,&#92;&quot;attr2&#92;&quot;:-0.36845248,&#92;&quot;attr3&#92;&quot;:0.62557063,&#92;&quot;attr4&#92;&quot;:1.1974259,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:1.0105187,&#92;&quot;class&#92;&quot;:-1},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324,&#92;&quot;class&#92;&quot;:-1}]&quot;' data-total-rows='11183' data-total-columns='7' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;attr1&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr2&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr3&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr4&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr5&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr6&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;class&quot;,[&quot;integer&quot;,&quot;i8&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "72d920d9-98d6-4467-a533-b903bca236d9",
-      "code_hash": null,
+      "id": "2ba4ba1e-9a52-4b5d-9e37-0f3256751f74",
+      "code_hash": "afa281daf9609102192eaf06bd1f9412",
       "outputs": [
         {
           "type": "data",
@@ -225,49 +519,56 @@
           }
         }
       ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "              precision    recall  f1-score   support\n\n          -1       0.99      1.00      0.99      2731\n           1       0.73      0.42      0.53        65\n\n    accuracy                           0.98      2796\n   macro avg       0.86      0.71      0.76      2796\nweighted avg       0.98      0.98      0.98      2796\n\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "a3100be9-4ef6-4b5a-90c8-56034658a91b",
+      "code_hash": "7378f978ffa063904314f3cd5655f709",
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "syntax",
+          "evalue": "line 1\n    Because the True Positive Rate of 42% seems quite problematic, you might think that the solution is\n            ^^^\nSyntaxError: invalid syntax\n",
+          "traceback": []
+        }
+      ],
       "console": []
     },
     {
-      "id": "67d48b4e-9ccd-4f80-9a11-9e3ad40d52d1",
-      "code_hash": "c7b72a3bb9e6f4b2baa7060aa9b9171f",
+      "id": "7bcb9826-34e0-41b4-9ffc-74e9eb392ccb",
+      "code_hash": "d7f43aa6bf576307f1f99c962aac4599",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/html": "<pre class='text-xs'>array([[   0, 2731],\n       [   0,   65]])</pre>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "87085dd8-dda4-4300-b66b-010ab6a62fc9",
-      "code_hash": null,
+      "id": "167c80d6-a702-4210-b5d3-bc241f64211e",
+      "code_hash": "6cb07ec6eabb3f3bd59ae05c7e435a98",
       "outputs": [
         {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
+          "type": "error",
+          "ename": "syntax",
+          "evalue": "line 1\n    The True Positive Rate in this case is 100%, but that\u2019s because we\u2019re always predicting the positive\n                                                         ^\nSyntaxError: invalid character '\u2019' (U+2019)\n",
+          "traceback": []
         }
       ],
       "console": []
     },
     {
-      "id": "bf4cd3ab-04c5-467b-9987-c7680a33814b",
-      "code_hash": null,
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "cac0256a-f2a8-47ca-b118-cbdf685e7e65",
+      "id": "a56abd64-d86e-476f-a8e7-132b1d6d95ca",
       "code_hash": null,
       "outputs": [
         {

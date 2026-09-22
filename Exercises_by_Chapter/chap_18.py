@@ -30,23 +30,22 @@ def _():
     from sklearn.metrics import accuracy_score
     from sklearn.metrics import confusion_matrix
     from sklearn.metrics import ConfusionMatrixDisplay
-    # from sklearn.impute import SimpleImputer
-    # from sklearn.preprocessing import OneHotEncoder, FunctionTransformer
-    # from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.metrics import roc_auc_score
+    from sklearn.metrics import RocCurveDisplay
     from sklearn.linear_model import LogisticRegression
     from sklearn.metrics import classification_report
-    # from sklearn.compose import make_column_transformer
-    # from sklearn.pipeline import make_pipeline
 
     return (
         ConfusionMatrixDisplay,
         LogisticRegression,
+        RocCurveDisplay,
         accuracy_score,
         classification_report,
         confusion_matrix,
         np,
         os,
         pl,
+        roc_auc_score,
         train_test_split,
     )
 
@@ -55,7 +54,7 @@ def _():
 def _(mo):
     mo.md(r"""
     # Chapter 18:  Class imbalance
-    - Finished XXX September YY, 2026
+    - Finished Tuesday September 22, 2026
 
     Item | Book uses|I use|
     |--|--|--|
@@ -69,6 +68,14 @@ def _(mo):
 
     - A small amount of imbalance (like in the Titanic dataset) tends not to matter.
     - As the amount of class imbalance increases, more specialized techniques need to be applied
+    - Accuracy is misleading with class imbalance
+    - In this mammography dataset, a model can get ~98% accuracy by predicting the majority class all the time. That’s why confusion matrices, recall, precision, and AUC are more informative than accuracy here. AUC measures class separation, not just thresholded predictions
+
+    - A high AUC means the model ranks positive samples above negative samples well.
+    But a default threshold of 0.5 may still produce poor recall if the positive class is rare. Cost-sensitive learning and threshold tuning help balance error tradeoffs
+
+    - class_weight='balanced' makes the model pay more attention to the minority class.
+    Then changing the decision threshold lets you trade off between false positives and false negatives based on what matters most in the real problem.
 
     #### 18.1 Workflow recap
     A common issue when working on a classification problem is known as
@@ -492,15 +499,333 @@ def _(mo):
     class. As such, the False Positive Rate would also be 100%. I think you would agree that this is not a useful solution.
 
     #### 18.6 Using AUC as the evaluation metric
+    With the problem now understood, we can focus on the solution. The first step is choosing a more appropriate evaluation metric for tuning the model. We’ll use AUC (Area Under the ROC Curve), which measures how well the model separates the classes by assigning higher predicted probabilities to class‑1 samples than to class‑0 samples.
 
-    # Break on page 267. Completed 18.5, ready to start 18.6
+    To illustrate this, we’ll have the fitted model output predicted probabilities—rather than class labels—using predict_proba. We’ll store these values in y_score and print them. The first number in the array shows that the model assigns a 0.15% probability to the first test sample belonging to the positive class; the second number shows a 0.19% probability for the second sample.
     """)
     return
 
 
 @app.cell
-def _():
-    #
+def _(X_test, logreg):
+    y_score = logreg.predict_proba(X_test)[:, 1]
+    y_score
+    return (y_score,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    AUC is a measure of how well the model succeeds at assigning higher probabilities to class 1 samples
+    than class 0 samples. In other words, AUC doesn’t care about the actual predicted probability values,
+    rather it cares only about the rank ordering of the values. As such, it can be used with any classifier
+    that outputs predicted probabilities, regardless of whether those probabilities are well-calibrated.
+
+    Area Under the ROC Curve (AUC):
+    - Measures how effectively the model separates the two classes
+    - Rewards models that assign higher probabilities to class‑1 samples than to class‑0 samples
+    - Works with any classifier that outputs predicted probabilities
+
+    Let’s go ahead and calculate the AUC for our model. We’ll import roc_auc_score and pass it the true labels along with the predicted probabilities (not the class predictions). The result is an AUC of 0.93, which indicates strong class‑separation performance.
+    """)
+    return
+
+
+@app.cell
+def _(roc_auc_score, y_score, y_test):
+    roc_auc_score(y_test, y_score)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    A perfect model would achieve an AUC of 1.0, while a completely uninformed model would score 0.5. More formally, an AUC of 0.93 means that if you randomly select one class‑1 sample and one class‑0 sample, there’s a 93% chance the model will assign a higher predicted probability to the class‑1 sample
+
+    A natural follow‑up question is: If the AUC is high (0.93), why is the True Positive Rate so low (0.43)?
+
+    The answer comes down to the decision threshold. The threshold is the predicted‑probability cutoff (between 0 and 1) above which the model assigns the positive class. By default, this threshold is 0.5. So a predicted probability of 0.7 results in a class‑1 prediction, while a probability of 0.2 results in a class‑0 prediction.
+
+    From the right column of the confusion matrix, we can see that the model predicted class 1 for only 38 samples in the test set.
+    """)
+    return
+
+
+@app.cell
+def _(confusion_matrix, y_pred, y_test):
+    confusion_matrix(y_test, y_pred)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Equivalently, the model predicted a probability greater than 0.5 for only 38 samples. (This works by creating a boolean array and then counting the number of True values.)
+    """)
+    return
+
+
+@app.cell
+def _(y_score):
+    sum(y_score > 0.5)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    With that in mind, we can infer two things from the combination of a high AUC and a low True Positive Rate:
+
+    - The high AUC tells us the model is doing a good job separating the classes.
+    - The low True Positive Rate tells us the default decision threshold isn’t serving us well.
+
+    To understand this second issue more clearly, we’ll plot the ROC curve using plot_roc_curve. Its API is similar to plot_confusion_matrix. You pass the fitted model, X_test, and y_test.
+
+    So what are we looking at? The ROC curve plots the True Positive Rate (y‑axis) against the False Positive Rate (x‑axis) across all possible decision thresholds.
+
+    For example, one point on the curve corresponds to the default threshold of 0.5, where the True Positive Rate is 43% and the False Positive Rate is nearly zero.
+
+    Changing the decision threshold simply moves you to a different point on the curve. You could, for instance, move to a point with a True Positive Rate around 90% and a False Positive Rate around 10% just by adjusting the threshold. The threshold values themselves aren’t shown on the plot—only the resulting (TPR, FPR) pairs.
+    """)
+    return
+
+
+@app.cell
+def _(RocCurveDisplay, X_test, logreg, y_test):
+    disp_1 = RocCurveDisplay.from_estimator(logreg, X_test, y_test)
+    disp_1.figure_
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Interpreting the ROC curve:
+
+    - Plots the True Positive Rate (TPR) against the False Positive Rate (FPR) across all possible decision thresholds
+    - Changing the decision threshold moves you to a different point on the curve
+      - The threshold values themselves are not shown on the plot
+    - The AUC represents the proportion of the plot that lies beneath the ROC curve
+
+    Given what we’ve learned so far, it’s helpful to map out our next steps. In lesson 18.7, we’ll work on improving the model’s AUC. Then, in lesson 18.8, we’ll explore alternative decision thresholds so we can balance the True Positive Rate and False Positive Rate in a way that better fits our goals.
+
+    #### 18.7 Cost-senstive learning
+    Now that we know our next goal is to improve the model’s AUC, how do we actually do that? The good news is that we can use any of the techniques covered in this book, including hyperparameter tuning, feature selection, trying non‑linear models, and others. All of these approaches have the potential to boost AUC.
+
+    In this lesson we’ll focus on one technique we haven’t discussed yet that’s especially useful when dealing with class imbalance: cost‑sensitive learning.
+
+    The key idea behind cost‑sensitive learning is that not all prediction errors carry the same “cost.” That cost might represent real monetary impact or the real‑world consequences of different types of mistakes.
+
+    Under severe class imbalance, False Negatives—cases where positive samples are incorrectly labeled as negative—typically have a higher cost than False Positives, where negative samples are labeled as positive. This makes sense: positive samples are rare, and we care more about finding them than about occasionally misclassifying a negative sample. Put simply, we would rather incur a False Positive than a False Negative.
+
+    So how does cost‑sensitive learning actually work? In scikit‑learn, it’s implemented through the class_weight parameter available in several models, including logistic regression and random forests.
+
+    When you set class_weight='balanced', scikit‑learn increases the “weight” of minority‑class samples relative to majority‑class samples. In practical terms, the model is penalized more heavily for mistakes on the minority class (i.e., False Negatives) than for mistakes on the majority class (i.e., False Positives). Because the model tries to minimize total cost, it often becomes more inclined to predict the minority class, helping counteract the effects of class imbalance.
+
+    Let’s try this out by creating a logistic regression model that uses class_weight='balanced'. This setting applies weights inversely proportional to the class frequencies in the training data, though you can also specify custom weights for each class if you prefer.
+    """)
+    return
+
+
+@app.cell
+def _(LogisticRegression):
+    logreg_cost = LogisticRegression(
+        solver='liblinear',
+        class_weight='balanced', 
+        random_state=1
+    )
+    return (logreg_cost,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    We’ll fit our logistic regression model on the training set and use it to generate class predictions and predicted probabilities for the test set. When we compute the AUC, it increases from 0.93 to 0.94 simply by enabling class weighting.
+
+    Keep in mind that class weighting isn’t guaranteed to improve AUC, so it should be treated like any other tunable parameter — something we’ll explore in the next chapter.
+    """)
+    return
+
+
+@app.cell
+def _(X_test, X_train, logreg_cost, roc_auc_score, y_score, y_test, y_train):
+    logreg_cost.fit(X_train, y_train)
+    y_pred_1 = logreg_cost.predict(X_test)
+    y_score_1 = logreg_cost.predict_proba(X_test)[:, 1]
+    roc_auc_score(y_test, y_score)
+    return y_pred_1, y_score_1
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Let’s look at the classification report to see how our rates have changed:
+
+    - The True Positive Rate increased from 43% to 88%.
+    - The True Negative Rate decreased from about 100% to 89%, meaning the False Positive Rate rose from roughly 0% to 11%.
+
+    Even though this model may better reflect our priorities, its overall accuracy has dropped from 98% to 89%. This highlights an important point: a more useful classifier can sometimes have lower accuracy than the null accuracy, especially when class imbalance is involved.
+    """)
+    return
+
+
+@app.cell
+def _(classification_report, y_pred_1, y_test):
+    print(classification_report(y_test, y_pred_1))
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Changes due to cost-sensitive learning:
+    - TPR: 0.43 → 0.88
+    - FPR: 0.00 → 0.11
+
+    #### 18.8 Tuning the decision threshold
+    At this point, we could continue tuning various aspects of the model to further increase the AUC, but instead we’ll move on to our final step: adjusting the decision threshold.
+
+    Let’s look at the ROC curve for our class‑weighted logistic regression model. Using the default threshold of 0.5, the model achieves a True Positive Rate of 88% and a False Positive Rate of 11%, represented by a single point on the curve. If we want to move to a different point, one that better reflects our priorities, we simply change the threshold.
+    """)
+    return
+
+
+@app.cell
+def _(RocCurveDisplay, X_test, logreg_cost, y_test):
+    disp_2 = RocCurveDisplay.from_estimator(logreg_cost, X_test, y_test)
+    disp_2.figure_
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Before tuning the threshold, it’s helpful to look at the current confusion matrix, which reflects the default threshold of 0.5. You’ll notice that there are now far more True Positives and False Positives than before.
+    """)
+    return
+
+
+@app.cell
+def _(confusion_matrix, y_pred_1, y_test):
+    confusion_matrix(y_test, y_pred_1)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    More specifically, the model now predicts the positive class 352 times, compared with only 38 positive predictions previously.
+    """)
+    return
+
+
+@app.cell
+def _(y_score_1):
+    sum(y_score_1 > 0.5)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Let’s say we’re still uncomfortable with having 8 False Negatives and want to reduce them even further. If we lower the threshold to 0.25, the model ends up predicting the positive class 870 times.
+    """)
+    return
+
+
+@app.cell
+def _(y_score_1):
+    sum(y_score_1 > 0.25)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    The boolean array created by this condition can be converted into class predictions simply by multiplying it by 1.
+    """)
+    return
+
+
+@app.cell
+def _(y_score_1):
+    (y_score_1 > 0.25) * 1
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    In fact, the boolean array can be passed directly to the confusion‑matrix function, which will handle the conversion automatically.
+
+    By lowering the threshold to 0.25, we can see that the number of False Negatives drops from 8 to 4, but the number of False Positives rises from 295 to 809. More generally, decreasing the threshold shifts samples from the left column of the confusion matrix to the right column.
+    """)
+    return
+
+
+@app.cell
+def _(confusion_matrix, y_score_1, y_test):
+    confusion_matrix(y_test, y_score_1 > 0.25)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Looking at the classification report, the True Positive Rate has increased to 94%, while the False Positive Rate has risen to 30%. That shift moves us to a new point on the ROC curve.
+    """)
+    return
+
+
+@app.cell
+def _(classification_report, y_score_1, y_test):
+    print(classification_report(y_test, y_score_1 > 0.25, zero_division=0))
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Changes due to decreasing the threshold:
+    - TPR: 0.88 → 0.94
+    - FPR: 0.11 → 0.30
+
+    Now, let’s say we feel the original threshold produced too many False Positives. In that case, we could raise the threshold to 0.75, which shifts more samples from the right column of the confusion matrix to the left.
+    """)
+    return
+
+
+@app.cell
+def _(confusion_matrix, y_score_1, y_test):
+    confusion_matrix(y_test, y_score_1 > 0.75)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    We can see from the classification report that the True Positive Rate has dropped to 77%, while the False Positive Rate has fallen to 4%. Once again, this moves us to a different point on the ROC curve.
+    """)
+    return
+
+
+@app.cell
+def _(classification_report, y_score_1, y_test):
+    print(classification_report(y_test, y_score_1 > 0.75, zero_division=0))
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Changes due to increasing the threshold:
+    - TPR: 0.88 → 0.77
+    - FPR: 0.11 → 0.04
+
+    Keep in mind that changing the threshold doesn’t alter the model itself. Instead, it simply lets us trade off between two types of errors: False Positives and False Negatives.
+
+    There’s no single “correct” threshold we’re trying to discover. The right threshold is the one that best aligns with your priorities. While there is a method for selecting the point on the ROC curve closest to the upper‑left corner and treating that as the optimal threshold, that value is only meaningful if it matches what you care about.
+    """)
     return
 
 

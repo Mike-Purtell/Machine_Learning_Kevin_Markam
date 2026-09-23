@@ -26,14 +26,32 @@ def _():
     import os
     import numpy as np
     from sklearn.model_selection import train_test_split
+    from sklearn.model_selection import cross_val_score
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.model_selection import GridSearchCV
+
     # from sklearn.metrics import accuracy_score
-    # from sklearn.metrics import confusion_matrix
-    # from sklearn.metrics import ConfusionMatrixDisplay
-    # from sklearn.metrics import roc_auc_score
-    # from sklearn.metrics import RocCurveDisplay
+    from sklearn.metrics import confusion_matrix
+    from sklearn.metrics import ConfusionMatrixDisplay
+    from sklearn.metrics import roc_auc_score
+    from sklearn.metrics import RocCurveDisplay
     # from sklearn.linear_model import LogisticRegression
-    # from sklearn.metrics import classification_report
-    return os, pl, train_test_split
+    from sklearn.metrics import classification_report
+
+    return (
+        ConfusionMatrixDisplay,
+        GridSearchCV,
+        LogisticRegression,
+        RocCurveDisplay,
+        classification_report,
+        confusion_matrix,
+        cross_val_score,
+        np,
+        os,
+        pl,
+        roc_auc_score,
+        train_test_split,
+    )
 
 
 @app.cell(hide_code=True)
@@ -114,12 +132,237 @@ def _(os, pl, train_test_split):
     test_size=0.25,
     random_state=1,
     stratify=scan_y)
+    return X_test, X_train, scan_X, scan_y, y_test, y_train
 
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    #### 19.3: Optimizing the model on the training set
+    Step 2 is to optimize the model (or Pipeline) using only the training set. As you can see, I’m using cross‑validation as the evaluation procedure and AUC as the metric to optimize. The key detail is that I’m passing only the training data to cross_val_score. I’m deliberately keeping the testing set untouched so it can serve as an independent dataset for the next step, where we’ll tune the decision threshold.
+    Note that 'roc_auc' is the probability that the model assigns a higher score to a randomly chosen positive case than to a randomly chosen negative case.
+    - ROC = Receiver Operating Characteristic curve
+    - AUC = Area Under the Curve
+    """)
+    return
+
+
+@app.cell
+def _(LogisticRegression, X_train, cross_val_score, y_train):
+    logreg = LogisticRegression(solver='liblinear')
+    cross_val_score(
+        logreg,
+        X_train,
+        y_train.to_series(),
+        cv=5,
+        scoring='roc_auc'
+    ).mean()
+    return (logreg,)
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    To optimize the model, we’ll use a grid search. Normally, this would involve tuning every step of the Pipeline, but in this case we’re focusing the search solely on the model itself.
+
+    Because cost‑sensitive learning is valuable when dealing with class imbalance, we’re including the class_weight parameter in the search. We’ll try four options:
+
+    - None, the default, meaning no cost‑sensitive learning.
+
+    - 'balanced', the option we used earlier. It assigns weights inversely proportional to class frequencies. Since our data is roughly 98% class 0 and 2% class 1, this corresponds to a weight of 2 for class 0 and 98 for class 1.
+
+    - Custom weights: {0:1, 1:99} — this applies an even stronger emphasis on class 1 than 'balanced'.
+
+    - Custom weights: {0:3, 1:97} — this applies a slightly lower emphasis on class 1 than 'balanced'.
+    """)
     return
 
 
 @app.cell
 def _():
+    im_params = {}
+    im_params['l1_ratio'] = [0, 1]
+    im_params['C'] = [0.1, 1, 10]
+    im_params['class_weight'] = [None, 'balanced', {"'-1'":1, "'1'":99}, {"'-1'":3, "'1'":97}]
+    return (im_params,)
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    Now that we’ve defined the parameter grid, we can pass it to GridSearchCV and use AUC as the optimization metric. As before, the search is run only on the training set so that the testing set remains untouched for threshold tuning.
+
+    The grid search yields an AUC of 0.92, a modest improvement over the 0.91 from the unoptimized model.
+    """)
+    return
+
+
+@app.cell
+def _(GridSearchCV, X_train, im_params, logreg, y_train):
+    training_grid = GridSearchCV(
+        logreg, 
+        im_params, 
+        cv=5, 
+        scoring='roc_auc',
+        n_jobs=-1
+    )
+    training_grid.fit(X_train, y_train.to_series())
+    training_grid.best_score_
+    return (training_grid,)
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    Here’s the best parameter set the search found. Interestingly, it uses one of the custom class‑weight configurations.
+    """)
+    return
+
+
+@app.cell
+def _(training_grid):
+    training_grid.best_params_
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    Now that we’ve identified the best parameters, we can save the model configured with those settings as an object called best_model.
+    """)
+    return
+
+
+@app.cell
+def _(training_grid):
+    best_model = training_grid.best_estimator_
+    best_model
+    return (best_model,)
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    #### 19.4: Evaluating the model on the testing set
+    Step 3 is to use our best model to generate predictions for the testing set and evaluate those predictions. Because we kept the testing set completely untouched during Step 2, the model has never seen this data, which means it can serve as a genuinely independent check on performance.
+    """)
+    return
+
+
+@app.cell
+def _(X_test, best_model):
+    y_pred = best_model.predict(X_test)
+    y_score = best_model.predict_proba(X_test)[:, 1]
+
+    return y_pred, y_score
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    We’ll evaluate the predicted probabilities using AUC and the ROC curve. The AUC comes out to 0.94, which is our best estimate of how well the trained model will perform on truly new, unseen data.
+    """)
+    return
+
+
+@app.cell
+def _(RocCurveDisplay, X_test, best_model, roc_auc_score, y_score, y_test):
+    y_test_series = y_test.to_series()
+    print(roc_auc_score(y_test_series, y_score))
+    disp = RocCurveDisplay.from_estimator(\
+        best_model, 
+        X_test, 
+        y_test_series
+    )
+    disp.figure_
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    We’ll evaluate the class predictions using a confusion matrix and the classification report. The results show a True Positive Rate (class 1 recall) of 95% and a False Positive Rate (1 minus class 0 recall) of 24%
+    """)
+    return
+
+
+@app.cell
+def _(ConfusionMatrixDisplay, X_test, best_model, y_test):
+    confusion_matrix_display = ConfusionMatrixDisplay.from_estimator(
+        best_model, 
+        X_test, 
+        y_test
+    )
+    confusion_matrix_display.figure_
+    return
+
+
+@app.cell
+def _(classification_report, y_pred, y_test):
+    print(classification_report(y_test, y_pred))
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""
+    #### 19.5: Tuning the decision threshold
+    Step 4 is to tune the decision threshold based on our priorities, specifically, our tolerance of False Negatives versus False Positives.
+
+    This is the same process you saw in lesson 18.8, but with one important improvement: this time we’re tuning the threshold using data the model never saw during optimization. That separation matters, because it produces more reliable estimates of the True Positive Rate and False Positive Rate.
+
+    Let’s say we want to reduce the False Positive Rate, and we’re willing to accept a slightly lower True Positive Rate to get there. To make that tradeoff, we’ll nudge the decision threshold upward to 0.55.
+    """)
+    return
+
+
+@app.cell
+def _(confusion_matrix, np, y_score, y_test):
+    threshold_predictions = np.where(
+        y_score > 0.55,
+        "'1'",
+        "'-1'"
+    )
+    confusion_matrix(
+        y_test.to_series(),
+        threshold_predictions,
+        labels=["'-1'", "'1'"]
+    )
+    return
+
+
+@app.cell
+def _(classification_report, np, y_score, y_test):
+    _threshold_predictions = np.where(
+        y_score > 0.55,
+        "'1'",
+        "'-1'"
+    )
+    print(classification_report(
+        y_test.to_series(),
+        _threshold_predictions,
+        labels=["'-1'", "'1'"]
+    ))
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    The True Positive Rate drops from 95% to 92%, and the False Positive Rate falls from 24% to 20%. Let’s assume we’re satisfied with that tradeoff and move on to the final step.
+
+    #### 19.6: Retraining the model and making predictions
+    Step 5 is to apply our chosen decision threshold when making predictions on new data.
+
+    Before doing that, it’s essential to retrain our best model on all available data (the full scan_X and scan_y). Otherwise, we’d be discarding valuable information. In other words, we take the hyperparameters selected during Step 2 and fit the model using the entire dataset.
+    """)
+    return
+
+
+@app.cell
+def _(best_model, scan_X, scan_y):
+    print("Fitting the best model...")
+    print(best_model.fit(scan_X, scan_y.to_series()))
     return
 
 

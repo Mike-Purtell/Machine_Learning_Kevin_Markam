@@ -1,0 +1,100 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.24.0",
+    "script_metadata_hash": "34d476a201387f5118f43886ffe66b56"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "cfbde7eedba192f4ab804e0ed18fffe0",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "8213bde512bedfae405f9cede73fea08",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-19-class-walkthrough\">Chapter 19:  Class walkthrough</h1>\n<ul>\n<li>Finished Wednesday September 23, 2026</li>\n</ul>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>TBD</li>\n<li>TBD</li>\n<li>TBD</li>\n</ul>\n<h4 id=\"191-best-practices-for-class-imbalance\">19.1 Best practices for class imbalance</h4>\n<span class=\"paragraph\">We just covered a lot of new ideas in the previous chapter: class imbalance, the confusion matrix and its derived rates, the classification report, ROC curves and AUC, the decision threshold, and cost\u2011sensitive learning. That\u2019s a big toolkit \u2014 and now you\u2019ve seen how all these pieces fit together when evaluating and tuning a classifier.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "754ef6d629cddcf324a43e41b675a7ef",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Now read in the titanic dataset:</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "3fa04336-dd16-44bc-994f-81e4cc137992",
+      "code_hash": "e63ea4a0683a62afb5cc1496aad9fc54",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Loading scan records dataset from local file...\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "5346e449-ff67-4663-9bc6-16d7ec8a4d60",
+      "code_hash": "cb55e29fa300fb468cf69d05336f6b13",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='5346e449-ff67-4663-9bc6-16d7ec8a4d60-0' random-id='d8de0443-8c36-71e7-c722-fdf9b3a6b7f6'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;attr1&#92;&quot;:0.60266208,&#92;&quot;attr2&#92;&quot;:1.0117114,&#92;&quot;attr3&#92;&quot;:0.49032595,&#92;&quot;attr4&#92;&quot;:0.53286367,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:0.97395345},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324},{&#92;&quot;attr1&#92;&quot;:0.020154146,&#92;&quot;attr2&#92;&quot;:-0.34191087,&#92;&quot;attr3&#92;&quot;:-0.27606055,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324},{&#92;&quot;attr1&#92;&quot;:-0.19191329,&#92;&quot;attr2&#92;&quot;:-0.3994177,&#92;&quot;attr3&#92;&quot;:-0.36622367,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324},{&#92;&quot;attr1&#92;&quot;:-0.78441482,&#92;&quot;attr2&#92;&quot;:-0.47019533,&#92;&quot;attr3&#92;&quot;:-0.59163147,&#92;&quot;attr4&#92;&quot;:-0.85955255,&#92;&quot;attr5&#92;&quot;:-0.37786573,&#92;&quot;attr6&#92;&quot;:-0.94572324}]&quot;' data-total-rows='2796' data-total-columns='6' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;attr1&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr2&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr3&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr4&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr5&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attr6&quot;,[&quot;number&quot;,&quot;f64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "830434bd-c568-4d42-b7c2-8d98fda1b70b",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

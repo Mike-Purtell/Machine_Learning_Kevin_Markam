@@ -37,11 +37,13 @@ def _():
     from sklearn.metrics import RocCurveDisplay
     # from sklearn.linear_model import LogisticRegression
     from sklearn.metrics import classification_report
+    from sklearn.metrics import PrecisionRecallDisplay
 
     return (
         ConfusionMatrixDisplay,
         GridSearchCV,
         LogisticRegression,
+        PrecisionRecallDisplay,
         RocCurveDisplay,
         classification_report,
         confusion_matrix,
@@ -253,7 +255,6 @@ def _(mo):
 def _(X_test, best_model):
     y_pred = best_model.predict(X_test)
     y_score = best_model.predict_proba(X_test)[:, 1]
-
     return y_pred, y_score
 
 
@@ -362,7 +363,136 @@ def _(mo):
 @app.cell
 def _(best_model, scan_X, scan_y):
     print("Fitting the best model...")
+    best_model.fit(scan_X, scan_y.to_series())
     print(best_model.fit(scan_X, scan_y.to_series()))
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    We’ll use the model to generate predictions for new data, whose true class labels are unknown. Since I don’t have any actual new samples, I’ll create a small synthetic dataset for demonstration.
+
+    To keep the results reproducible, I’ll set NumPy’s random seed. Then I’ll use randint to generate a 4×6 array of integers between 0 and 2. This gives us four simulated samples of new data, each with six features.
+    """)
+    return
+
+
+@app.cell
+def _(np):
+    np.random.seed(1)
+    scan_X_new = np.random.randint(0, 3, (4, 6))
+    scan_X_new
+    return (scan_X_new,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    We’ll generate predictions by passing the new data to the predict_proba method and storing the resulting probabilities.
+    """)
+    return
+
+
+@app.cell
+def _(best_model, scan_X_new):
+    scan_y_new_score = best_model.predict_proba(scan_X_new)[:,1]
+    return (scan_y_new_score,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Finally, we’ll predict class 1 whenever the predicted probability exceeds our decision threshold of 0.55; otherwise, we’ll assign class 0. These are the resulting class predictions for the four new samples.
+    """)
+    return
+
+
+@app.cell
+def _(scan_y_new_score):
+    (scan_y_new_score > 0.55) * 1
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    #### 19.7 : Should I use and ROC curve or a precision-recall curve?
+    One alternative to ROC curves you may have encountered is the precision–recall curve. In this lesson, I’ll explain how the precision–recall curve works and then compare it to the ROC curve.
+
+    To begin, let’s revisit the confusion matrix for our best model. We’ll fit the model on X_train and y_train, then generate both class predictions and predicted probabilities for X_test.
+    """)
+    return
+
+
+@app.cell
+def _(X_test, X_train, best_model, y_train):
+    best_model.fit(X_train, y_train.to_series())
+    y_pred_1 = best_model.predict(X_test)
+    y_score_1 = best_model.predict_proba(X_test)[:, 1]
+    return (y_pred_1,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    We can then build the confusion matrix by comparing the true labels with the predicted labels. From that matrix, we’ll calculate two key rates for this part of the analysis.
+    """)
+    return
+
+
+@app.cell
+def _(confusion_matrix, y_pred_1, y_test):
+    confusion_matrix(y_test, y_pred_1)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    The first rate is recall, which is another name for the True Positive Rate. It answers the question: When cancer is present, how often does the model correctly identify it? We compute it by dividing the True Positives by the entire bottom row of the confusion matrix, giving us a recall of 95%. **62/(3 + 62)**
+
+    The second rate is precision. It answers the question: When the model predicts cancer, how often is that prediction correct? We calculate it by dividing the True Positives by the entire right column of the confusion matrix, which gives us 9%. Unlike the other rates we’ve computed, precision uses a column total rather than a row total. **62/(650 + 62)**
+
+    Both precision and recall appear in the classification report, and the values we just computed for class 1 match the entries shown here.
+    """)
+    return
+
+
+@app.cell
+def _(classification_report, y_pred_1, y_test):
+    print(classification_report(y_test, y_pred_1))
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Now that we’ve covered precision and recall, let’s plot the precision–recall curve using plot_precision_recall_curve. Its API is similar to plot_roc_curve, you pass the fitted model, X_test, and y_test.
+    """)
+    return
+
+
+@app.cell
+def _(PrecisionRecallDisplay, X_test, best_model, y_test):
+    disp_1 = PrecisionRecallDisplay.from_estimator(
+        best_model,
+        X_test,
+        y_test,
+    )
+    disp_1.figure_
+ 
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _():
+    print(f'{100*281/290:.1f} %')
     return
 
 

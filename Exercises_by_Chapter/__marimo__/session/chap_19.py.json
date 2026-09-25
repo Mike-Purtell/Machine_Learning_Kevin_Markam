@@ -20,7 +20,7 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "a7e19849b67ecb26458df09bfeb767db",
+      "code_hash": "08ac6166bc94004d3b2727a47d7425f6",
       "outputs": [
         {
           "type": "data",
@@ -33,12 +33,12 @@
     },
     {
       "id": "vblA",
-      "code_hash": "692bedbe5d2597439e55512fa270f028",
+      "code_hash": "64bd649f7ea54457ff1bf1cfc4782189",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-19-class-walkthrough\">Chapter 19:  Class walkthrough</h1>\n<ul>\n<li>Finished Wednesday September 23, 2026</li>\n</ul>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>TBD</li>\n<li>TBD</li>\n<li>TBD</li>\n</ul>\n<h4 id=\"191-best-practices-for-class-imbalance\">19.1 Best practices for class imbalance</h4>\n<span class=\"paragraph\">We just covered a lot of new ideas in the previous chapter: class imbalance, the confusion matrix and its derived rates, the classification report, ROC curves and AUC (Area Under the Curve), the decision threshold, and cost\u2011sensitive learning. That\u2019s a big toolkit, and now we have seen how all these pieces fit together when evaluating and tuning a classifier.</span>\n<span class=\"paragraph\">To properly demonstrate these concepts, I intentionally bent my real workflow in two ways that aren\u2019t ideal. In this chapter, I\u2019m going to walk through my actual best\u2011practice workflow for class\u2011imbalance problems so you can see how these steps are handled in a production\u2011quality setting.</span>\n<span class=\"paragraph\">So what were the two shortcuts I took before?</span>\n<ol>\n<li>I used a simple train/test split instead of cross\u2011validation.\nCross\u2011validation is generally the better choice because it\u2019s easier to use consistently and it produces more reliable estimates of model performance.</li>\n<li>I tuned the decision threshold on the same dataset used for model optimization.\nIn practice, it\u2019s better to tune the threshold on data different from the data used to train and optimize the model. Experiments show that this leads to more reliable estimates of the True Positive Rate and False Positive Rate.</li>\n</ol>\n<span class=\"paragraph\">In this chapter, I\u2019m going to walk through my full workflow, start to finish,  incorporating both of these two improvements.</span>\n<h4 id=\"192-splitting-the-dataset\">19.2: Splitting the dataset</h4>\n<span class=\"paragraph\">Step\u202f1 in my real workflow is to split the dataset into training and testing sets. At first glance, this might seem contradictory, since I just said we\u2019ll be using cross\u2011validation in this chapter rather than a train/test split.</span>\n<span class=\"paragraph\">That\u2019s true \u2014 but in this chapter we\u2019re using train_test_split for a different purpose than we did in chapter\u202f18:</span>\n<span class=\"paragraph\">In chapter\u202f18, the train/test split was used for model evaluation.</span>\n<span class=\"paragraph\">In this chapter, the split is used to set aside independent data for tuning the decision threshold.</span>\n<span class=\"paragraph\">If you want a deeper explanation of why this matters, you can revisit lesson\u202f10.12.</span>\n<span class=\"paragraph\">Anyway, the train_test_split code here is the same as what we used in lesson\u202f18.3, including the use of stratified sampling.</span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"chapter-19-class-walkthrough\">Chapter 19:  Class walkthrough</h1>\n<ul>\n<li>Finished Wednesday September 23, 2026</li>\n</ul>\n<table>\n<thead>\n<tr>\n<th>Item</th>\n<th>Book uses</th>\n<th>I use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>python</td>\n<td>unknown</td>\n<td>3.14</td>\n</tr>\n<tr>\n<td>dataframes</td>\n<td>pandas</td>\n<td>polars</td>\n</tr>\n<tr>\n<td>scikit-learn</td>\n<td>0.23.2 (2025)</td>\n<td>1.9.0 (June 2026)</td>\n</tr>\n<tr>\n<td>IDE</td>\n<td>unknown</td>\n<td>VS Code</td>\n</tr>\n<tr>\n<td>Notebooks</td>\n<td>unknown</td>\n<td>Marimo</td>\n</tr>\n</tbody>\n</table>\n<span class=\"paragraph\"><strong>My takeaways:</strong></span>\n<ul>\n<li>Separate your data for separate purposes. Use a train/test split not for model evaluation (that's what cross-validation is for) but to reserve an independent set for tuning the decision threshold \u2014 tuning the threshold on the same data used to optimize the model gives overly optimistic/unreliable TPR and FPR estimates.</li>\n<li>AUC vs. average precision is a \"what do you care about\" choice, not a \"which is more correct\" choice. AUC reflects performance on both classes (sensitivity + specificity), while average precision focuses solely on the positive class and ignores True Negatives \u2014 so it's more robust to reporting an \"artificially high\" score under severe class imbalance, but only tells you about the positive class. For problems like cancer detection where both classes matter, AUC is the better primary metric.</li>\n<li>Optimize threshold-independent metrics first, then tune the threshold. AUC and average precision summarize performance across all thresholds, so use them to select/tune the model. Threshold-dependent metrics (F1, F-beta, balanced accuracy, Cohen's kappa, MCC) should only be used afterward, to pick the best decision threshold \u2014 using them during model tuning risks optimizing around a default 0.5 threshold that isn't right for your problem.</li>\n</ul>\n<h4 id=\"191-best-practices-for-class-imbalance\">19.1 Best practices for class imbalance</h4>\n<span class=\"paragraph\">We just covered a lot of new ideas in the previous chapter: class imbalance, the confusion matrix and its derived rates, the classification report, ROC curves and AUC (Area Under the Curve), the decision threshold, and cost\u2011sensitive learning. That\u2019s a big toolkit, and now we have seen how all these pieces fit together when evaluating and tuning a classifier.</span>\n<span class=\"paragraph\">To properly demonstrate these concepts, I intentionally bent my real workflow in two ways that aren\u2019t ideal. In this chapter, I\u2019m going to walk through my actual best\u2011practice workflow for class\u2011imbalance problems so you can see how these steps are handled in a production\u2011quality setting.</span>\n<span class=\"paragraph\">So what were the two shortcuts I took before?</span>\n<ol>\n<li>I used a simple train/test split instead of cross\u2011validation.\nCross\u2011validation is generally the better choice because it\u2019s easier to use consistently and it produces more reliable estimates of model performance.</li>\n<li>I tuned the decision threshold on the same dataset used for model optimization.\nIn practice, it\u2019s better to tune the threshold on data different from the data used to train and optimize the model. Experiments show that this leads to more reliable estimates of the True Positive Rate and False Positive Rate.</li>\n</ol>\n<span class=\"paragraph\">In this chapter, I\u2019m going to walk through my full workflow, start to finish,  incorporating both of these two improvements.</span>\n<h4 id=\"192-splitting-the-dataset\">19.2: Splitting the dataset</h4>\n<span class=\"paragraph\">Step\u202f1 in my real workflow is to split the dataset into training and testing sets. At first glance, this might seem contradictory, since I just said we\u2019ll be using cross\u2011validation in this chapter rather than a train/test split.</span>\n<span class=\"paragraph\">That\u2019s true \u2014 but in this chapter we\u2019re using train_test_split for a different purpose than we did in chapter\u202f18:</span>\n<span class=\"paragraph\">In chapter\u202f18, the train/test split was used for model evaluation.</span>\n<span class=\"paragraph\">In this chapter, the split is used to set aside independent data for tuning the decision threshold.</span>\n<span class=\"paragraph\">If you want a deeper explanation of why this matters, you can revisit lesson\u202f10.12.</span>\n<span class=\"paragraph\">Anyway, the train_test_split code here is the same as what we used in lesson\u202f18.3, including the use of stratified sampling.</span></span>"
           }
         }
       ],
@@ -392,8 +392,8 @@
       ]
     },
     {
-      "id": "4d351d03-c1cc-45d1-ac48-b144e8d6f5d1",
-      "code_hash": "171db6b6d578cf9108cdec6ff859cd52",
+      "id": "xXTn",
+      "code_hash": "80245a84687d2cdd5ed6febf58e94013",
       "outputs": [
         {
           "type": "data",
@@ -405,8 +405,8 @@
       "console": []
     },
     {
-      "id": "6c97ce8d-0262-4413-b915-61259fd1f791",
-      "code_hash": "c1f43fce1746b03963fb479b98daa224",
+      "id": "AjVT",
+      "code_hash": "4f02e407c08294c6deb5149586e1e6fd",
       "outputs": [
         {
           "type": "data",
@@ -418,7 +418,7 @@
       "console": []
     },
     {
-      "id": "68947a6d-c409-4ec2-8d4c-6bb5e016e300",
+      "id": "pHFh",
       "code_hash": "c55a885a0910ef7d3216e06af902a630",
       "outputs": [
         {
@@ -431,7 +431,7 @@
       "console": []
     },
     {
-      "id": "6cf63867-177f-44ca-a9e1-9b224139e38c",
+      "id": "NCOB",
       "code_hash": "662809313fcb7a61da8f5c3ec4d91a3c",
       "outputs": [
         {
@@ -451,7 +451,7 @@
       ]
     },
     {
-      "id": "4aaa8776-bfbe-4a58-b639-9c7c778eb6f4",
+      "id": "aqbW",
       "code_hash": "646ac9a2cd4a423ca9ddb9c3b902d86d",
       "outputs": [
         {
@@ -464,7 +464,7 @@
       "console": []
     },
     {
-      "id": "9af98c63-3426-4fb6-8390-07523c805294",
+      "id": "TRpd",
       "code_hash": "94a6f2d10fe0df0ca2c4b0075529c266",
       "outputs": [
         {
@@ -477,8 +477,8 @@
       "console": []
     },
     {
-      "id": "e6a80e14-f0d3-472a-9004-23a7d57bbe4f",
-      "code_hash": "7ed2f7df173bdc218ef4323e27afd06a",
+      "id": "TXez",
+      "code_hash": "1a4bcea64dd68b237ac4e964b3c45cda",
       "outputs": [
         {
           "type": "data",
@@ -490,8 +490,8 @@
       "console": []
     },
     {
-      "id": "e5648005-8328-465c-98c2-ea6ee5aeee68",
-      "code_hash": "1641ef78e713d236a25e24f7b9cddd22",
+      "id": "dNNg",
+      "code_hash": "10fd5d14b6f420279ec3c0f420fe8b93",
       "outputs": [
         {
           "type": "data",
@@ -503,7 +503,7 @@
       "console": []
     },
     {
-      "id": "7f2ce3b3-06b6-4477-8727-588b7b1e7705",
+      "id": "yCnT",
       "code_hash": "d10140bc780ac84d9cbcda1868cd391e",
       "outputs": [
         {
@@ -516,7 +516,7 @@
       "console": []
     },
     {
-      "id": "bfe0af26-39d1-4efa-9fd7-474a458324de",
+      "id": "wlCL",
       "code_hash": "f3fa160b5d8b58224d180d5b81993105",
       "outputs": [
         {
@@ -529,8 +529,8 @@
       "console": []
     },
     {
-      "id": "fa82a461-62de-4ed7-9817-6343d61bc776",
-      "code_hash": "52ce0b6c53bf1ed5b2a3f6f2f77990ee",
+      "id": "kqZH",
+      "code_hash": "5e206fef4a95f146a39ca5f38a653c12",
       "outputs": [
         {
           "type": "data",
@@ -542,7 +542,7 @@
       "console": []
     },
     {
-      "id": "64bb4cf9-2f19-429f-99d0-b6a2ddc9ba88",
+      "id": "wAgl",
       "code_hash": "ea75bf2e9e82f6f85ee40303c81ba4e5",
       "outputs": [
         {
@@ -562,7 +562,7 @@
       ]
     },
     {
-      "id": "35952cef-d79f-46e5-81e6-818c9545673d",
+      "id": "rEll",
       "code_hash": "e5b2476c360b02da85371298cb76d4a9",
       "outputs": [
         {
@@ -575,8 +575,8 @@
       "console": []
     },
     {
-      "id": "13eb66c5-755a-489b-9f71-eee72fed9227",
-      "code_hash": "ba41241f668b82ae049775aaedfb010b",
+      "id": "dGlV",
+      "code_hash": "83eb00da4c9e62afda663ea351b3b653",
       "outputs": [
         {
           "type": "data",
@@ -588,21 +588,21 @@
       "console": []
     },
     {
-      "id": "25615935-241c-4f11-a68b-702b645eba9e",
-      "code_hash": null,
+      "id": "SdmI",
+      "code_hash": "846d02a64d1c334de0a9ddc3132ce7ba",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">The precision\u2013recall curve plots precision (y\u2011axis) against recall (x\u2011axis) across all possible decision thresholds. Like the ROC curve, it helps you choose a threshold that aligns with your priorities.</span>\n<span class=\"paragraph\">Just as an ROC curve can be summarized by the area under the curve, a precision\u2013recall curve can be summarized the same way. Scikit\u2011learn uses average precision as its summary metric, one of several possible ways to compute the area under a precision\u2013recall curve.</span>\n<span class=\"paragraph\"><strong>Interpreting the precision-recall curve:</strong></span>\n<ul>\n<li>Plot of precision vs recall for all possible decision thresholds</li>\n<li>Move to another point on the curve by changing the threshold</li>\n<li>Average precision is the percentage of the plot underneath the curve</li>\n</ul>\n<span class=\"paragraph\">To compute average precision, we import average_precision_score and pass it the true labels along with the predicted probabilities. The function returns a score of 54.7 %.</span></span>"
           }
         }
       ],
       "console": []
     },
     {
-      "id": "xXTn",
-      "code_hash": "9b7482831c1449837be358dba5667f97",
+      "id": "lgWD",
+      "code_hash": "0f28e4697944786145c29b227415e076",
       "outputs": [
         {
           "type": "data",
@@ -615,13 +615,91 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "96.9 %\n",
+          "text": "54.8 %\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
-      "id": "AjVT",
+      "id": "yOPj",
+      "code_hash": "737c366dfc1a78a19e83b7e5ff89c823",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">A perfect model would score 1.0, while a completely uninformed model would score roughly the fraction of positive samples\u2014in this case, about 0.02. For comparison, remember that an uninformed model\u2019s ROC AUC is 0.5, which means average precision and AUC have very different baseline levels for the same problem.</span>\n<span class=\"paragraph\"><strong>Precision-recall scores:</strong></span>\n<ul>\n<li>Perfect model: 1.0</li>\n<li>Uninformed model: 0.02 in this case (fraction of positive samples)</li>\n</ul>\n<span class=\"paragraph\">In this chapter, I recommended using AUC as the primary evaluation metric when dealing with class imbalance. That said, many practitioners prefer average precision instead. So which one should you use?</span>\n<span class=\"paragraph\">To answer that, I\u2019ll start with the most common critique of AUC and then give you my response. It may help to keep the confusion matrix in mind as we walk through this discussion, so I\u2019ll display it here.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ddcd55b8-6722-4afd-9efc-aacd9ac7a52e",
+      "code_hash": "1ffe659cf8dd817855768ec97b19b281",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<pre class='text-xs'>array([[2081,  650],\n       [   3,   62]])</pre>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "631494e8-25b5-4fa8-8133-b0654180f1be",
+      "code_hash": "1f459a3edaf6ff817ea0cf5cabe7e6cf",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Let\u2019s quickly run through the rates again:</span>\n<ul>\n<li>True Positive Rate (recall): 62 out of 65, which is 95%.</li>\n<li>False Positive Rate: 649 out of 2,731, which is 24%.</li>\n<li>Precision is 62 out of 711, which is 9%.</li>\n</ul>\n<span class=\"paragraph\">With that in mind, here\u2019s the most common critique of AUC in highly imbalanced settings:\nWhen the classes are severely imbalanced, the number of True Negatives becomes extremely large. That makes the False Positive Rate look artificially low, which in turn makes the AUC look artificially high. As a result, AUC may no longer give a realistic picture of the model\u2019s performance.</span>\n<span class=\"paragraph\"><strong>Critique of AUC in cases of class imbalance</strong></span>\n<ul>\n<li><strong>Effects of severe class imbalance</strong><ul>\n<li>The number of True Negatives becomes extremely large.</li>\n<li>The False Positive Rate becomes artificially low.</li>\n<li>As a result, the AUC becomes artificially high and no longer reflects real performance.</li>\n</ul>\n</li>\n<li><strong>Example</strong><ul>\n<li>If True Negatives increase from 2,082 to 200,000\u2026</li>\n<li>The False Positive Rate would drop from 0.24 to 0.003.</li>\n<li>AUC would increase.</li>\n<li>Precision would remain 0.09.</li>\n</ul>\n</li>\n<li><strong>Proposed solution</strong><ul>\n<li>Use the precision\u2013recall curve and average precision.</li>\n<li>These metrics are more realistic in imbalanced settings because they ignore the number of True Negatives.</li>\n</ul>\n</li>\n</ul>\n<span class=\"paragraph\">As an example, imagine increasing the number of True Negatives from 2,082 to 200,000 while leaving all other values unchanged. The False Positive Rate would drop from 24% to 0.3%, and the AUC would rise\u2014though we can\u2019t say by how much, since AUC can\u2019t be computed directly from a confusion matrix. The model would appear excellent based on its AUC, even though its precision would still be only 9%.</span>\n<span class=\"paragraph\">According to this critique, the solution is to rely on the precision\u2013recall curve and average precision, which offer a more realistic assessment in imbalanced settings because they ignore the number of True Negatives.</span>\n<span class=\"paragraph\"><strong>Responses to the Critique of AUC</strong></span>\n<ol>\n<li>The choice between AUC and average precision depends on what you want to measure</li>\n</ol>\n<ul>\n<li>AUC evaluates performance across both classes. In this context, it measures how well the model detects cancer when it\u2019s present and how well it avoids predicting cancer when it\u2019s not present.</li>\n<li>Average precision, by contrast, focuses solely on the positive class. Because precision and recall ignore True Negatives, the average precision score is unchanged whether you have two thousand or two million True Negatives.</li>\n</ul>\n<span class=\"paragraph\">Choosing between the two:</span>\n<ul>\n<li>Use AUC when you care about performance across both classes.</li>\n<li>Use average precision when your priority is strictly how well the model identifies the positive class.</li>\n</ul>\n<span class=\"paragraph\">For cancer detection, performance on both classes matters, so AUC is the more appropriate choice.</span>\n<ol start=\"2\">\n<li>Precision can be \u201cartificially low\u201d in the same scenario\nIn cases of severe class imbalance, it\u2019s true that the False Positive Rate can look artificially low, making the model appear better than it is. But the critique cuts both ways: precision can look artificially low, making the model appear worse than it is.</li>\n</ol>\n<span class=\"paragraph\">Consider the hypothetical confusion matrix:</span>\n<ul>\n<li>If someone doesn\u2019t have cancer, they have only a 0.3% chance of being incorrectly told they do. 649/200,649 = 0.003</li>\n<li>If someone does have cancer, they have only a 5% chance of being incorrectly told they don\u2019t. 3/65 = 0.05</li>\n</ul>\n<span class=\"paragraph\">Despite these strong characteristics, the model\u2019s precision is still 9%. Even if all 3 False Negatives were moved into the True Positive box\u2014giving a True Positive Rate of 100%\u2014precision would still be 9%. Precision alone would make this model sound terrible, even though it\u2019s clearly quite good.</span>\n<ol start=\"3\">\n<li>The actual AUC score is irrelevant\nDuring model tuning, the purpose of an evaluation metric is simply to provide something meaningful to maximize when comparing models. AUC works well because it measures how effectively the model separates the classes.</li>\n</ol>\n<span class=\"paragraph\">Once you\u2019ve maximized AUC, you can adjust the decision threshold to achieve the True Positive Rate and False Positive Rate that match your priorities. The AUC score itself is not your business objective, so it doesn\u2019t matter if the score is \u201cartificially high.\u201d What matters is that it helps you choose a better model.</span>\n<span class=\"paragraph\"><strong>Bottom Line</strong></span>\n<ul>\n<li>Both AUC and average precision are reasonable metrics to maximize, even in cases of class imbalance.</li>\n<li>Neither metric perfectly represents a model\u2019s performance\u2014each highlights different aspects.</li>\n<li>Choose AUC when you care about performance across both classes.</li>\n<li>Choose average precision when your focus is strictly on how well the model identifies the positive class.</li>\n</ul>\n<h4 id=\"198-can-i-use-a-different-metric-such-as-f1-score\">19.8: Can I use a different metric such as F1 score?</h4>\n<span class=\"paragraph\">There are several other metrics commonly used for class\u2011imbalance problems, including F1 score, F\u2011beta score, balanced accuracy, Cohen\u2019s kappa, and Matthews correlation coefficient.\nAll of the metrics listed above\u2014F1 score, F\u2011beta score, balanced accuracy, Cohen\u2019s kappa, and Matthews correlation coefficient\u2014require you to choose a decision threshold. In contrast, AUC and average precision summarize a classifier\u2019s performance across all possible thresholds.</span>\n<span class=\"paragraph\">Because of that, using AUC or average precision during model tuning allows you to first maximize the model\u2019s overall ability to separate the classes, and then adjust the decision threshold afterward to match your specific priorities.</span>\n<span class=\"paragraph\">If you try to maximize F1 score (or any other threshold\u2011dependent metric) during model tuning, you end up optimizing the model\u2019s hyperparameters around the default decision threshold of 0.5. But that threshold may be far from optimal for your specific problem. In other words, you could easily miss out on a better model simply because you tuned it using a non\u2011optimal threshold.</span>\n<span class=\"paragraph\">If you want to use any of these other metrics, I recommend using them <strong>only to choose between different decision thresholds</strong> after you\u2019ve already optimized your model for <strong>AUC</strong> or <strong>average precision</strong>. This way, you first maximize the model\u2019s overall ability to separate the classes, and then use the threshold\u2011dependent metrics to fine\u2011tune the decision threshold to match your priorities.</span>\n<h4 id=\"199-should-i-use-resampling-to-fix-class-imbalance\">19.9: Should I use resampling to fix class imbalance?</h4>\n<span class=\"paragraph\">In cases of class imbalance, there\u2019s a set of techniques collectively known as resampling that is often used. Resampling refers to any technique that transforms the training data in order to achieve more balance between the classes. In other words, resampling attempts to fix the class imbalance at the dataset level rather than working around it, which is what we\u2019ve done in this chapter.\nHere are the two most common resampling approaches:</span>\n<ul>\n<li>Undersampling (or downsampling) is the process of deleting samples from the majority class.</li>\n<li>Oversampling (or upsampling) is the process of creating new samples from the minority class,\neither by duplicating existing samples or by simulating new samples. One popular oversampling\nmethod that simulates new samples is SMOTE (Synthetic Minority Over\u2011sampling Technique).</li>\n</ul>\n<span class=\"paragraph\">Both of these approaches can be done in either a directed, strategic fashion or in a random fashion.\nOr they can be done together, in which you both undersample and oversample.</span>\n<span class=\"paragraph\">Regardless of the specific approach, keep in mind that the act of resampling risks deleting important samples and/or adding meaningless new samples.</span>\n<span class=\"paragraph\">All of that being said, is resampling actually helpful? Experimental results show that resampling\nmethods can be helpful, but are not always helpful. And while there are dozens of different resampling algorithms, no one algorithm works best across all datasets and models, meaning that it\u2019s hard to give practical advice for which one to use.\nIf you decide to pursue resampling, keep in mind that it\u2019s not yet supported by sklearn, though it may eventually be available. In the meantime, you can use the imbalanced-learn library, which is\nsupposed to be fully compatible with scikit-learn. Personally, I tend not to use this approach in order to avoid adding additional complexity or project dependencies.</span>\n<span class=\"paragraph\">Here are two guidelines for the proper use of resampling:</span>\n<ul>\n<li>Treat resampling like any other preprocessing technique. Namely, it should be\nincluded in a Pipeline in order to avoid data leakage.</li>\n<li>The resampling technique should only ever be applied to training data, and not testing\ndata. The model should always be tested on the natural, imbalanced data so that it can output\na realistic estimate of model performance.</li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "d2134b39-229f-478e-9711-e60e00533f3f",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "cd4bd2ad-3e5f-4b2d-add7-9182dc94920c",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "e74641fe-9b89-4ce9-bc64-66c0bef9bd7c",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "43dfdd5f-8695-417b-8e32-9a8e41a83052",
       "code_hash": null,
       "outputs": [
         {

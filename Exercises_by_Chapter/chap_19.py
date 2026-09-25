@@ -30,14 +30,14 @@ def _():
     from sklearn.linear_model import LogisticRegression
     from sklearn.model_selection import GridSearchCV
 
-    # from sklearn.metrics import accuracy_score
     from sklearn.metrics import confusion_matrix
     from sklearn.metrics import ConfusionMatrixDisplay
     from sklearn.metrics import roc_auc_score
     from sklearn.metrics import RocCurveDisplay
-    # from sklearn.linear_model import LogisticRegression
+
     from sklearn.metrics import classification_report
     from sklearn.metrics import PrecisionRecallDisplay
+    from sklearn.metrics import average_precision_score
 
     return (
         ConfusionMatrixDisplay,
@@ -45,6 +45,7 @@ def _():
         LogisticRegression,
         PrecisionRecallDisplay,
         RocCurveDisplay,
+        average_precision_score,
         classification_report,
         confusion_matrix,
         cross_val_score,
@@ -71,10 +72,12 @@ def _(mo):
     Notebooks|unknown|Marimo
 
     **My takeaways:**
+    - Separate your data for separate purposes. Use a train/test split not for model evaluation (that's what cross-validation is for) but to reserve an independent set for tuning the decision threshold — tuning the threshold on the same data used to optimize the model gives overly optimistic/unreliable TPR and FPR estimates.
 
-    - TBD
-    - TBD
-    - TBD
+    - AUC vs. average precision is a "what do you care about" choice, not a "which is more correct" choice. AUC reflects performance on both classes (sensitivity + specificity), while average precision focuses solely on the positive class and ignores True Negatives — so it's more robust to reporting an "artificially high" score under severe class imbalance, but only tells you about the positive class. For problems like cancer detection where both classes matter, AUC is the better primary metric.
+
+    - Optimize threshold-independent metrics first, then tune the threshold. AUC and average precision summarize performance across all thresholds, so use them to select/tune the model. Threshold-dependent metrics (F1, F-beta, balanced accuracy, Cohen's kappa, MCC) should only be used afterward, to pick the best decision threshold — using them during model tuning risks optimizing around a default 0.5 threshold that isn't right for your problem.
+
     #### 19.1 Best practices for class imbalance
     We just covered a lot of new ideas in the previous chapter: class imbalance, the confusion matrix and its derived rates, the classification report, ROC curves and AUC (Area Under the Curve), the decision threshold, and cost‑sensitive learning. That’s a big toolkit, and now we have seen how all these pieces fit together when evaluating and tuning a classifier.
 
@@ -486,18 +489,145 @@ def _(PrecisionRecallDisplay, X_test, best_model, y_test):
 
 
 @app.cell
-def _():
+def _(mo):
+    mo.md(r"""
+    The precision–recall curve plots precision (y‑axis) against recall (x‑axis) across all possible decision thresholds. Like the ROC curve, it helps you choose a threshold that aligns with your priorities.
+
+    Just as an ROC curve can be summarized by the area under the curve, a precision–recall curve can be summarized the same way. Scikit‑learn uses average precision as its summary metric, one of several possible ways to compute the area under a precision–recall curve.
+
+    **Interpreting the precision-recall curve:**
+    - Plot of precision vs recall for all possible decision thresholds
+    - Move to another point on the curve by changing the threshold
+    - Average precision is the percentage of the plot underneath the curve
+
+    To compute average precision, we import average_precision_score and pass it the true labels along with the predicted probabilities. The function returns a score of 54.7 %.
+    """)
     return
 
 
 @app.cell
-def _():
-    print(f'{100*281/290:.1f} %')
+def _(average_precision_score, y_score, y_test):
+    print(f'{100*average_precision_score(y_test, y_score, pos_label="\'1\'"):.1f} %')
     return
 
 
 @app.cell
-def _():
+def _(mo):
+    mo.md(r"""
+    A perfect model would score 1.0, while a completely uninformed model would score roughly the fraction of positive samples—in this case, about 0.02. For comparison, remember that an uninformed model’s ROC AUC is 0.5, which means average precision and AUC have very different baseline levels for the same problem.
+
+    **Precision-recall scores:**
+    - Perfect model: 1.0
+    - Uninformed model: 0.02 in this case (fraction of positive samples)
+
+    In this chapter, I recommended using AUC as the primary evaluation metric when dealing with class imbalance. That said, many practitioners prefer average precision instead. So which one should you use?
+
+    To answer that, I’ll start with the most common critique of AUC and then give you my response. It may help to keep the confusion matrix in mind as we walk through this discussion, so I’ll display it here.
+    """)
+    return
+
+
+@app.cell
+def _(confusion_matrix, y_pred, y_test):
+    confusion_matrix(y_test, y_pred)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Let’s quickly run through the rates again:
+    - True Positive Rate (recall): 62 out of 65, which is 95%.
+    - False Positive Rate: 649 out of 2,731, which is 24%.
+    - Precision is 62 out of 711, which is 9%.
+
+    With that in mind, here’s the most common critique of AUC in highly imbalanced settings:
+    When the classes are severely imbalanced, the number of True Negatives becomes extremely large. That makes the False Positive Rate look artificially low, which in turn makes the AUC look artificially high. As a result, AUC may no longer give a realistic picture of the model’s performance.
+
+    **Critique of AUC in cases of class imbalance**
+    - **Effects of severe class imbalance**
+      - The number of True Negatives becomes extremely large.
+      - The False Positive Rate becomes artificially low.
+      - As a result, the AUC becomes artificially high and no longer reflects real performance.
+    - **Example**
+      - If True Negatives increase from 2,082 to 200,000…
+      - The False Positive Rate would drop from 0.24 to 0.003.
+      - AUC would increase.
+      - Precision would remain 0.09.
+    - **Proposed solution**
+      - Use the precision–recall curve and average precision.
+      - These metrics are more realistic in imbalanced settings because they ignore the number of True Negatives.
+
+    As an example, imagine increasing the number of True Negatives from 2,082 to 200,000 while leaving all other values unchanged. The False Positive Rate would drop from 24% to 0.3%, and the AUC would rise—though we can’t say by how much, since AUC can’t be computed directly from a confusion matrix. The model would appear excellent based on its AUC, even though its precision would still be only 9%.
+
+    According to this critique, the solution is to rely on the precision–recall curve and average precision, which offer a more realistic assessment in imbalanced settings because they ignore the number of True Negatives.
+
+    **Responses to the Critique of AUC**
+    1. The choice between AUC and average precision depends on what you want to measure
+    - AUC evaluates performance across both classes. In this context, it measures how well the model detects cancer when it’s present and how well it avoids predicting cancer when it’s not present.
+    - Average precision, by contrast, focuses solely on the positive class. Because precision and recall ignore True Negatives, the average precision score is unchanged whether you have two thousand or two million True Negatives.
+
+    Choosing between the two:
+    - Use AUC when you care about performance across both classes.
+    - Use average precision when your priority is strictly how well the model identifies the positive class.
+
+    For cancer detection, performance on both classes matters, so AUC is the more appropriate choice.
+
+    2. Precision can be “artificially low” in the same scenario
+    In cases of severe class imbalance, it’s true that the False Positive Rate can look artificially low, making the model appear better than it is. But the critique cuts both ways: precision can look artificially low, making the model appear worse than it is.
+
+    Consider the hypothetical confusion matrix:
+    - If someone doesn’t have cancer, they have only a 0.3% chance of being incorrectly told they do. 649/200,649 = 0.003
+    - If someone does have cancer, they have only a 5% chance of being incorrectly told they don’t. 3/65 = 0.05
+
+    Despite these strong characteristics, the model’s precision is still 9%. Even if all 3 False Negatives were moved into the True Positive box—giving a True Positive Rate of 100%—precision would still be 9%. Precision alone would make this model sound terrible, even though it’s clearly quite good.
+
+    3. The actual AUC score is irrelevant
+    During model tuning, the purpose of an evaluation metric is simply to provide something meaningful to maximize when comparing models. AUC works well because it measures how effectively the model separates the classes.
+
+    Once you’ve maximized AUC, you can adjust the decision threshold to achieve the True Positive Rate and False Positive Rate that match your priorities. The AUC score itself is not your business objective, so it doesn’t matter if the score is “artificially high.” What matters is that it helps you choose a better model.
+
+    **Bottom Line**
+    - Both AUC and average precision are reasonable metrics to maximize, even in cases of class imbalance.
+    - Neither metric perfectly represents a model’s performance—each highlights different aspects.
+    - Choose AUC when you care about performance across both classes.
+    - Choose average precision when your focus is strictly on how well the model identifies the positive class.
+
+    #### 19.8: Can I use a different metric such as F1 score?
+    There are several other metrics commonly used for class‑imbalance problems, including F1 score, F‑beta score, balanced accuracy, Cohen’s kappa, and Matthews correlation coefficient.
+    All of the metrics listed above—F1 score, F‑beta score, balanced accuracy, Cohen’s kappa, and Matthews correlation coefficient—require you to choose a decision threshold. In contrast, AUC and average precision summarize a classifier’s performance across all possible thresholds.
+
+    Because of that, using AUC or average precision during model tuning allows you to first maximize the model’s overall ability to separate the classes, and then adjust the decision threshold afterward to match your specific priorities.
+
+    If you try to maximize F1 score (or any other threshold‑dependent metric) during model tuning, you end up optimizing the model’s hyperparameters around the default decision threshold of 0.5. But that threshold may be far from optimal for your specific problem. In other words, you could easily miss out on a better model simply because you tuned it using a non‑optimal threshold.
+
+    If you want to use any of these other metrics, I recommend using them **only to choose between different decision thresholds** after you’ve already optimized your model for **AUC** or **average precision**. This way, you first maximize the model’s overall ability to separate the classes, and then use the threshold‑dependent metrics to fine‑tune the decision threshold to match your priorities.
+
+    #### 19.9: Should I use resampling to fix class imbalance?
+    In cases of class imbalance, there’s a set of techniques collectively known as resampling that is often used. Resampling refers to any technique that transforms the training data in order to achieve more balance between the classes. In other words, resampling attempts to fix the class imbalance at the dataset level rather than working around it, which is what we’ve done in this chapter.
+    Here are the two most common resampling approaches:
+    - Undersampling (or downsampling) is the process of deleting samples from the majority class.
+    - Oversampling (or upsampling) is the process of creating new samples from the minority class,
+    either by duplicating existing samples or by simulating new samples. One popular oversampling
+    method that simulates new samples is SMOTE (Synthetic Minority Over‑sampling Technique).
+
+    Both of these approaches can be done in either a directed, strategic fashion or in a random fashion.
+    Or they can be done together, in which you both undersample and oversample.
+
+    Regardless of the specific approach, keep in mind that the act of resampling risks deleting important samples and/or adding meaningless new samples.
+
+    All of that being said, is resampling actually helpful? Experimental results show that resampling
+    methods can be helpful, but are not always helpful. And while there are dozens of different resampling algorithms, no one algorithm works best across all datasets and models, meaning that it’s hard to give practical advice for which one to use.
+    If you decide to pursue resampling, keep in mind that it’s not yet supported by sklearn, though it may eventually be available. In the meantime, you can use the imbalanced-learn library, which is
+    supposed to be fully compatible with scikit-learn. Personally, I tend not to use this approach in order to avoid adding additional complexity or project dependencies.
+
+    Here are two guidelines for the proper use of resampling:
+    - Treat resampling like any other preprocessing technique. Namely, it should be
+    included in a Pipeline in order to avoid data leakage.
+    - The resampling technique should only ever be applied to training data, and not testing
+    data. The model should always be tested on the natural, imbalanced data so that it can output
+    a realistic estimate of model performance.
+    """)
     return
 
 
